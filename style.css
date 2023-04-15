@@ -1,0 +1,13 @@
+body{
+    color: blueviolet;
+    background-color: black;
+}
+
+.project-text{
+    width: auto;
+    font-weight: 800;
+}
+
+.bg-overall{
+    background-color: rgb(0, 0, 0);
+}
