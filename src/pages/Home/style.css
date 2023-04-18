@@ -1,16 +1,49 @@
+body{
+  background-image: url(/src/assets/faunaSnapshotBackground.jpg);
+  background-size: cover;
+}
+
 .project-text {
   width: auto;
   font-weight: 800;
-}
-
-body{
-  background-color: rgba(2, 65, 2, 0.589);
+  color: white;
+  font-family: 'Margarine', cursive;
 }
 
 .bg-nav {
   background-color: rgb(0, 0, 0);
 }
 
-.text-nav {
-  color: white;
+.menu-box{
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+  top: 20%;
 }
+
+.btn-play{
+  position: relative;
+  width: 100%;
+  background: linear-gradient(89.68deg, rgba(255, 255, 255, 0.28) 0.12%, rgba(255, 255, 255, 0.19) 21.88%, rgba(255, 255, 255, 0.37) 49.67%, rgba(255, 255, 255, 0.21) 72.54%, rgba(255, 255, 255, 0.36) 99.72%);
+  box-shadow: 0px 10px 19px rgba(0, 0, 0, 0.43);
+  border-radius: 13px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: 'Margarine', cursive;
+  letter-spacing: 0.25rem;
+}
+
+.how-to-play-main{
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.how-to-play-secondary{
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+}
+
+.btn-play:hover{
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
