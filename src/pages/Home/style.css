@@ -1,5 +1,5 @@
 body{
-  background-image: url(/public/static/images/faunaSnapshotBackground.jpg);
+  background-image: url(/static/images/faunaSnapshotBackground.jpg);
   background-size: cover;
 }
 
@@ -8,6 +8,7 @@ body{
   font-weight: 800;
   color: white;
   font-family: 'Margarine', cursive;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .bg-nav {
@@ -54,4 +55,28 @@ body{
 
 .card-border{
   border-radius: 10%;
+}
+
+.img-level{
+  height: 50%;
+}
+
+.justify-card-text{
+  text-align: justify;
+}
+
+.btn-decoration{
+  background-color:rgb(35, 160, 56);
+  border-color:rgb(35, 160, 56);
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.btn-decoration:hover{
+  background-color:rgb(32, 110, 45);
+  border-color:rgb(35, 160, 56);
+}
+
+.btn-decoration:focus{
+  background-color:rgb(35, 160, 56);
+  border-color:rgb(35, 160, 56);
 }
