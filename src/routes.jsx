@@ -7,10 +7,8 @@ const AppRoutes = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/">
-        <Route index element={<Home />} />
-      </Route>
-      <Route path="/levels">
-        <Route index element={<Levels />} />
+        <Route index element={<Home />}/>
+        <Route path="levels" element={<Levels />} />
       </Route>
     </Routes>
   </BrowserRouter>
