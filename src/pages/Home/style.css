@@ -1,5 +1,5 @@
 body{
-  background-image: url(/src/static/faunaSnapshotBackground.jpg);
+  background-image: url(/public/static/images/faunaSnapshotBackground.jpg);
   background-size: cover;
 }
 
