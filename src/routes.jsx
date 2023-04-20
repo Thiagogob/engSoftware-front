@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import { BrowserRouter } from "react-router-dom";
 import Levels from "./pages/Home/levels";
+import Level1 from "./pages/Home/level2";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -9,6 +10,7 @@ const AppRoutes = () => (
       <Route path="/">
         <Route index element={<Home />}/>
         <Route path="levels" element={<Levels />} />
+        <Route path="level1" element={<Level1/>}/>
       </Route>
     </Routes>
   </BrowserRouter>

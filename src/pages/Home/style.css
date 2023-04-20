@@ -80,3 +80,12 @@ body{
   background-color:rgb(35, 160, 56);
   border-color:rgb(35, 160, 56);
 }
+
+.animal-jumbotron{
+  background-color: rgba(245, 245, 220, 0);
+  color: white;
+}
+
+.btn-animal{
+  width: 30%;
+}
