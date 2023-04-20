@@ -54,7 +54,7 @@ function Level2() {
                 transition={{ duration: 0.01, ease: "easeInOut" }}
                 onClick={flash}
             >
-            <img className="camera-size" src={"/public/static/images/cameraBack.png"} alt="" />
+            <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
             </motion.div>
             
         </div>
