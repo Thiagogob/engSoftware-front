@@ -5,10 +5,10 @@ body{
 
 .cursor{
     position: absolute;
-    
+    cursor: none;
 }
   
 .camera-size{
     height: 128px;
-    width: 128px;
+    width: 150px;
 }

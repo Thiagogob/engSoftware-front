@@ -90,14 +90,4 @@ body{
   width: 30%;
 }
 
-.cursor{
-  position: absolute;
-  top: 0;
-  left: 0;
-  
-}
 
-.camera-size{
-  height: 128px;
-  width: 128px;
-}

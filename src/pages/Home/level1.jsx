@@ -10,9 +10,9 @@ function Level1() {
                     <p className="lead">Qual o nome desse animal: </p>
                 </div>
                 <div className="row d-flex justify-content-center">
-                    <button type="button" className="btn btn-primary btn-decoration mx-auto btn-animal">Onça</button>
-                    <button type="button" className="btn btn-primary btn-decoration mx-auto btn-animal">Cavalo</button>
-                    <button type="button" className="btn btn-primary btn-decoration mx-auto btn-animal">Cachorro</button>
+                    <button type="button" className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Onça-pintada</button>
+                    <button type="button" className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Flamingo</button>
+                    <button type="button" className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Arara</button>
                 </div>
             </div>
         </div>
