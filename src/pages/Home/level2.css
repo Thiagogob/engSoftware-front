@@ -1,7 +1,3 @@
-*{
-    cursor: none;
-}
-
 body{
     background-image: url(/static/images/faunaSnapshotBackground.jpg);
     background-size: cover;

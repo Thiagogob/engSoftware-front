@@ -32,7 +32,7 @@ function Level2() {
     }
     return (
 
-        <div className="container">
+        <div className="container container-camera">
             <motion.div
                 className="cursor"
                 variants={variants}
