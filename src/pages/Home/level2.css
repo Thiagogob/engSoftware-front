@@ -9,6 +9,7 @@ body{
 }
   
 .camera-size{
+    position: absolute;
     height: 128px;
     width: 150px;
 }

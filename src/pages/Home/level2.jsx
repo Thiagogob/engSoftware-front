@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./level2.css"
 import { motion } from "framer-motion"
-import Camera from "../../components/camera/camera";
 
 function Level2() {
     const [mousePosition, setMousePosition] = useState({
@@ -26,7 +25,7 @@ function Level2() {
 
     const variants = {
         default: {
-            x: mousePosition.x - 64,
+            x: mousePosition.x - 150,
             y: mousePosition.y - 64
         }
     }
