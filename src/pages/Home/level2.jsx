@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import "./style.css"
-
+import "./level2.css"
+import { motion } from "framer-motion"
+import Camera from "../../components/camera/camera";
 
 function Level2() {
     const [mousePosition, setMousePosition] = useState({
@@ -22,52 +23,26 @@ function Level2() {
             window.removeEventListener("mousemove", mouseMove);
         }
     }, []);
+
+    const variants = {
+        default: {
+            x: mousePosition.x - 64,
+            y: mousePosition.y - 64
+        }
+    }
     return (
 
         <div className="container">
-                <div className="cursor">
-                    <div className="cam">
-                        <div className="up4"></div>
-                        <div className="up3"></div>
-                        <div className="up2"></div>
-                        <div className="up"></div>
-                        <div className="box-out1"></div>
-                        <div className="box-out"></div>
-                        <div className="box">
-                            <div className="box-in">
-                                <h1 className="text">SAMASUNG</h1>
-                                <h2>5x</h2>
-                                <div className="cr">
-                                    <div className="cr-in"></div>
-                                </div>
-                                <div className="cr2"></div>
-                                <div className="cr3">
-                                    <div className="cr3-in"></div>
-                                </div>
-                                <div className="c1">
-                                    <div className="c2">
-                                        <div className="c3">
-                                            <div className="c4">
-                                                <div className="c5">
-                                                    <div className="c6">
-                                                        <div className="c7">
-                                                            <div className="c8"></div>
-                                                            <div className="c9"></div>
-                                                            <div className="c10"></div>
-                                                            <div className="c11"></div>
-                                                            <div className="c12"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <motion.div
+                className="cursor"
+                variants={variants}
+                animate="default"
+                transition={{ duration: 0.01, ease: "easeInOut" }}
+            >
+            <img className="camera-size" src={"/public/static/images/camera.png"} alt="" />
+            </motion.div>
+            
+        </div>
     );
 }
 

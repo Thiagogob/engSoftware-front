@@ -1,0 +1,18 @@
+*{
+    cursor: none;
+}
+
+body{
+    background-image: url(/static/images/faunaSnapshotBackground.jpg);
+    background-size: cover;
+}
+
+.cursor{
+    position: absolute;
+    
+}
+  
+.camera-size{
+    height: 128px;
+    width: 128px;
+}
