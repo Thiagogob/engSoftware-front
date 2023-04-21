@@ -30,8 +30,8 @@ function Level1() {
       text: "Qual o nome desse animal:",
       image: <img src={macaco}/>,
       options: [
-        { id: 0, text: "Macaco", isCorrect: true },
-        { id: 1, text: "Cobra", isCorrect: false },
+        { id: 0, text: "Cobra", isCorrect: false },
+        { id: 1, text: "Macaco", isCorrect: true },
         { id: 2, text: "Juburu", isCorrect: false },
       ],
     },
@@ -39,9 +39,9 @@ function Level1() {
       text: "Qual o nome desse animal:",
       image: <img src={flamingo}/>,
       options: [
-        { id: 0, text: "Flamingo", isCorrect: false },
-        { id: 1, text: "Arara", isCorrect: true },
-        { id: 2, text: "Crocodilo", isCorrect: true },
+        { id: 0, text: "Flamingo", isCorrect: true },
+        { id: 1, text: "Arara", isCorrect: false },
+        { id: 2, text: "Crocodilo", isCorrect: false },
       ],
     },
   ];
