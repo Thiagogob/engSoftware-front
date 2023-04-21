@@ -84,10 +84,28 @@ body{
 .animal-jumbotron{
   background-color: rgba(245, 245, 220, 0);
   color: white;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 .btn-animal{
-  width: 30%;
+  width: 250px;
 }
+
+.list-style{
+  list-style: none;
+}
+
+li{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.score-text{
+  line-height: 0;
+  margin-top: 25px;
+}
+
 
 
