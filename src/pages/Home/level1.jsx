@@ -23,7 +23,7 @@ function Level1() {
       options: [
         { id: 0, text: "Onça-pintada", isCorrect: true },
         { id: 1, text: "Flamingo", isCorrect: false },
-        { id: 2, text: "Arara", isCorrect: false },
+        { id: 2, text: "Tamanduá", isCorrect: false },
       ],
     },
     {
