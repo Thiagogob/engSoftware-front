@@ -15,7 +15,8 @@ function Level1() {
   const [showFinalResults, setFinalResults] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
+  const correctAudio = new Audio("/static/images/correct.mp3");
+  const wrongAudio = new Audio("/static/images/errado.mp3");
   const questions = [
     {
       text: "Qual o nome desse animal:",
@@ -50,6 +51,10 @@ function Level1() {
   const optionClicked = (isCorrect) => {
     if(isCorrect){
         setScore(score+ 1);
+        correctAudio.play();
+    }
+    else{
+        wrongAudio.play();
     }
     if(currentQuestion + 1 < questions.length){
         setCurrentQuestion(currentQuestion + 1);
