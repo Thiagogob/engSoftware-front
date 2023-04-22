@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./style.css";
-import oncaPintada from "/static/images/oncapintada.png";
-import arara from "/static/images/arara.png";
-import capivara from "/static/images/capivara.png";
-import cobra from "/static/images/cobra.png";
-import crocodilo from "/static/images/crocodilo.png";
-import flamingo from "/static/images/flamingo.png";
-import juburu from "/static/images/juburu.png";
-import macaco from "/static/images/macaco.png";
+import oncaPintada from "/static/images/oncapintadaFix.png";
+import arara from "/static/images/araraFix.png";
+import capivara from "/static/images/capivaraFix.png";
+import cobra from "/static/images/cobraFix.png";
+import crocodilo from "/static/images/crocodiloFix.png";
+import flamingo from "/static/images/flamingoFix.png";
+import juburu from "/static/images/juburuFix.png";
+import macaco from "/static/images/macacoFix.png";
 
 function Level1() {
   //propriedades
