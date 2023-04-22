@@ -47,15 +47,27 @@ function Level2() {
     return (
 
         <div className="container container-camera">
-            <motion.div
-                className="cursor"
-                variants={variants}
-                animate="default"
-                transition={{ duration: 0.01, ease: "easeInOut" }}
-                onClick={flash}
-            >
-            <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
-            </motion.div>
+
+            <div>
+                <motion.div
+                    className="cursor"
+                    variants={variants}
+                    animate="default"
+                    transition={{ duration: 0.01, ease: "easeInOut" }}
+                    onClick={flash}
+                >
+                <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
+                </motion.div>
+                <img src={"/static/images/araraMovimento.png"} alt="" />
+                <img src={"/static/images/capivaraMovimento.png"} alt="" />
+                <img src={"/static/images/crocodiloMovimento.png"} alt="" />
+                <img src={"/static/images/flamingoMovimento.png"} alt="" />
+                <img src={"/static/images/juburuMovimento.png"} alt="" />
+                <img src={"/static/images/macacoMovimento.png"} alt="" />
+                <img src={"/static/images/oncapintadaMovimento.png"} alt="" />
+
+            </div>
+            
             
         </div>
     );
