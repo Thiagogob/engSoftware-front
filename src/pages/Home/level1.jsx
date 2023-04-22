@@ -8,7 +8,6 @@ import crocodilo from "/static/images/crocodilo.png";
 import flamingo from "/static/images/flamingo.png";
 import juburu from "/static/images/juburu.png";
 import macaco from "/static/images/macaco.png";
-import somOnca from "/static/images/flashSoundEffect.mp3"
 
 function Level1() {
   //propriedades
@@ -17,6 +16,9 @@ function Level1() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const correctAudio = new Audio("/static/images/correct.mp3");
   const wrongAudio = new Audio("/static/images/errado.mp3");
+  const oncaAudio = new Audio("/static/images/somOnca.mp3");
+  const macacoAudio = new Audio("/static/images/somMacaco.mp3");
+  const flamingoAudio = new Audio("/static/images/somFlamingo.mp3");
   const questions = [
     {
       text: "Qual o nome desse animal:",
@@ -25,6 +27,15 @@ function Level1() {
         { id: 0, text: "Onça-pintada", isCorrect: true },
         { id: 1, text: "Flamingo", isCorrect: false },
         { id: 2, text: "Tamanduá", isCorrect: false },
+      ],
+    },
+    {
+      text: "Qual o som desse animal:",
+      image: <img src={oncaPintada}/>,
+      options: [
+        { id: 0, text: <img src="/static/images/checkFinal.png"/>, isCorrect: true },
+        { id: 1, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+        { id: 2, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
       ],
     },
     {
@@ -37,12 +48,30 @@ function Level1() {
       ],
     },
     {
+      text: "Qual o som desse animal:",
+      image: <img src={macaco}/>,
+      options: [
+        { id: 3, text: <img src="/static/images/checkFinal.png"/>, isCorrect: true },
+        { id: 4, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+        { id: 5, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+      ],
+    },
+    {
       text: "Qual o nome desse animal:",
       image: <img src={flamingo}/>,
       options: [
         { id: 0, text: "Flamingo", isCorrect: true },
         { id: 1, text: "Arara", isCorrect: false },
         { id: 2, text: "Crocodilo", isCorrect: false },
+      ],
+    },
+    {
+      text: "Qual o som desse animal:",
+      image: <img src={flamingo}/>,
+      options: [
+        { id: 6, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+        { id: 7, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+        { id: 8, text: <img src="/static/images/checkFinal.png"/>, isCorrect: true },
       ],
     },
   ];
@@ -63,6 +92,73 @@ function Level1() {
         setFinalResults(true);
     }
     
+  }
+
+  const soundClicked = (id) => {
+    if(id == 0){
+      oncaAudio.play();
+      setTimeout(() => {
+        oncaAudio.pause();
+      }, 2000);
+      oncaAudio.currentTime = 0;
+      
+    }
+    if(id == 1){
+      macacoAudio.play();
+      setTimeout(() => {
+        macacoAudio.pause();
+      }, 2000);
+      macacoAudio.currentTime = 0;
+    }
+    if(id == 2){
+      flamingoAudio.play();
+      setTimeout(() => {
+        flamingoAudio.pause();
+      }, 2000);
+      flamingoAudio.currentTime = 0;
+    }
+    if(id == 3){
+      macacoAudio.play();
+      setTimeout(() => {
+        macacoAudio.pause();
+      }, 2000);
+      macacoAudio.currentTime = 0;
+    }
+    if(id == 4){
+      oncaAudio.play();
+      setTimeout(() => {
+        oncaAudio.pause();
+      }, 2000);
+      oncaAudio.currentTime = 0;
+    }
+    if(id == 5){
+      flamingoAudio.play();
+      setTimeout(() => {
+        flamingoAudio.pause();
+      }, 2000);
+      flamingoAudio.currentTime = 0;
+    }
+    if(id == 6){
+      oncaAudio.play();
+      setTimeout(() => {
+        oncaAudio.pause();
+      }, 2000);
+      oncaAudio.currentTime = 0;
+    }
+    if(id == 7){
+      macacoAudio.play();
+      setTimeout(() => {
+        macacoAudio.pause();
+      }, 2000);
+      macacoAudio.currentTime = 0;
+    }
+    if(id == 8){
+      flamingoAudio.play();
+      setTimeout(() => {
+        flamingoAudio.pause();
+      }, 2000);
+      flamingoAudio.currentTime = 0;
+    }
   }
 
 
@@ -101,14 +197,34 @@ function Level1() {
             </div>
             <p className="lead project-text d-flex justify-content-center question-text">
               {questions[currentQuestion].text}
-              {}
             </p>
             <ul className="d-flex justify-content-center list-style">
               {questions[currentQuestion].options.map((option) =>{
-                return (
-                    <li type="button"
-                    className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration" onClick={()=>optionClicked(option.isCorrect)} key={option.id}>{option.text}</li>
-                );
+                if(currentQuestion%2===0){
+                  return (
+                    <li
+                      type="button"
+                      className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration"
+                      onClick={() => optionClicked(option.isCorrect)}
+                      key={option.id}
+                    >
+                      {option.text}
+                    </li>
+                  );
+                  } else return (
+                    <div>
+                      <div className="row d-flex justify-content-center">
+                        <button type="button" class="btn btn-light" onClick={()=> soundClicked(option.id)}><img src="/static/images/playIcon.png"/></button></div>
+                      <li
+                        type="button"
+                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration btn-sound"
+                        onClick={() => optionClicked(option.isCorrect)}
+                        key={option.id}
+                      >
+                        {option.text}
+                      </li>
+                    </div>
+                  );
               })}
             </ul>
           </div>
