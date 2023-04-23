@@ -136,7 +136,8 @@ function Level2() {
 
                 :
                 <div className="task-card">
-                    <motion.div
+                    {/*
+                        <motion.div
                         className="cursor"
                         variants={variants}
                         animate="default"
@@ -145,6 +146,9 @@ function Level2() {
                     >
                         <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
                     </motion.div>
+                    
+                    
+                    */}
                     <div className="row">
                         <div className="mx-auto">
                             <h2 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h2>
@@ -160,7 +164,7 @@ function Level2() {
                         {tasks[currentTask].options.map((option) => {
                             return (
 
-                                <li onClick={() => optionClicked(option.isCorrect)} key={option.id}>
+                                <li className="animal" onClick={() => optionClicked(option.isCorrect)} key={option.id}>
 
                                     <motion.li animate={{
                                         y: [0, 250, 0],
