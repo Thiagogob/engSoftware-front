@@ -8,15 +8,19 @@
 body{
     background-image: url(/static/images/faunaSnapshotBackground.jpg);
     background-size: cover;
+    cursor: pointer;
 
 }
 
+
+
 .cursor{
-    position: absolute;
+    position: relative;
     cursor: pointer;
     z-index: -1;
-    width: 150px;
-    height: 150px;
+    width: calc(5vw + 5vh); /* dynamic width */
+  height: calc(5vw + 5vh); /* dynamic height */
+  transform-origin: center;
     
 }
   

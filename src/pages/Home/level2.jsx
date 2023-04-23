@@ -15,27 +15,27 @@ function Level2() {
         {
             text: "Tire uma foto da Arara: ",
             options: [
-                { id: 0, image: <img src="/static/images/araraMovimento.png" />, isCorrect: true },
-                { id: 1, image: <img src="/static/images/macacoMovimento.png" />, isCorrect: false },
-                { id: 2, image: <img src="/static/images/crocodiloMovimento.png" />, isCorrect: false },
+                { id: 0, image: <img src="/static/images/araraMovimento.png" />,hover: <img src="/static/images/araraFoto.png" />, isCorrect: true },
+                { id: 1, image: <img src="/static/images/macacoMovimento.png" />, hover: <img src="/static/images/macacoFoto.png" />,isCorrect: false },
+                { id: 2, image: <img src="/static/images/crocodiloMovimento.png" />, hover: <img src="/static/images/crocodiloFoto.png" />,isCorrect: false },
             ],
 
         },
         {
             text: "Tire uma foto da Capivara: ",
             options: [
-                { id: 0, image: <img src="/static/images/juburuMovimento.png" />, isCorrect: false },
-                { id: 1, image: <img src="/static/images/flamingoMovimento.png" />, isCorrect: false },
-                { id: 2, image: <img src="/static/images/capivaraMovimento.png" />, isCorrect: true },
+                { id: 0, image: <img src="/static/images/juburuMovimento.png" />,hover: <img src="/static/images/juburuFoto.png" />, isCorrect: false },
+                { id: 1, image: <img src="/static/images/flamingoMovimento.png" />, hover: <img src="/static/images/flamingoFoto.png" />,isCorrect: false },
+                { id: 2, image: <img src="/static/images/capivaraMovimento.png" />, hover: <img src="/static/images/capivaraFoto.png" />,isCorrect: true },
             ],
 
         },
         {
             text: "Tire uma foto da Cobra: ",
             options: [
-                { id: 0, image: <img src="/static/images/capivaraMovimento.png" />, isCorrect: false },
-                { id: 1, image: <img src="/static/images/cobraMovimento.png" />, isCorrect: true },
-                { id: 2, image: <img src="/static/images/oncapintadaMovimento.png" />, isCorrect: false },
+                { id: 0, image: <img src="/static/images/capivaraMovimento.png" />, hover: <img src="/static/images/capivaraFoto.png" />,isCorrect: false },
+                { id: 1, image: <img src="/static/images/cobraMovimento.png" />, hover: <img src="/static/images/cobraFoto.png" />,isCorrect: true },
+                { id: 2, image: <img src="/static/images/oncapintadaMovimento.png" />, hover: <img src="/static/images/oncapintadaFoto.png" />,isCorrect: false },
             ],
 
         },
@@ -87,7 +87,7 @@ function Level2() {
 
     const variants = {
         default: {
-            x: mousePosition.x - 200,
+            x: mousePosition.x - 250,
             y: mousePosition.y - 80
         }
     }
@@ -106,6 +106,17 @@ function Level2() {
     }
 
 
+        const [isHovered, setIsHovered] = useState(false);
+      
+        const handleHover = () => {
+          setIsHovered(true);
+        };
+      
+        const handleLeave = () => {
+          setIsHovered(false);
+        };
+
+        const [hoveredOption, setHoveredOption] = useState(null);
 
     return (
 
@@ -146,9 +157,9 @@ function Level2() {
                     >
                         <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
                     </motion.div>
-                    
-                    
                     */}
+                    
+                
                     <div className="row">
                         <div className="mx-auto">
                             <h2 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h2>
@@ -160,28 +171,35 @@ function Level2() {
                         </div>
                     </div>
 
-                    <ul className="d-flex justify-content-center">
+                    <motion.ul className="d-flex justify-content-center"
+                                                    animate={{
+                                                        y: [0, 220, 0],
+                                                        x: [0, -100, 0],
+                                                    }}
+                    
+                                                    transition={{
+                                                        duration: 1,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut",
+                                                    }}>
                         {tasks[currentTask].options.map((option) => {
                             return (
 
-                                <li className="animal" onClick={() => optionClicked(option.isCorrect)} key={option.id}>
+                                <li className="animal" onClick={() => optionClicked(option.isCorrect)}
+                                key={option.id}
+                                >
 
-                                    <motion.li animate={{
-                                        y: [0, 250, 0],
-                                        x: [0, -100, 0],
-                                    }}
-                                        transition={{
-                                            duration: 1,
-                                            repeat: Infinity,
-                                            ease: "easeInOut",
-                                        }}>{option.image}</motion.li>
+                                    <div
+                                         onMouseEnter={() => setHoveredOption(option.id)}
+                                         onMouseLeave={() => setHoveredOption(null)}
+                                    >{hoveredOption === option.id ? option.hover : option.image}</div>
 
 
                                 </li>
 
                             );
                         })}
-                    </ul>
+                    </motion.ul>
 
                 </div>
 
@@ -195,14 +213,3 @@ function Level2() {
 }
 
 export default Level2;
-
-{/*
-<img src={"/static/images/araraMovimento.png"} alt="" />
-                    <img onClick={flash} src={"/static/images/capivaraMovimento.png"} alt="" />
-                    <img src={"/static/images/crocodiloMovimento.png"} alt="" />
-                <img src={"/static/images/flamingoMovimento.png"} alt="" />
-                <img src={"/static/images/juburuMovimento.png"} alt="" />
-                <img src={"/static/images/macacoMovimento.png"} alt="" />
-                <img src={"/static/images/oncapintadaMovimento.png"} alt="" />
-                */
-}
