@@ -1,12 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body{
     background-image: url(/static/images/faunaSnapshotBackground.jpg);
     background-size: cover;
+
 }
 
 .cursor{
     position: absolute;
-    cursor: none;
+    cursor: pointer;
     z-index: -1;
+    width: 150px;
+    height: 150px;
+    
 }
   
 .camera-size{
@@ -14,5 +25,6 @@ body{
     height: 128px;
     width: 150px;
 }
+
 
 

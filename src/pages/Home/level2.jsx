@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./level2.css";
 import { motion } from "framer-motion";
 
-
 function Level2() {
 
     const [showFinalResults, setFinalResults] = useState(false);
     const [photosLeft, setPhotosLeft] = useState(5);
     const [currentTask, setCurrentTask] = useState(0);
     const [score, setScore] = useState(0);
+
+
 
     const tasks = [
         {
@@ -23,9 +24,18 @@ function Level2() {
         {
             text: "Tire uma foto da Capivara: ",
             options: [
-                { id: 0, image: <img src="/static/images/capivaraMovimento.png" />, isCorrect: true },
-                { id: 1, image: <img src="/static/images/juburuMovimento.png" />, isCorrect: false },
-                { id: 2, image: <img src="/static/images/flamingoMovimento.png" />, isCorrect: false },
+                { id: 0, image: <img src="/static/images/juburuMovimento.png" />, isCorrect: false },
+                { id: 1, image: <img src="/static/images/flamingoMovimento.png" />, isCorrect: false },
+                { id: 2, image: <img src="/static/images/capivaraMovimento.png" />, isCorrect: true },
+            ],
+
+        },
+        {
+            text: "Tire uma foto da Cobra: ",
+            options: [
+                { id: 0, image: <img src="/static/images/capivaraMovimento.png" />, isCorrect: false },
+                { id: 1, image: <img src="/static/images/cobraMovimento.png" />, isCorrect: true },
+                { id: 2, image: <img src="/static/images/oncapintadaMovimento.png" />, isCorrect: false },
             ],
 
         },
@@ -33,8 +43,15 @@ function Level2() {
 
     const optionClicked = (isCorrect) => {
         if (isCorrect) {
+            const sound = new Audio("/static/images/flashSoundEffect.mp3");
+            sound.play();
             setPhotosLeft(photosLeft - 1);
             setScore(score + 1);
+        }
+        else {
+            const sound = new Audio("/static/images/flashSoundEffect.mp3");
+            sound.play();
+            setPhotosLeft(photosLeft - 1);
         }
         if (photosLeft === 1) {
             setFinalResults(true);
@@ -70,8 +87,8 @@ function Level2() {
 
     const variants = {
         default: {
-            x: mousePosition.x - 150,
-            y: mousePosition.y - 64
+            x: mousePosition.x - 200,
+            y: mousePosition.y - 80
         }
     }
 
@@ -129,18 +146,35 @@ function Level2() {
                         <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
                     </motion.div>
                     <div className="row">
-                        <h2 className="text-light">Tarefa {currentTask + 1} de {tasks.length}</h2>
+                        <div className="mx-auto">
+                            <h2 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h2>
+                        </div>
                     </div>
                     <div className="row">
-                        <h2 className="text-light">{photosLeft} fotos restantes</h2>
+                        <div className="mx-auto">
+                            <h2 className="project-text">{photosLeft} fotos restantes</h2>
+                        </div>
                     </div>
-                    <h3 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h3>
+
                     <ul className="d-flex justify-content-center">
                         {tasks[currentTask].options.map((option) => {
                             return (
+
                                 <li onClick={() => optionClicked(option.isCorrect)} key={option.id}>
-                                    {option.image}
+
+                                    <motion.li animate={{
+                                        y: [0, 250, 0],
+                                        x: [0, -100, 0],
+                                    }}
+                                        transition={{
+                                            duration: 1,
+                                            repeat: Infinity,
+                                            ease: "easeInOut",
+                                        }}>{option.image}</motion.li>
+
+
                                 </li>
+
                             );
                         })}
                     </ul>
