@@ -22,7 +22,7 @@ function Level1() {
   const questions = [
     {
       text: "Qual o nome desse animal:",
-      image: <img src={oncaPintada}/>,
+      image: <img src={oncaPintada} />,
       options: [
         { id: 0, text: "Onça-pintada", isCorrect: true },
         { id: 1, text: "Flamingo", isCorrect: false },
@@ -31,16 +31,16 @@ function Level1() {
     },
     {
       text: "Qual o som desse animal:",
-      image: <img src={oncaPintada}/>,
+      image: <img src={oncaPintada} />,
       options: [
-        { id: 0, text: <img src="/static/images/checkFinal.png"/>, isCorrect: true },
-        { id: 1, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
-        { id: 2, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+        { id: 0, text: <img src="/static/images/checkFinal.png" />, isCorrect: true },
+        { id: 1, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
+        { id: 2, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
       ],
     },
     {
       text: "Qual o nome desse animal:",
-      image: <img src={macaco}/>,
+      image: <img src={macaco} />,
       options: [
         { id: 0, text: "Cobra", isCorrect: false },
         { id: 1, text: "Macaco", isCorrect: true },
@@ -49,16 +49,16 @@ function Level1() {
     },
     {
       text: "Qual o som desse animal:",
-      image: <img src={macaco}/>,
+      image: <img src={macaco} />,
       options: [
-        { id: 3, text: <img src="/static/images/checkFinal.png"/>, isCorrect: true },
-        { id: 4, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
-        { id: 5, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
+        { id: 3, text: <img src="/static/images/checkFinal.png" />, isCorrect: true },
+        { id: 4, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
+        { id: 5, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
       ],
     },
     {
       text: "Qual o nome desse animal:",
-      image: <img src={flamingo}/>,
+      image: <img src={flamingo} />,
       options: [
         { id: 0, text: "Flamingo", isCorrect: true },
         { id: 1, text: "Arara", isCorrect: false },
@@ -67,92 +67,92 @@ function Level1() {
     },
     {
       text: "Qual o som desse animal:",
-      image: <img src={flamingo}/>,
+      image: <img src={flamingo} />,
       options: [
-        { id: 6, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
-        { id: 7, text: <img src="/static/images/checkFinal.png"/>, isCorrect: false },
-        { id: 8, text: <img src="/static/images/checkFinal.png"/>, isCorrect: true },
+        { id: 6, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
+        { id: 7, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
+        { id: 8, text: <img src="/static/images/checkFinal.png" />, isCorrect: true },
       ],
     },
   ];
 
   //funcoes auxiliares
   const optionClicked = (isCorrect) => {
-    if(isCorrect){
-        setScore(score+ 1);
-        correctAudio.play();
+    if (isCorrect) {
+      setScore(score + 1);
+      correctAudio.play();
     }
-    else{
-        wrongAudio.play();
+    else {
+      wrongAudio.play();
     }
-    if(currentQuestion + 1 < questions.length){
-        setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion + 1 < questions.length) {
+      setCurrentQuestion(currentQuestion + 1);
     }
-    else{
-        setFinalResults(true);
+    else {
+      setFinalResults(true);
     }
-    
+
   }
 
   const soundClicked = (id) => {
-    if(id == 0){
+    if (id == 0) {
       oncaAudio.play();
       setTimeout(() => {
         oncaAudio.pause();
       }, 2000);
       oncaAudio.currentTime = 0;
-      
+
     }
-    if(id == 1){
+    if (id == 1) {
       macacoAudio.play();
       setTimeout(() => {
         macacoAudio.pause();
       }, 2000);
       macacoAudio.currentTime = 0;
     }
-    if(id == 2){
+    if (id == 2) {
       flamingoAudio.play();
       setTimeout(() => {
         flamingoAudio.pause();
       }, 2000);
       flamingoAudio.currentTime = 0;
     }
-    if(id == 3){
+    if (id == 3) {
       macacoAudio.play();
       setTimeout(() => {
         macacoAudio.pause();
       }, 2000);
       macacoAudio.currentTime = 0;
     }
-    if(id == 4){
+    if (id == 4) {
       oncaAudio.play();
       setTimeout(() => {
         oncaAudio.pause();
       }, 2000);
       oncaAudio.currentTime = 0;
     }
-    if(id == 5){
+    if (id == 5) {
       flamingoAudio.play();
       setTimeout(() => {
         flamingoAudio.pause();
       }, 2000);
       flamingoAudio.currentTime = 0;
     }
-    if(id == 6){
+    if (id == 6) {
       oncaAudio.play();
       setTimeout(() => {
         oncaAudio.pause();
       }, 2000);
       oncaAudio.currentTime = 0;
     }
-    if(id == 7){
+    if (id == 7) {
       macacoAudio.play();
       setTimeout(() => {
         macacoAudio.pause();
       }, 2000);
       macacoAudio.currentTime = 0;
     }
-    if(id == 8){
+    if (id == 8) {
       flamingoAudio.play();
       setTimeout(() => {
         flamingoAudio.pause();
@@ -165,42 +165,36 @@ function Level1() {
   return (
     <div className="container">
       <div className="jumbotron jumbotron-fluid animal-jumbotron">
-      <h2 className="score-text">Quantidade de Pontos: {score}</h2>
+
         {showFinalResults ? (
-          <div className="final-result d-flex justify-content-center">
-            <div className="row">
-                <div className="col-12">
-                    <h2 className="d-flex justify-content-center">{score} de {questions.length} questões corretas</h2>
-                </div>
-                <div className="col-12 d-flex justify-content-center">
-                <a href="/level1">
-                    <button type="button"
-                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Recomeçar</button>
-                </a>
-                <a href="/level2">
-                    <button type="button"
-                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Jogar Fase 2</button>
-                </a>
-                <a href="/home">
-                    <button type="button"
-                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Sair</button>
-                </a>
-                </div>
-                
-                
+
+          <div className="d-flex align-items-center justify-content-center">
+            <div className="final-result">
+              <h1 className="d-flex justify-content-center">Resultado Final</h1>
+              <h2 className="d-flex justify-content-center">
+                {score} de {questions.length} questões corretas - ({((score / questions.length) * 100).toFixed(2)}%)
+              </h2>
+              <div className="row d-flex justify-content-around">
+                <a href="/level1"><button type="button" class="btn btn-primary">Recomeçar</button></a>
+                <a href="/level2"><button type="button" class="btn btn-primary">Jogar Fase 2</button></a>
+                <a href="/home"><button type="button" class="btn btn-danger btn-exit">Sair</button></a>
+              </div>
             </div>
           </div>
+
         ) : (
+
           <div className="question-card">
+            <h2 className="score-text">Quantidade de Pontos: {score}</h2>
             <div className="animal-img d-flex justify-content-center">
-                {questions[currentQuestion].image}
+              {questions[currentQuestion].image}
             </div>
             <p className="lead project-text d-flex justify-content-center question-text">
               {questions[currentQuestion].text}
             </p>
             <ul className="d-flex justify-content-center list-style">
-              {questions[currentQuestion].options.map((option) =>{
-                if(currentQuestion%2===0){
+              {questions[currentQuestion].options.map((option) => {
+                if (currentQuestion % 2 === 0) {
                   return (
                     <li
                       type="button"
@@ -211,20 +205,20 @@ function Level1() {
                       {option.text}
                     </li>
                   );
-                  } else return (
-                    <div>
-                      <div className="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-light" onClick={()=> soundClicked(option.id)}><img src="/static/images/playIcon.png"/></button></div>
-                      <li
-                        type="button"
-                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration btn-sound"
-                        onClick={() => optionClicked(option.isCorrect)}
-                        key={option.id}
-                      >
-                        {option.text}
-                      </li>
-                    </div>
-                  );
+                } else return (
+                  <div>
+                    <div className="row d-flex justify-content-center">
+                      <button type="button" class="btn btn-light" onClick={() => soundClicked(option.id)}><img src="/static/images/playIcon.png" /></button></div>
+                    <li
+                      type="button"
+                      className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration btn-sound"
+                      onClick={() => optionClicked(option.isCorrect)}
+                      key={option.id}
+                    >
+                      {option.text}
+                    </li>
+                  </div>
+                );
               })}
             </ul>
           </div>

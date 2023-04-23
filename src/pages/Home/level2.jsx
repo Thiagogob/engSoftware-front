@@ -15,27 +15,27 @@ function Level2() {
         {
             text: "Tire uma foto da Arara: ",
             options: [
-                { id: 0, image: <img src="/static/images/araraMovimento.png" />,hover: <img src="/static/images/araraFoto.png" />, isCorrect: true },
-                { id: 1, image: <img src="/static/images/macacoMovimento.png" />, hover: <img src="/static/images/macacoFoto.png" />,isCorrect: false },
-                { id: 2, image: <img src="/static/images/crocodiloMovimento.png" />, hover: <img src="/static/images/crocodiloFoto.png" />,isCorrect: false },
+                { id: 0, image: <img src="/static/images/araraMovimento.png" />, hover: <img src="/static/images/araraFoto.png" />, isCorrect: true },
+                { id: 1, image: <img src="/static/images/macacoMovimento.png" />, hover: <img src="/static/images/macacoFoto.png" />, isCorrect: false },
+                { id: 2, image: <img src="/static/images/crocodiloMovimento.png" />, hover: <img src="/static/images/crocodiloFoto.png" />, isCorrect: false },
             ],
 
         },
         {
             text: "Tire uma foto da Capivara: ",
             options: [
-                { id: 0, image: <img src="/static/images/juburuMovimento.png" />,hover: <img src="/static/images/juburuFoto.png" />, isCorrect: false },
-                { id: 1, image: <img src="/static/images/flamingoMovimento.png" />, hover: <img src="/static/images/flamingoFoto.png" />,isCorrect: false },
-                { id: 2, image: <img src="/static/images/capivaraMovimento.png" />, hover: <img src="/static/images/capivaraFoto.png" />,isCorrect: true },
+                { id: 0, image: <img src="/static/images/juburuMovimento.png" />, hover: <img src="/static/images/juburuFoto.png" />, isCorrect: false },
+                { id: 1, image: <img src="/static/images/flamingoMovimento.png" />, hover: <img src="/static/images/flamingoFoto.png" />, isCorrect: false },
+                { id: 2, image: <img src="/static/images/capivaraMovimento.png" />, hover: <img src="/static/images/capivaraFoto.png" />, isCorrect: true },
             ],
 
         },
         {
             text: "Tire uma foto da Cobra: ",
             options: [
-                { id: 0, image: <img src="/static/images/capivaraMovimento.png" />, hover: <img src="/static/images/capivaraFoto.png" />,isCorrect: false },
-                { id: 1, image: <img src="/static/images/cobraMovimento.png" />, hover: <img src="/static/images/cobraFoto.png" />,isCorrect: true },
-                { id: 2, image: <img src="/static/images/oncapintadaMovimento.png" />, hover: <img src="/static/images/oncapintadaFoto.png" />,isCorrect: false },
+                { id: 0, image: <img src="/static/images/capivaraMovimento.png" />, hover: <img src="/static/images/capivaraFoto.png" />, isCorrect: false },
+                { id: 1, image: <img src="/static/images/cobraMovimento.png" />, hover: <img src="/static/images/cobraFoto.png" />, isCorrect: true },
+                { id: 2, image: <img src="/static/images/oncapintadaMovimento.png" />, hover: <img src="/static/images/oncapintadaFoto.png" />, isCorrect: false },
             ],
 
         },
@@ -106,17 +106,17 @@ function Level2() {
     }
 
 
-        const [isHovered, setIsHovered] = useState(false);
-      
-        const handleHover = () => {
-          setIsHovered(true);
-        };
-      
-        const handleLeave = () => {
-          setIsHovered(false);
-        };
+    const [isHovered, setIsHovered] = useState(false);
 
-        const [hoveredOption, setHoveredOption] = useState(null);
+    const handleHover = () => {
+        setIsHovered(true);
+    };
+
+    const handleLeave = () => {
+        setIsHovered(false);
+    };
+
+    const [hoveredOption, setHoveredOption] = useState(null);
 
     return (
 
@@ -124,23 +124,17 @@ function Level2() {
 
             {showFinalResults ?
 
-                <div className="final-results">
-                    <div className="row d-flex justify-content-center">
-                        <h2 className="text-light">{score} fotos corretas</h2>
-                    </div>
-                    <div className="d-flex justify-content-center">
-                        <a href="/level2">
-                            <button type="button"
-                                className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Recomeçar</button>
-                        </a>
-                        <a href="/level1">
-                            <button type="button"
-                                className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Jogar Fase 1</button>
-                        </a>
-                        <a href="/home">
-                            <button type="button"
-                                className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration">Sair</button>
-                        </a>
+                <div className="d-flex align-items-center justify-content-center">
+                    <div className="final-result">
+                        <h1 className="d-flex justify-content-center">Resultado Final</h1>
+                        <h2 className="d-flex justify-content-center">
+                            {score}/{tasks.length} fotos corretas - ({((score / tasks.length) * 100).toFixed(2)}%)
+                        </h2>
+                        <div className="row d-flex justify-content-around">
+                            <a href="/level2"><button type="button" class="btn btn-primary">Recomeçar</button></a>
+                            <a href="/level1"><button type="button" class="btn btn-primary">Jogar Fase 1</button></a>
+                            <a href="/home"><button type="button" class="btn btn-danger btn-exit">Sair</button></a>
+                        </div>
                     </div>
                 </div>
 
@@ -158,8 +152,8 @@ function Level2() {
                         <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
                     </motion.div>
                     */}
-                    
-                
+
+
                     <div className="row">
                         <div className="mx-auto">
                             <h2 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h2>
@@ -172,26 +166,26 @@ function Level2() {
                     </div>
 
                     <motion.ul className="d-flex justify-content-center"
-                                                    animate={{
-                                                        y: [0, 220, 0],
-                                                        x: [0, -100, 0],
-                                                    }}
-                    
-                                                    transition={{
-                                                        duration: 1,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut",
-                                                    }}>
+                        animate={{
+                            y: [0, 220, 0],
+                            x: [0, -100, 0],
+                        }}
+
+                        transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                        }}>
                         {tasks[currentTask].options.map((option) => {
                             return (
 
                                 <li className="animal" onClick={() => optionClicked(option.isCorrect)}
-                                key={option.id}
+                                    key={option.id}
                                 >
 
                                     <div
-                                         onMouseEnter={() => setHoveredOption(option.id)}
-                                         onMouseLeave={() => setHoveredOption(null)}
+                                        onMouseEnter={() => setHoveredOption(option.id)}
+                                        onMouseLeave={() => setHoveredOption(null)}
                                     >{hoveredOption === option.id ? option.hover : option.image}</div>
 
 
