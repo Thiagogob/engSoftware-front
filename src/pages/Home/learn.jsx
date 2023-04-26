@@ -62,7 +62,7 @@ function Learn() {
         <div className="d-flex align-items-center justify-content-center">
             {showAnimals ? (
                 <div className="learn-container text-center">
-                    <div className="jumbotron">
+                    <div className="jumbotron how-to-play-jumbo">
                         <h1 className="display-4">Aprendendo sobre os animais</h1>
                         <div>
                             {animals[currentAnimal].image}
@@ -76,9 +76,15 @@ function Learn() {
                 </div>
             ) :
                 (
-                    <div className="learn-container text-center">
-                        <div className="jumbotron">
-                                AAAAAAAAAAA
+                    <div className="text-center no-more-animals">
+                        <div class="jumbotron my-5">
+                            <h1 class="display-4">FIM!</h1>
+                            <p class="lead">Você acabou de aprender sobre os animais! Está na hora de jogar</p>
+                            <hr class="my-4"></hr>
+                                <div className="row justify-content-around">
+                                <div className="d-flex justify-content-center"><a href="/level1"><button type="button" className="btn btn-primary btn-decoration">Jogar Fase 1</button></a></div>
+                                <div className="d-flex justify-content-center"><a href="/level2"><button type="button" className="btn btn-primary btn-decoration">Jogar Fase 2</button></a></div>
+                                </div>
                         </div>
                     </div>
                 )}
