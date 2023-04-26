@@ -133,3 +133,19 @@ li{
   width: 100px;
 }
 
+.how-to-play{
+  /* Center the div  */
+  margin: 0 auto;
+
+  /* Dimensions  */
+  width: 50%; /* Can be in percentage also. */
+  height: auto;
+  margin-top: 64px;
+
+  /* Visual  */
+  background-color: rgba(119, 0, 255, 0.685);
+  padding: 16px;
+  border-radius: 16px;
+  color: rgb(255, 255, 255);
+  box-shadow: 0px 10px 19px rgba(0, 0, 0, 0.43);
+}
