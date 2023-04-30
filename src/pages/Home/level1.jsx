@@ -211,7 +211,7 @@ function Level1() {
               <p className="lead project-text d-flex justify-content-center question-text">
                 {questions[currentQuestion].text}
               </p>
-              <ul className="d-flex justify-content-center list-style">
+              <ul className="d-flex justify-content-center list-style justify-content-around">
                 {questions[currentQuestion].options.map((option) => {
                   if (currentQuestion % 2 === 0) {
                     return (
@@ -226,11 +226,12 @@ function Level1() {
                     );
                   } else return (
                     <div>
-                      <div className="row d-flex justify-content-center">
-                        <button type="button" class="btn btn-light" onClick={() => soundClicked(option.id)}><img src="/static/images/playIcon.png" /></button></div>
+                      <div className="row d-flex justify-content-center justify-content-around">
+                        <button type="button" className="btn btn-light" onClick={() => soundClicked(option.id)}><img src="/static/images/playIcon.png" /></button>
+                      </div>
                       <li
                         type="button"
-                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration btn-sound"
+                        className="btn btn-primary btn-decoration btn-animal btn-decoration btn-sound"
                         onClick={() => optionClicked(option.isCorrect)}
                         key={option.id}
                       >

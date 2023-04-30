@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./level2.css";
 import { motion } from "framer-motion";
 
+
 function Level2() {
 
     const [showFinalResults, setFinalResults] = useState(false);
