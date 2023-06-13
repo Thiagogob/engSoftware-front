@@ -1,9 +1,9 @@
-import { Button, TextField } from "@mui/material"
-import { useState } from "react"
-import styled from "styled-components"
+import { Button, TextField } from "@mui/material";
+import { useState } from "react";
+import styled from "styled-components";
 
-const Admin = () => {
-  const [loginData, setLoginData] = useState({ username: '', password: '' })
+const AdminRegister = () => {
+  const [loginData, setLoginData] = useState({ username: '', name: '', password: '' })
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
@@ -17,16 +17,17 @@ const Admin = () => {
 
     // const data = await login(loginData)
 
-    setLoginData({ username: '', password: '' })
+    setLoginData({ username: '', password: '', name: '' })
   }
 
   return (
     <AdminContainer>
       <div className="content">
-        <h1>Login</h1>
+        <h1>Cadastro</h1>
+        <TextField onChange={e => updateLogin('name', e)} value={loginData.name} color='primary' label="Nome" variant="outlined" />
         <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
         <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
-        <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+        <Button onClick={loginSubmit} variant="contained">Fazer cadastro</Button>
       </div>
     </AdminContainer>
   )
@@ -54,4 +55,4 @@ const AdminContainer = styled.div`
   }
 `
 
-export default Admin
+export default AdminRegister
