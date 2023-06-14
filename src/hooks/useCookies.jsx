@@ -4,16 +4,16 @@ export const useCookies = () => {
   const cookies = new Cookies()
   const getCookie = (cookie) => cookies.get(cookie)
 
-  const setAuthCookie = (token, expire) => {
-    if (!expire) cookies.set('Authorization', `${token}`)
+  const setAuthCookie = (token, expire, cookieName) => {
+    if (!expire) return cookies.set(cookieName, `${token}`)
 
     const expirationDate = new Date()
     expirationDate.setFullYear(expirationDate.getFullYear() + 1)
-    cookies.set('Authorization', `${token}`, { expires: expirationDate })
+    cookies.set(cookieName, `${token}`, { expires: expirationDate })
   }
 
   const setUserCookie = (user, expire) => {
-    if (!expire) cookies.set('User', user)
+    if (!expire) return cookies.set('User', user)
 
     const expirationDate = new Date()
     expirationDate.setFullYear(expirationDate.getFullYear() + 1)

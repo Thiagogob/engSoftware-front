@@ -1,9 +1,11 @@
 import { Button, TextField } from "@mui/material"
 import { useState } from "react"
 import styled from "styled-components"
+import { useAuth } from "../../contexts/useAuth"
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' })
+  const { loginTeacher } = useAuth()
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
@@ -15,9 +17,9 @@ const Admin = () => {
   async function loginSubmit(event) {
     event.preventDefault()
 
-    // const data = await login(loginData)
+    const data = await loginTeacher(loginData.username, loginData.password)
 
-    setLoginData({ username: '', password: '' })
+    // setLoginData({ username: '', password: '' });
   }
 
   return (

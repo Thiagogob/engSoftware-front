@@ -1,4 +1,4 @@
-import { useCookies } from 'hooks/useCookies'
+import { useCookies } from '../hooks/useCookies'
 import { createContext, useContext, useState } from 'react'
 
 
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   const { auth, setAuth } = useContext(AuthContext)
-  const { getCookie, removeCookie } = useCookies()
+  const { getCookie, removeCookie, setAuthCookie } = useCookies()
 
   const setCookieAuth = () => {
     const result = getCookie('Authorization')
@@ -31,10 +31,42 @@ export const useAuth = () => {
     setAuth(false)
   }
 
+  const loginTeacher = async (username, password) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    }
+
+    const response = await fetch('https://apifaunasnapshot.vercel.app/auth/teacher', requestOptions)
+    const data = await response.json()
+
+    if (data?.token) setAuthCookie(data.token, true, 'authteacher')
+
+    return data
+  }
+
+  const registerTeacher = async (name, username, password) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, username, password }),
+    }
+
+    const response = await fetch('https://apifaunasnapshot.vercel.app/teacher', requestOptions)
+    const data = await response.json()
+
+    if (data?.token) setAuthCookie(data.token, true, 'authteacher')
+
+    return data
+  }
+
   return {
     auth,
     setCookieAuth,
     getUser,
     removeAuth,
+    loginTeacher,
+    registerTeacher
   }
 }
