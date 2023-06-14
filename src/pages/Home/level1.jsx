@@ -25,54 +25,54 @@ function Level1() {
       text: "Qual o nome desse animal:",
       image: <img src={oncaPintada} />,
       options: [
-        { id: 0, text: "Onça-pintada", isCorrect: true },
-        { id: 1, text: "Flamingo", isCorrect: false },
-        { id: 2, text: "Tamanduá", isCorrect: false },
+        { id: 0, text: "Onça-pintada", isCorrect: true, colorClass: "option-color-0"},
+        { id: 1, text: "Flamingo", isCorrect: false, colorClass: "option-color-1" },
+        { id: 2, text: "Tamanduá", isCorrect: false, colorClass: "option-color-2" },
       ],
     },
     {
       text: "Qual o som desse animal:",
       image: <img src={oncaPintada} />,
       options: [
-        { id: 0, text: <img src="/static/images/checkFinal.png" />, isCorrect: true },
-        { id: 1, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
-        { id: 2, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
+        { id: 0, text: <img src="/static/images/checkFinal.png" />, isCorrect: true, colorClass: "option-color-0" },
+        { id: 1, text: <img src="/static/images/checkFinal.png" />, isCorrect: false, colorClass: "option-color-1" },
+        { id: 2, text: <img src="/static/images/checkFinal.png" />, isCorrect: false, colorClass: "option-color-2" },
       ],
     },
     {
       text: "Qual o nome desse animal:",
       image: <img src={macaco} />,
       options: [
-        { id: 0, text: "Cobra", isCorrect: false },
-        { id: 1, text: "Macaco", isCorrect: true },
-        { id: 2, text: "Juburu", isCorrect: false },
+        { id: 0, text: "Cobra", isCorrect: false, colorClass: "option-color-0" },
+        { id: 1, text: "Macaco", isCorrect: true, colorClass: "option-color-1" },
+        { id: 2, text: "Juburu", isCorrect: false, colorClass: "option-color-2" },
       ],
     },
     {
       text: "Qual o som desse animal:",
       image: <img src={macaco} />,
       options: [
-        { id: 3, text: <img src="/static/images/checkFinal.png" />, isCorrect: true },
-        { id: 4, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
-        { id: 5, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
+        { id: 3, text: <img src="/static/images/checkFinal.png" />, isCorrect: true, colorClass: "option-color-0" },
+        { id: 4, text: <img src="/static/images/checkFinal.png" />, isCorrect: false, colorClass: "option-color-1" },
+        { id: 5, text: <img src="/static/images/checkFinal.png" />, isCorrect: false, colorClass: "option-color-2" },
       ],
     },
     {
       text: "Qual o nome desse animal:",
       image: <img src={flamingo} />,
       options: [
-        { id: 0, text: "Flamingo", isCorrect: true },
-        { id: 1, text: "Arara", isCorrect: false },
-        { id: 2, text: "Crocodilo", isCorrect: false },
+        { id: 0, text: "Flamingo", isCorrect: true, colorClass: "option-color-0" },
+        { id: 1, text: "Arara", isCorrect: false, colorClass: "option-color-1" },
+        { id: 2, text: "Crocodilo", isCorrect: false, colorClass: "option-color-2" },
       ],
     },
     {
       text: "Qual o som desse animal:",
       image: <img src={flamingo} />,
       options: [
-        { id: 6, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
-        { id: 7, text: <img src="/static/images/checkFinal.png" />, isCorrect: false },
-        { id: 8, text: <img src="/static/images/checkFinal.png" />, isCorrect: true },
+        { id: 6, text: <img src="/static/images/checkFinal.png" />, isCorrect: false, colorClass: "option-color-0" },
+        { id: 7, text: <img src="/static/images/checkFinal.png" />, isCorrect: false, colorClass: "option-color-1" },
+        { id: 8, text: <img src="/static/images/checkFinal.png" />, isCorrect: true, colorClass: "option-color-2" },
       ],
     },
   ];
@@ -217,7 +217,7 @@ function Level1() {
                     return (
                       <li
                         type="button"
-                        className="btn btn-primary btn-decoration mx-auto btn-animal btn-decoration"
+                        className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
                         onClick={() => optionClicked(option.isCorrect)}
                         key={option.id}
                       >
@@ -231,7 +231,7 @@ function Level1() {
                       </div>
                       <li
                         type="button"
-                        className="btn btn-primary btn-decoration btn-animal btn-decoration btn-sound"
+                        className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
                         onClick={() => optionClicked(option.isCorrect)}
                         key={option.id}
                       >
