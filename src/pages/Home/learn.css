@@ -1,3 +1,7 @@
+.body{
+    text-transform: uppercase;
+}
+
 .learn-container{
     height: 100vh;
 }
@@ -5,3 +9,4 @@
 .how-to-play-jumbo{
     padding: 0rem 2rem;
 }
+

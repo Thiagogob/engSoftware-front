@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-transform: uppercase;
 }
 
 
@@ -9,7 +10,7 @@ body{
     background-image: url(/static/images/faunaSnapshotBackground.jpg);
     background-size: cover;
     cursor: pointer;
-
+    text-transform: uppercase;
 }
 
 

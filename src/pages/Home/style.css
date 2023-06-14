@@ -1,6 +1,7 @@
 body{
   background-image: url(/static/images/faunaSnapshotBackground.jpg);
   background-size: cover;
+  text-transform: uppercase;
 }
 
 .project-text {
@@ -105,6 +106,7 @@ li{
 .score-text{
   line-height: 0;
   margin-top: 25px;
+  
 }
 
 .btn-sound{
