@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie'
 
 export const useCookies = () => {
   const cookies = new Cookies()
-  const getCookie = (cookie) => cookies.get(cookie)
+  const getCookie = async (cookie) => cookies.get(cookie)
 
   const setAuthCookie = (token, expire, cookieName) => {
     if (!expire) return cookies.set(cookieName, `${token}`)
@@ -13,11 +13,11 @@ export const useCookies = () => {
   }
 
   const setUserCookie = (user, expire) => {
-    if (!expire) return cookies.set('User', user)
+    if (!expire) return cookies.set('user', user)
 
     const expirationDate = new Date()
     expirationDate.setFullYear(expirationDate.getFullYear() + 1)
-    cookies.set('User', user, { expires: expirationDate })
+    cookies.set('user', user, { expires: expirationDate })
   }
 
   const removeCookie = (cookie) => {

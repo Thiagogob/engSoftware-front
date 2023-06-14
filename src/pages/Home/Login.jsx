@@ -2,13 +2,15 @@ import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import useApi from "../../hooks/useApi"
-import { useAuth } from "../../contexts/useAuth"
+import { useAuth } from "../../hooks/useAuth"
+import { useNavigate } from "react-router"
 
 const Login = () => {
     const [loginDatas, setLoginDatas] = useState({ username: '', teacher: '' })
     const [teachers, setTeachers] = useState([])
     const { getTeachers } = useApi()
-    const { loginStudent } = useAuth()
+    const { loginStudent, authUser } = useAuth()
+    const navigate = useNavigate()
 
     const fetchTeachers = async () => {
         const teachers = await getTeachers()
@@ -24,16 +26,21 @@ const Login = () => {
         fetchTeachers()
     }, [])
 
+    useEffect(() => {
+        if (authUser) navigate('/levels', { replace: true })
+    }, [authUser]);
+
     async function loginSubmit(event) {
         event.preventDefault()
 
-        const data = await loginStudent(loginDatas.username, loginDatas.teacher)
+        await loginStudent(loginDatas.username, loginDatas.teacher)
+        if (authUser) navigate('/levels', { replace: true })
 
         setLoginDatas({ username: '', teacher: '' })
     }
 
     return (
-        <LoginContainer>
+        !authUser && <LoginContainer>
             <div className="content">
                 <h1>Login</h1>
                 <TextField onChange={e => setLoginDatas(currentData => ({ ...currentData, username: e.target.value }))} value={loginDatas.username} color='primary' label="Digite o seu nome" variant="outlined" />
