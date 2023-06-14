@@ -9,12 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
     "framer": "^2.3.0",
     "motion": "^10.15.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.10.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "styled-components": "^5.3.6",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
