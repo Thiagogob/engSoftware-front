@@ -2,13 +2,13 @@ import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import { BrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import { AuthProvider } from "./contexts/useAuth";
+import { AuthProvider } from "./contexts/auth";
 
 const Levels = lazy(() => import('./pages/Home/levels'))
 const Level1 = lazy(() => import('./pages/Home/level1'))
 const Level2 = lazy(() => import('./pages/Home/level2'))
 const Learn = lazy(() => import('./pages/Home/learn'))
-const Login = lazy(() => import('./pages/Home/Login'))
+const Login = lazy(() => import('./pages/Home/login'))
 const Loading = lazy(() => import('./components/Loading'))
 const Admin = lazy(() => import('./pages/Admin'))
 const AdminRegister = lazy(() => import('./pages/Admin/register'))
@@ -34,7 +34,7 @@ const AppRoutes = () => (
         </Routes>
       </Suspense>
     </AuthProvider>
-  </BrowserRouter>
+  </BrowserRouter >
 );
 
 export default AppRoutes;
