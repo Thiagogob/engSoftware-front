@@ -1,11 +1,11 @@
 import { useCookies } from '../hooks/useCookies'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(true)
+  const [auth, setAuth] = useState({ admin: false, user: false })
 
   return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
 }
@@ -14,10 +14,7 @@ export const useAuth = () => {
   const { auth, setAuth } = useContext(AuthContext)
   const { getCookie, removeCookie, setAuthCookie } = useCookies()
 
-  const setCookieAuth = () => {
-    const result = getCookie('Authorization')
-    setAuth(result === undefined ? false : true)
-  }
+  useEffect(() => setAuth(getCookie('authteacher') === undefined ? false : true), [])
 
   const getUser = () => {
     const result = getCookie('User')
@@ -26,9 +23,9 @@ export const useAuth = () => {
   }
 
   const removeAuth = () => {
-    removeCookie('Authorization')
-    removeCookie('User')
-    setAuth(false)
+    // removeCookie('Authorization')
+    // removeCookie('User')
+    // setAuth(false)
   }
 
   const loginTeacher = async (username, password) => {
@@ -42,6 +39,7 @@ export const useAuth = () => {
     const data = await response.json()
 
     if (data?.token) setAuthCookie(data.token, true, 'authteacher')
+    setAuth({ admin: true, user: false })
 
     return data
   }
@@ -57,16 +55,35 @@ export const useAuth = () => {
     const data = await response.json()
 
     if (data?.token) setAuthCookie(data.token, true, 'authteacher')
+    setAuth({ admin: true, user: false })
 
     return data
   }
 
+  const loginStudent = async (username, teacherUser) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, teacherUser }),
+    }
+
+    await fetch('https://apifaunasnapshot.vercel.app/student', requestOptions)
+
+    const loginResponse = await fetch('https://apifaunasnapshot.vercel.app/auth/student', requestOptions)
+    const loginData = await loginResponse.json()
+
+    if (loginData?.token) setAuthCookie(loginData.token, true, 'authstudent')
+
+    return loginData
+  }
+
   return {
-    auth,
-    setCookieAuth,
+    authAdmin: auth.admin,
+    authUser: auth.user,
     getUser,
     removeAuth,
     loginTeacher,
-    registerTeacher
+    registerTeacher,
+    loginStudent
   }
 }

@@ -2,10 +2,12 @@ import { Button, TextField } from "@mui/material"
 import { useState } from "react"
 import styled from "styled-components"
 import { useAuth } from "../../contexts/useAuth"
+import Loading from "../../components/Loading"
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' })
-  const { loginTeacher } = useAuth()
+  const [loading, setLoading] = useState(false);
+  const { loginTeacher, authAdmin } = useAuth()
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
@@ -17,20 +19,25 @@ const Admin = () => {
   async function loginSubmit(event) {
     event.preventDefault()
 
+    setLoading(true);
     const data = await loginTeacher(loginData.username, loginData.password)
+    setLoading(false);
 
-    // setLoginData({ username: '', password: '' });
+    setLoginData({ username: '', password: '' });
   }
 
   return (
-    <AdminContainer>
-      <div className="content">
-        <h1>Login</h1>
-        <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
-        <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
-        <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
-      </div>
-    </AdminContainer>
+    <>
+      {!authAdmin && <AdminContainer>
+        <div className="content">
+          <h1>Login</h1>
+          <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
+          <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
+          <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+        </div>
+        {loading && <Loading />}
+      </AdminContainer>}
+    </>
   )
 }
 

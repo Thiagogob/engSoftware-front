@@ -2,9 +2,11 @@ import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { useAuth } from "../../contexts/useAuth";
+import Loading from "../../components/Loading";
 
 const AdminRegister = () => {
   const [loginData, setLoginData] = useState({ username: '', name: '', password: '' })
+  const [loading, setLoading] = useState(false);
   const { registerTeacher } = useAuth()
 
   function updateLogin(key, e) {
@@ -17,7 +19,9 @@ const AdminRegister = () => {
   async function loginSubmit(event) {
     event.preventDefault()
 
+    setLoading(true)
     const data = await registerTeacher(loginData.name, loginData.username, loginData.password)
+    setLoading(false)
 
     setLoginData({ username: '', password: '', name: '' })
   }
@@ -31,6 +35,7 @@ const AdminRegister = () => {
         <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
         <Button onClick={loginSubmit} variant="contained">Fazer cadastro</Button>
       </div>
+      {loading && <Loading />}
     </AdminContainer>
   )
 }

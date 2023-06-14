@@ -1,16 +1,35 @@
 import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
+import useApi from "../../hooks/useApi"
+import { useAuth } from "../../contexts/useAuth"
 
 const Login = () => {
     const [loginDatas, setLoginDatas] = useState({ username: '', teacher: '' })
+    const [teachers, setTeachers] = useState([])
+    const { getTeachers } = useApi()
+    const { loginStudent } = useAuth()
+
+    const fetchTeachers = async () => {
+        const teachers = await getTeachers()
+        const filteredTeachers = teachers.map(teacher => ({
+            name: teacher.name,
+            username: teacher.username
+        }))
+
+        setTeachers(filteredTeachers)
+    }
+
+    useEffect(() => {
+        fetchTeachers()
+    }, [])
 
     async function loginSubmit(event) {
         event.preventDefault()
 
-        // const data = await login(loginData)
+        const data = await loginStudent(loginDatas.username, loginDatas.teacher)
 
-        setLoginDatas('')
+        setLoginDatas({ username: '', teacher: '' })
     }
 
     return (
@@ -24,9 +43,7 @@ const Login = () => {
                     value={loginDatas.teacher}
                     onChange={e => setLoginDatas(currentData => ({ ...currentData, teacher: e.target.value }))}
                 >
-                    <MenuItem value={'Professor 1'}>Professor 1</MenuItem>
-                    <MenuItem value={'Professor 2'}>Professor 2</MenuItem>
-                    <MenuItem value={'Professor 3'}>Professor 3</MenuItem>
+                    {teachers.map(teacher => <MenuItem key={teacher.username} value={teacher.username}>{`${teacher.name} (${teacher.username})`}</MenuItem>)}
                 </Select>
                 <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
             </div>
