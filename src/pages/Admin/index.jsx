@@ -3,11 +3,13 @@ import { useState } from "react"
 import styled from "styled-components"
 import { useAuth } from "../../hooks/useAuth"
 import Loading from "../../components/Loading"
+import { useNavigate } from "react-router"
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' })
   const [loading, setLoading] = useState(false);
   const { loginTeacher, authAdmin } = useAuth()
+  const navigate = useNavigate()
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
@@ -22,6 +24,7 @@ const Admin = () => {
     setLoading(true);
     const data = await loginTeacher(loginData.username, loginData.password)
     setLoading(false);
+    if (authAdmin) navigate('/dashboard')
 
     setLoginData({ username: '', password: '' });
   }

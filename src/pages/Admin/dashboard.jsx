@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useAuth } from "../../hooks/useAuth"
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material"
+import { Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material"
 import useApi from "../../hooks/useApi";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -8,17 +8,35 @@ import { useCookies } from "../../hooks/useCookies";
 
 const DashBoard = () => {
   const [animals, setAnimals] = useState([])
+  const [username, setUsername] = useState('')
   const { authAdmin } = useAuth()
-  const { getTeacherAnimals } = useApi()
+  const { getTeacherAnimals, updateTeacherAnimal } = useApi()
   const { getCookie } = useCookies()
 
   useEffect(() => {
     (async function () {
-      const { username } = await getCookie('user')
-      const data = await getTeacherAnimals(username)
-      setAnimals(data)
+      setUsername((await getCookie('user')).username)
     })()
   }, [])
+
+  useEffect(() => {
+    (async function () {
+      if (username) {
+        const data = await getTeacherAnimals(username)
+        setAnimals(data)
+      }
+    })()
+  }, [username])
+
+  const updateAnimalCheckBox = async (animalName, state) => {
+    updateTeacherAnimal(username, animalName, state);
+    setAnimals(currentAnimals =>
+      currentAnimals.map(animal =>
+        animal.name === animalName ? { ...animal, selected: state } : animal
+      )
+    );
+  };
+
 
   return (
     authAdmin && <DashBoardContainer>
@@ -37,7 +55,12 @@ const DashBoard = () => {
                   <StyledTableCell component="th" scope="row">
                     {animal.name}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{animal.selected ? 'Sim' : 'Não'}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    <Switch
+                      checked={!!animal.selected}
+                      onChange={() => updateAnimalCheckBox(animal.name, !animal.selected)}
+                    />
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
