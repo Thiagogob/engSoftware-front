@@ -22,8 +22,6 @@ export const useAuth = () => {
     validationCookies()
   }, [])
 
-  useEffect(() => console.log(auth), [auth])
-
   const getUser = () => {
     const result = getCookie('User')
     const user = result

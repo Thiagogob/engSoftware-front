@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import { BrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { AuthProvider } from "./contexts/auth";
+import { AnimalsProvider } from "./contexts/animals";
 
 const Levels = lazy(() => import('./pages/Home/levels'))
 const Level1 = lazy(() => import('./pages/Home/level1'))
@@ -16,23 +17,25 @@ const AdminRegister = lazy(() => import('./pages/Admin/register'))
 const AppRoutes = () => (
   <BrowserRouter>
     <AuthProvider>
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="levels" element={<Levels />} />
-            <Route path="level1" element={<Level1 />} />
-            <Route path="level2" element={<Level2 />} />
-            <Route path="learn" element={<Learn />} />
-            <Route path="home" element={<Home />} />
-            <Route path="login" element={<Login />} />
-          </Route>
-          <Route path="/admin">
-            <Route index element={<Admin />} />
-            <Route path="cadastro" element={<AdminRegister />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <AnimalsProvider>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="levels" element={<Levels />} />
+              <Route path="level1" element={<Level1 />} />
+              <Route path="level2" element={<Level2 />} />
+              <Route path="learn" element={<Learn />} />
+              <Route path="home" element={<Home />} />
+              <Route path="login" element={<Login />} />
+            </Route>
+            <Route path="/admin">
+              <Route index element={<Admin />} />
+              <Route path="cadastro" element={<AdminRegister />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </AnimalsProvider>
     </AuthProvider>
   </BrowserRouter >
 );
