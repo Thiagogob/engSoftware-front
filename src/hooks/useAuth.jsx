@@ -9,7 +9,7 @@ export const useAuth = () => {
   useEffect(() => {
     const validationCookies = async () => {
       const studentCookie = await getCookie('authstudent')
-      const teacherCookie = await getCookie('authsteacher')
+      const teacherCookie = await getCookie('authteacher')
 
       const authValue = teacherCookie
         ? { admin: true, user: false }
@@ -41,6 +41,8 @@ export const useAuth = () => {
     if (data?.token) {
       setAuthCookie(data.token, true, 'authteacher')
       setAuth({ admin: true, user: false })
+      if (await getCookie('user')) removeCookie('user')
+      setUserCookie({ username })
 
       if (await getCookie('authstudent')) removeCookie('authstudent')
     }
@@ -61,6 +63,8 @@ export const useAuth = () => {
     if (data?.token) {
       setAuthCookie(data.token, true, 'authteacher')
       setAuth({ admin: true, user: false })
+      if (await getCookie('user')) removeCookie('user')
+      setUserCookie({ username })
 
       if (await getCookie('authstudent')) removeCookie('authstudent')
     }

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { AuthProvider } from "./contexts/auth";
 import { AnimalsProvider } from "./contexts/animals";
+import DashBoard from "./pages/Admin/dashboard";
 
 const Levels = lazy(() => import('./pages/Home/levels'))
 const Level1 = lazy(() => import('./pages/Home/level1'))
@@ -31,6 +32,7 @@ const AppRoutes = () => (
             </Route>
             <Route path="/admin">
               <Route index element={<Admin />} />
+              <Route path="dashboard" element={<DashBoard />} />
               <Route path="cadastro" element={<AdminRegister />} />
             </Route>
           </Routes>
