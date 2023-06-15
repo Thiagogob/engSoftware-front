@@ -179,16 +179,7 @@ function Level2() {
                                 <h2 className="project-text">{photosLeft} fotos restantes</h2>
                             </div>
                         </div>
-                        <motion.ul className="d-flex justify-content-center"
-                            animate={{
-                                y: [0, 220, 0],
-                                x: [0, -100, 0],
-                            }}
-                            transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}>
+                        <ul className="d-flex justify-content-center">
                             {tasks[currentTask].options.map((option) => {
                                 return (
                                     <li className="animal" onClick={() => optionClicked(option.isCorrect)}
@@ -201,7 +192,7 @@ function Level2() {
                                     </li>
                                 );
                             })}
-                        </motion.ul>
+                        </ul>
                     </div>
                 }
             </div>
