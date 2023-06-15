@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { useAuth } from "../../hooks/useAuth"
 import Loading from "../../components/Loading"
 import { useNavigate } from "react-router"
+import { useEffect } from "react"
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' })
@@ -24,10 +25,12 @@ const Admin = () => {
     setLoading(true);
     const data = await loginTeacher(loginData.username, loginData.password)
     setLoading(false);
-    if (authAdmin) navigate('/dashboard')
-
     setLoginData({ username: '', password: '' });
   }
+
+  useEffect(() => {
+    if (authAdmin) navigate('dashboard')
+  }, [authAdmin])
 
   return (
     !authAdmin && <AdminContainer>

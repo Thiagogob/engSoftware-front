@@ -25,10 +25,17 @@ const useApi = () => {
     return data;
   }
 
+  const getClassRoomAttempts = async (username) => {
+    const response = await fetch(`https://apifaunasnapshot.vercel.app/attempt/teacher/${username}`)
+    const data = await response.json()
+    return data
+  }
+
   return {
     getTeachers,
     getTeacherAnimals,
-    updateTeacherAnimal
+    updateTeacherAnimal,
+    getClassRoomAttempts
   }
 }
 

@@ -1,17 +1,36 @@
 import styled from "styled-components"
 import { useAuth } from "../../hooks/useAuth"
-import { Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, tableCellClasses } from "@mui/material"
 import useApi from "../../hooks/useApi";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useCookies } from "../../hooks/useCookies";
+import { v4 } from 'uuid'
+import Loading from "../../components/Loading"
+import {
+  Paper,
+  Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  tableCellClasses,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+} from "@mui/material"
+import { useNavigate } from "react-router";
 
 const DashBoard = () => {
+  const [loading, setLoading] = useState(false);
   const [animals, setAnimals] = useState([])
+  const [classRoom, setClassRoom] = useState([])
   const [username, setUsername] = useState('')
   const { authAdmin } = useAuth()
-  const { getTeacherAnimals, updateTeacherAnimal } = useApi()
-  const { getCookie } = useCookies()
+  const { getTeacherAnimals, updateTeacherAnimal, getClassRoomAttempts } = useApi()
+  const { getCookie, removeCookie } = useCookies()
+  const navigate = useNavigate()
 
   useEffect(() => {
     (async function () {
@@ -22,8 +41,15 @@ const DashBoard = () => {
   useEffect(() => {
     (async function () {
       if (username) {
-        const data = await getTeacherAnimals(username)
-        setAnimals(data)
+        setLoading(true);
+
+        const AnimalsData = await getTeacherAnimals(username)
+        const AttemptsData = await getClassRoomAttempts(username)
+
+        setAnimals(AnimalsData)
+        setClassRoom(AttemptsData)
+
+        setLoading(false);
       }
     })()
   }, [username])
@@ -37,37 +63,106 @@ const DashBoard = () => {
     );
   };
 
+  const logout = () => {
+    removeCookie('authteacher')
+    removeCookie('user')
+    navigate('/', { replace: true })
+  }
+
 
   return (
-    authAdmin && <DashBoardContainer>
-      <div className="content">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Animais</StyledTableCell>
-                <StyledTableCell align="right">Selecionado</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {animals.map((animal) => (
-                <StyledTableRow key={animal.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {animal.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    <Switch
-                      checked={!!animal.selected}
-                      onChange={() => updateAnimalCheckBox(animal.name, !animal.selected)}
-                    />
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+    authAdmin && <>
+      <StyledHeader>
+        <h2>Olá, {username}</h2>
+        <button onClick={logout}>Sair</button>
+      </StyledHeader>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', margin: '4rem 0' }}>
+        <DashBoardContainer>
+          <div className="content">
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Animais</StyledTableCell>
+                    <StyledTableCell align="right">Selecionado</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {animals.map((animal) => (
+                    <StyledTableRow key={animal.name}>
+                      <StyledTableCell component="th" scope="row">
+                        {animal.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <Switch
+                          checked={!!animal.selected}
+                          onChange={() => updateAnimalCheckBox(animal.name, !animal.selected)}
+                        />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div >
+        </DashBoardContainer >
+        <DashBoardContainer>
+          <div className="content">
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Nome</TableCell>
+                    <TableCell>Tentativas</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {classRoom.map((student) => (
+                    <TableRow key={student.username}>
+                      <TableCell>{student.username}</TableCell>
+                      <TableCell>
+                        <Accordion>
+                          <AccordionSummary
+                            expandIcon={<h5>v</h5>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            Clique aqui para ver mais
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            {student.attempts.map((attempt, index) =>
+                              <div key={v4()}>
+                                <h3 style={{ margin: '2rem 0 1rem 0', fontWeight: 'bold', letterSpacing: '.2rem' }}>Tentativa {index + 1}:</h3>
+                                <h4>Fase 1:</h4>
+                                {attempt?.phaseOne?.map(phase =>
+                                  <div key={v4()} style={{ display: 'flex', alignItems: 'center' }}>
+                                    <h5>{"phase.animal"}: </h5>
+                                    <h6>{"phase.selected" ? "Acertou" : "Errou"}</h6>
+                                  </div>
+                                )}
+                                <h4 style={{ marginTop: '.5rem' }}>Fase 2:</h4>
+                                {attempt?.phaseTwo?.map(phase =>
+                                  <div key={v4()} style={{ display: 'flex', alignItems: 'center' }}>
+                                    <h5>{"phase.animal"}: </h5>
+                                    <h6>{"phase.selected" ? "Acertou" : "Errou"}</h6>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </AccordionDetails>
+                        </Accordion>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </DashBoardContainer>
       </div>
-    </DashBoardContainer>
+      {loading && <Loading />}
+    </>
   )
 }
 
@@ -85,7 +180,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#999',
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -95,7 +189,6 @@ const DashBoardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 
   .content {
     display: flex;
@@ -105,11 +198,33 @@ const DashBoardContainer = styled.div`
     width: 60%;
     padding: 2rem;
     border-radius: .5rem;
+  }
 
-    h1 {
-      text-align: center;
-      text-transform: uppercase;
-    }
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+  }
+`
+
+const StyledHeader = styled.div`
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  background-color: rgba(200, 200, 200, 1);
+  gap: 1rem;
+  padding: 0 3rem;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 1rem;
+    background-color: #111;
+    color: #FBFBFB;
+    letter-spacing: .2rem;
+    border-radius: 5px;
+    padding: .2rem 1rem;
   }
 `
 

@@ -21,7 +21,7 @@ export const useCookies = () => {
   }
 
   const removeCookie = (cookie) => {
-    cookies.remove(cookie)
+    cookies.remove(cookie, { path: '/' })
   }
 
   return { setAuthCookie, getCookie, setUserCookie, removeCookie }
