@@ -5,6 +5,8 @@ import { useAuth } from "../../hooks/useAuth"
 import Loading from "../../components/Loading"
 import { useNavigate } from "react-router"
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
+import StyledLink from "../../components/StyledLink"
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' })
@@ -33,15 +35,21 @@ const Admin = () => {
   }, [authAdmin])
 
   return (
-    !authAdmin && <AdminContainer>
-      <div className="content">
-        <h1>Login</h1>
-        <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
-        <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
-        <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+    <>
+      {!authAdmin && <AdminContainer>
+        <div className="content">
+          <h1>Login (Professor)</h1>
+          <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
+          <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
+          <Link to='cadastro'>Não possui uma conta?</Link>
+          <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+        </div>
+        {loading && <Loading />}
+      </AdminContainer>}
+      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
-      {loading && <Loading />}
-    </AdminContainer>
+    </>
   )
 }
 

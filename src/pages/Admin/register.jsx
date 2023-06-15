@@ -3,6 +3,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useAuth } from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
+import { Link } from "react-router-dom";
+import StyledLink from "../../components/StyledLink";
 
 const AdminRegister = () => {
   const [loginData, setLoginData] = useState({ username: '', name: '', password: '' })
@@ -27,16 +29,22 @@ const AdminRegister = () => {
   }
 
   return (
-    <AdminContainer>
-      <div className="content">
-        <h1>Cadastro</h1>
-        <TextField onChange={e => updateLogin('name', e)} value={loginData.name} color='primary' label="Nome" variant="outlined" />
-        <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
-        <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
-        <Button onClick={loginSubmit} variant="contained">Fazer cadastro</Button>
+    <>
+      <AdminContainer>
+        <div className="content">
+          <h1>Cadastro</h1>
+          <TextField onChange={e => updateLogin('name', e)} value={loginData.name} color='primary' label="Nome" variant="outlined" />
+          <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
+          <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
+          <Link to='/admin'>Já possui uma conta?</Link>
+          <Button onClick={loginSubmit} variant="contained">Fazer cadastro</Button>
+        </div>
+        {loading && <Loading />}
+      </AdminContainer>
+      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
-      {loading && <Loading />}
-    </AdminContainer>
+    </>
   )
 }
 

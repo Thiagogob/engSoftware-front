@@ -4,6 +4,7 @@ import styled from "styled-components"
 import useApi from "../../hooks/useApi"
 import { useAuth } from "../../hooks/useAuth"
 import { useNavigate } from "react-router"
+import StyledLink from "../../components/StyledLink"
 
 const Login = () => {
     const [loginDatas, setLoginDatas] = useState({ username: '', teacher: '' })
@@ -23,7 +24,8 @@ const Login = () => {
     }
 
     useEffect(() => {
-        fetchTeachers()
+        setTimeout(() => fetchTeachers(), 300)
+
     }, [])
 
     useEffect(() => {
@@ -40,22 +42,29 @@ const Login = () => {
     }
 
     return (
-        !authUser && <LoginContainer>
-            <div className="content">
-                <h1>Login</h1>
-                <TextField onChange={e => setLoginDatas(currentData => ({ ...currentData, username: e.target.value }))} value={loginDatas.username} color='primary' label="Digite o seu nome" variant="outlined" />
-                <InputLabel id="123">Professor</InputLabel>
-                <Select
-                    labelId="123"
-                    value={loginDatas.teacher}
-                    onChange={e => setLoginDatas(currentData => ({ ...currentData, teacher: e.target.value }))}
-                >
-                    {teachers.map(teacher => <MenuItem key={teacher.username} value={teacher.username}>{`${teacher.name} (${teacher.username})`}</MenuItem>)}
-                </Select>
-                <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+        <>
+            {!authUser && (
+                <LoginContainer>
+                    <div className="content">
+                        <h1>Login (Aluno)</h1>
+                        <TextField onChange={e => setLoginDatas(currentData => ({ ...currentData, username: e.target.value }))} value={loginDatas.username} color='primary' label="Digite o seu nome" variant="outlined" />
+                        <InputLabel id="123">Professor</InputLabel>
+                        <Select
+                            labelId="123"
+                            value={loginDatas.teacher}
+                            onChange={e => setLoginDatas(currentData => ({ ...currentData, teacher: e.target.value }))}
+                        >
+                            {teachers.map(teacher => <MenuItem key={teacher.username} value={teacher.username}>{`${teacher.name} (${teacher.username})`}</MenuItem>)}
+                        </Select>
+                        <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+                    </div>
+                </LoginContainer>
+            )}
+            <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+                <StyledLink to='/'>Voltar ao início</StyledLink>
             </div>
-        </LoginContainer>
-    )
+        </>
+    );
 }
 
 const LoginContainer = styled.div`
@@ -79,5 +88,6 @@ const LoginContainer = styled.div`
     }
   }
 `
+
 
 export default Login

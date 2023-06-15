@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./level2.css";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 
 function Level2() {
@@ -124,41 +125,41 @@ function Level2() {
         <div className="container container-camera">
             {showHowToPlay ? (
                 <div className="d-flex align-items-center justify-content-center">
-                <div className="how-to-play">
-                  <h1 className="d-flex justify-content-center">Como Jogar: </h1>
-                  <ul className="justify-content-between">
-                    <li>1. Qual animal fotografar aparecerá na tela</li>
-                    <li>2. Você deve passar o mouse por cima do animal em movimento</li>
-                    <li>3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
-                    <li>4. Você deve clicar rápido para realizar a fotografia</li>
-                    <li>5. Para aprender sobre animais, clique no botão amarelo</li>
-                  </ul>
-                  <div className="row d-flex justify-content-around">
-                    <button type="button" className="btn btn-success" onClick={()=>setHowToPlay(false)}>Jogar Fase 2</button>
-                    <a href="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></a>
-                    <a href="/home"><button type="button" className="btn btn-danger btn-exit">Sair</button></a>
-                  </div>
-                </div>
-              </div>
-            ): (
-            <div>
-                {showFinalResults ?
-                    <div className="d-flex align-items-center justify-content-center">
-                        <div className="final-result">
-                            <h1 className="d-flex justify-content-center">Resultado Final</h1>
-                            <h2 className="d-flex justify-content-center">
-                                {score}/{tasks.length} fotos corretas - ({((score / tasks.length) * 100).toFixed(2)}%)
-                            </h2>
-                            <div className="row d-flex justify-content-around">
-                                <a href="/level2"><button type="button" class="btn btn-primary">Recomeçar</button></a>
-                                <a href="/level1"><button type="button" class="btn btn-primary">Jogar Fase 1</button></a>
-                                <a href="/home"><button type="button" class="btn btn-danger btn-exit">Sair</button></a>
-                            </div>
+                    <div className="how-to-play">
+                        <h1 className="d-flex justify-content-center">Como Jogar: </h1>
+                        <ul className="justify-content-between">
+                            <li>1. Qual animal fotografar aparecerá na tela</li>
+                            <li>2. Você deve passar o mouse por cima do animal em movimento</li>
+                            <li>3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
+                            <li>4. Você deve clicar rápido para realizar a fotografia</li>
+                            <li>5. Para aprender sobre animais, clique no botão amarelo</li>
+                        </ul>
+                        <div className="row d-flex justify-content-around">
+                            <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 2</button>
+                            <Link href="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
+                            <Link href="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
                         </div>
                     </div>
-                    :
-                    <div className="task-card">
-                        {/*
+                </div>
+            ) : (
+                <div>
+                    {showFinalResults ?
+                        <div className="d-flex align-items-center justify-content-center">
+                            <div className="final-result">
+                                <h1 className="d-flex justify-content-center">Resultado Final</h1>
+                                <h2 className="d-flex justify-content-center">
+                                    {score}/{tasks.length} fotos corretas - ({((score / tasks.length) * 100).toFixed(2)}%)
+                                </h2>
+                                <div className="row d-flex justify-content-around">
+                                    <a href="/level2"><button type="button" class="btn btn-primary">Recomeçar</button></a>
+                                    <a href="/level1"><button type="button" class="btn btn-primary">Jogar Fase 1</button></a>
+                                    <a href="/home"><button type="button" class="btn btn-danger btn-exit">Sair</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        <div className="task-card">
+                            {/*
                             <motion.div
                             className="cursor"
                             variants={variants}
@@ -169,33 +170,33 @@ function Level2() {
                             <img className="camera-size" src={"/static/images/cameraBack.png"} alt="" />
                         </motion.div>
                         */}
-                        <div className="row">
-                            <div className="mx-auto">
-                                <h2 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h2>
+                            <div className="row">
+                                <div className="mx-auto">
+                                    <h2 className="d-flex justify-content-center project-text">{tasks[currentTask].text}</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="mx-auto">
-                                <h2 className="project-text">{photosLeft} fotos restantes</h2>
+                            <div className="row">
+                                <div className="mx-auto">
+                                    <h2 className="project-text">{photosLeft} fotos restantes</h2>
+                                </div>
                             </div>
+                            <ul className="d-flex justify-content-center">
+                                {tasks[currentTask].options.map((option) => {
+                                    return (
+                                        <li className="animal" onClick={() => optionClicked(option.isCorrect)}
+                                            key={option.id}
+                                        >
+                                            <div
+                                                onMouseEnter={() => setHoveredOption(option.id)}
+                                                onMouseLeave={() => setHoveredOption(null)}
+                                            >{hoveredOption === option.id ? option.hover : option.image}</div>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
-                        <ul className="d-flex justify-content-center">
-                            {tasks[currentTask].options.map((option) => {
-                                return (
-                                    <li className="animal" onClick={() => optionClicked(option.isCorrect)}
-                                        key={option.id}
-                                    >
-                                        <div
-                                            onMouseEnter={() => setHoveredOption(option.id)}
-                                            onMouseLeave={() => setHoveredOption(null)}
-                                        >{hoveredOption === option.id ? option.hover : option.image}</div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
             )}
 
 
