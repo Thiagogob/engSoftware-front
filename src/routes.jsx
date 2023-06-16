@@ -5,6 +5,7 @@ import { Suspense, lazy } from "react";
 import { AuthProvider } from "./contexts/auth";
 import { AnimalsProvider } from "./contexts/animals";
 import Loading from "./components/Loading";
+import NewLevel2 from "./pages/Home/newLevel2";
 
 const Levels = lazy(() => import('./pages/Home/levels'))
 const Level1 = lazy(() => import('./pages/Home/level1'))
@@ -25,7 +26,7 @@ const AppRoutes = () => (
               <Route index element={<Home />} />
               <Route path="levels" element={<Levels />} />
               <Route path="level1" element={<Level1 />} />
-              <Route path="level2" element={<Level2 />} />
+              <Route path="level2" element={<NewLevel2 />} />
               <Route path="learn" element={<Learn />} />
               <Route path="login" element={<Login />} />
             </Route>

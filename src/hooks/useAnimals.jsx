@@ -1,21 +1,17 @@
-import { useContext, useEffect } from "react"
-import { useAuth } from "./useAuth"
+import { useContext, useEffect, useRef } from "react"
 import { AnimalsContext } from "../contexts/animals"
 import { useCookies } from "./useCookies"
 
 export const useAnimals = () => {
   const { animals, setAnimals, apiCall, setApiCall } = useContext(AnimalsContext)
-  const { authUser } = useAuth()
   const { getCookie } = useCookies()
 
   useEffect(() => {
-
     if (!apiCall)
       (async function () {
-        getCookie('authstudent') ? fetchTeacherAnimals() : fetchStandardAnimals()
+        !!(await getCookie('authstudent')) ? fetchTeacherAnimals() : fetchStandardAnimals()
         setApiCall(true)
       })()
-
   }, [])
 
   async function fetchStandardAnimals() {

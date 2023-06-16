@@ -16,11 +16,11 @@ function Level1() {
   const [showHowToPlay, setHowToPlay] = useState(true);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const correctAudio = new Audio("/static/images/correct.mp3");
-  const wrongAudio = new Audio("/static/images/errado.mp3");
-  const oncaAudio = new Audio("/static/images/somOnca.mp3");
-  const macacoAudio = new Audio("/static/images/somMacaco.mp3");
-  const flamingoAudio = new Audio("/static/images/somFlamingo.mp3");
+  const correctAudio = new Audio("/static/sounds/correct.mp3");
+  const wrongAudio = new Audio("/static/sounds/errado.mp3");
+  const oncaAudio = new Audio("/static/sounds/somOnca.mp3");
+  const macacoAudio = new Audio("/static/sounds/somMacaco.mp3");
+  const flamingoAudio = new Audio("/static/sounds/somFlamingo.mp3");
   const questions = [
     {
       text: "Qual o nome desse animal:",
@@ -179,8 +179,8 @@ function Level1() {
               </ul>
               <div className="row d-flex justify-content-around">
                 <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 1</button>
-                <Link href="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
-                <Link href="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
+                <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
               </div>
             </div>
           </div>
@@ -196,9 +196,9 @@ function Level1() {
                       {score} de {questions.length} questões corretas - ({((score / questions.length) * 100).toFixed(2)}%)
                     </h2>
                     <div className="row d-flex justify-content-around">
-                      <a href="/level1"><button type="button" className="btn btn-primary">Recomeçar</button></a>
-                      <a href="/level2"><button type="button" className="btn btn-primary">Jogar Fase 2</button></a>
-                      <a href="/home"><button type="button" className="btn btn-danger btn-exit">Sair</button></a>
+                      <Link to="/level1"><button type="button" className="btn btn-primary">Recomeçar</button></Link>
+                      <Link to="/level2"><button type="button" className="btn btn-primary">Jogar Fase 2</button></Link>
+                      <Link to="/home"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
                     </div>
                   </div>
                 </div>

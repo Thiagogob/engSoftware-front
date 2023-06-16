@@ -13,9 +13,9 @@ import macaco from "/static/images/macacoFix.png";
 function Learn() {
     const [currentAnimal, setCurrentAnimals] = useState(0);
     const [showAnimals, setShowAnimals] = useState(true);
-    const oncaAudio = new Audio("/static/images/somOnca.mp3");
-    const macacoAudio = new Audio("/static/images/somMacaco.mp3");
-    const flamingoAudio = new Audio("/static/images/somFlamingo.mp3");
+    const oncaAudio = new Audio("/static/sounds/somOnca.mp3");
+    const macacoAudio = new Audio("/static/sounds/somMacaco.mp3");
+    const flamingoAudio = new Audio("/static/sounds/somFlamingo.mp3");
 
     const nextClicked = () => {
         if (currentAnimal < animals.length - 1) {
@@ -81,10 +81,10 @@ function Learn() {
                             <h1 class="display-4">FIM!</h1>
                             <p class="lead">Você acabou de aprender sobre os animais! Está na hora de jogar</p>
                             <hr class="my-4"></hr>
-                                <div className="row justify-content-around">
+                            <div className="row justify-content-around">
                                 <div className="d-flex justify-content-center"><a href="/level1"><button type="button" className="btn btn-primary btn-decoration">Jogar Fase 1</button></a></div>
                                 <div className="d-flex justify-content-center"><a href="/level2"><button type="button" className="btn btn-primary btn-decoration">Jogar Fase 2</button></a></div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
