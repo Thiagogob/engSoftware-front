@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useAnimals } from '../../hooks/useAnimals'
 import { Link } from 'react-router-dom';
 import { generateAnimalsOptions } from '../../utils/generateAnimalsOptions.js'
 import { drawAnimals } from '../../utils/drawAnimals.js'
+import { useAnimals } from '../../hooks/useAnimals'
+import { useAuth } from '../../hooks/useAuth'
+import useApi from '../../hooks/useApi';
+import { useCookies } from '../../hooks/useCookies';
 
 const NewLevel2 = () => {
   const { animals } = useAnimals()
+  const { authUser } = useAuth()
+  const { postAttempt } = useApi()
+  const { getCookie } = useCookies()
+
   const [showFinalResults, setFinalResults] = useState(false);
   const [photosLeft, setPhotosLeft] = useState(5);
   const [currentTask, setCurrentTask] = useState(0);
@@ -15,7 +22,8 @@ const NewLevel2 = () => {
   const [tasksGenerated, setTasksGenerated] = useState(false);
   const [tasks, setTasks] = useState([])
 
-  const optionClicked = (isCorrect, animal) => {
+  const optionClicked = async (isCorrect, animal) => {
+    setScore(currentScore => [...currentScore, { animal, isCorrect }]);
     if (isCorrect) {
       const sound = new Audio("/static/sounds/flashSoundEffect.mp3");
       sound.play();
@@ -35,49 +43,32 @@ const NewLevel2 = () => {
     else {
       setFinalResults(true);
     }
-    setScore(currentScore => [...currentScore, { animal, isCorrect }]);
   }
+
+  useEffect(() => {
+    if (currentTask + 1 >= tasks.length && authUser)
+      (async function () {
+        const cookie = await getCookie('user')
+        const token = await getCookie('authstudent')
+        await postAttempt('Dois', score, cookie.username, cookie.teacherUser, token)
+      })()
+  }, [score])
 
   useEffect(() => {
     if (!tasksGenerated && animals.length) {
       const drawnAnimals = drawAnimals(animals, 3);
-      setTasks([
-        {
-          text: `Tire uma foto d${(drawnAnimals[0].name.toLowerCase().endsWith('a') || drawnAnimals[0].name.charAt(drawnAnimals[0].name.length - 2) === 'a') ? 'a' : 'o'} ${drawnAnimals[0].name}:`,
-          options:
-            generateAnimalsOptions(drawnAnimals[0], animals)
-              .map((animal, index) => ({
-                id: index,
-                correctAnimal: drawnAnimals[0]?.name,
-                image: <img src={`/static/images/${animal.img}Movimento.png`} />,
-                hover: <img src={`/static/images/${animal.img}Foto.png`} />,
-                isCorrect: drawnAnimals[0]?.name === animal.name ? true : false,
 
-              })),
-        },
-        {
-          text: `Tire uma foto d${(drawnAnimals[1].name.toLowerCase().endsWith('a') || drawnAnimals[1].name.charAt(drawnAnimals[1].name.length - 2) === 'a') ? 'a' : 'o'} ${drawnAnimals[1].name}: `,
-          options: generateAnimalsOptions(drawnAnimals[1], animals)
-            .map((animal, index) => ({
-              id: index,
-              correctAnimal: drawnAnimals[1]?.name,
-              image: <img src={`/static/images/${animal.img}Movimento.png`} />,
-              hover: <img src={`/static/images/${animal.img}Foto.png`} />,
-              isCorrect: drawnAnimals[1]?.name === animal.name ? true : false,
-            })),
-        },
-        {
-          text: `Tire uma foto d${(drawnAnimals[2].name.toLowerCase().endsWith('a') || drawnAnimals[2].name.charAt(drawnAnimals[2].name.length - 2) === 'a') ? 'a' : 'o'} ${drawnAnimals[2].name}: `,
-          options: generateAnimalsOptions(drawnAnimals[2], animals)
-            .map((animal, index) => ({
-              id: index,
-              correctAnimal: drawnAnimals[2]?.name,
-              image: <img src={`/static/images/${animal.img}Movimento.png`} />,
-              hover: <img src={`/static/images/${animal.img}Foto.png`} />,
-              isCorrect: drawnAnimals[2]?.name === animal.name ? true : false,
-            })),
-        },
-      ]);
+      setTasks(drawnAnimals.map(correctAnimal => ({
+        text: `Tire uma foto d${(correctAnimal.name.toLowerCase().endsWith('a') || correctAnimal.name.charAt(drawnAnimals[0].name.length - 2) === 'a') ? 'a' : 'o'} ${correctAnimal.name}:`,
+        options: generateAnimalsOptions(correctAnimal, animals).map((animal, index) => ({
+          id: index,
+          correctAnimal: correctAnimal?.name,
+          image: <img src={`/static/images/${animal.img}Movimento.png`} />,
+          hover: <img src={`/static/images/${animal.img}Foto.png`} />,
+          isCorrect: correctAnimal?.name === animal.name ? true : false,
+        })),
+      })));
+
       if (drawnAnimals.length === 3) {
         setTasksGenerated(true);
       }

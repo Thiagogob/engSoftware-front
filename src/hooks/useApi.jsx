@@ -31,11 +31,24 @@ const useApi = () => {
     return data
   }
 
+  const postAttempt = async (phase, tries, username, teacherUser, authstudent) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', authstudent },
+      body: JSON.stringify({ phase, tries }),
+    }
+    const response = await fetch(`https://apifaunasnapshot.vercel.app/attempt/${teacherUser}/${username}`, requestOptions)
+    const data = await response.json()
+    console.log(data)
+    return data
+  }
+
   return {
     getTeachers,
     getTeacherAnimals,
     updateTeacherAnimal,
-    getClassRoomAttempts
+    getClassRoomAttempts,
+    postAttempt
   }
 }
 
