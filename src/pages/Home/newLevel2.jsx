@@ -22,8 +22,8 @@ const NewLevel2 = () => {
   const [tasksGenerated, setTasksGenerated] = useState(false);
   const [tasks, setTasks] = useState([])
 
-  const optionClicked = (isCorrect, animal) => {
-    setScore(currentScore => [...currentScore, { animal, isCorrect }]);
+  const optionClicked = (isCorrect, animal, img) => {
+    setScore(currentScore => [...currentScore, { animal, isCorrect, img }]);
     if (isCorrect) {
       const sound = new Audio("/static/sounds/flashSoundEffect.mp3");
       sound.play();
@@ -63,6 +63,7 @@ const NewLevel2 = () => {
         text: `Tire uma foto d${(correctAnimal.name.toLowerCase().endsWith('a') || correctAnimal.name.charAt(drawnAnimals[0].name.length - 2) === 'a') ? 'a' : 'o'} ${correctAnimal.name}:`,
         options: generateAnimalsOptions(correctAnimal, animals).map((animal, index) => ({
           id: index,
+          img: correctAnimal?.img,
           correctAnimal: correctAnimal?.name,
           image: <img src={`/static/images/${animal.img}Movimento.png`} />,
           hover: <img src={`/static/images/${animal.img}Foto.png`} />,
@@ -112,12 +113,16 @@ const NewLevel2 = () => {
           {showFinalResults ?
             <div className="d-flex align-items-center justify-content-center">
               <div className="final-result">
-                <h1 className="d-flex justify-content-center">Resultado Final</h1>
-                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem' }}>
+                <h1 className="d-flex justify-content-center" style={{ fontSize: '3.5rem' }}>Resultado Final</h1>
+                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '4rem', gap: '2rem' }}>
                   {score.map((animal, index) =>
-                    <h2 key={index} style={{ textAlign: 'center' }}>
-                      {animal.animal}: <span style={{ color: score[index].isCorrect ? 'green' : 'red' }}>{score[index].isCorrect ? 'Acertou' : 'Errou'}</span>
-                    </h2>
+                    <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
+                      <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
+                      <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
+                        {animal.animal}:
+                      </h2>
+                      <h2 style={{ fontSize: '2.5rem', color: score[index].isCorrect ? 'green' : 'red' }}>{score[index].isCorrect ? 'Acertou' : 'Errou'}</h2>
+                    </div>
                   )}
                 </div>
                 <div className="row d-flex justify-content-around">
@@ -144,7 +149,7 @@ const NewLevel2 = () => {
                   return (
                     <li
                       className="animal"
-                      onClick={() => { optionClicked(option.isCorrect, option.correctAnimal) }}
+                      onClick={() => { optionClicked(option.isCorrect, option.correctAnimal, option.img) }}
                       key={option.id}
                     >
                       <div
@@ -160,8 +165,9 @@ const NewLevel2 = () => {
             </div>
           }
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

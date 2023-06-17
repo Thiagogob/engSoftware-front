@@ -6,6 +6,7 @@ import { AuthProvider } from "./contexts/auth";
 import { AnimalsProvider } from "./contexts/animals";
 import Loading from "./components/Loading";
 import NewLevel2 from "./pages/Home/newLevel2";
+import NewLevel1 from "./pages/Home/newLevel1";
 
 const Levels = lazy(() => import('./pages/Home/levels'))
 const Level1 = lazy(() => import('./pages/Home/level1'))
@@ -25,7 +26,7 @@ const AppRoutes = () => (
             <Route path="/">
               <Route index element={<Home />} />
               <Route path="levels" element={<Levels />} />
-              <Route path="level1" element={<Level1 />} />
+              <Route path="level1" element={<NewLevel1 />} />
               <Route path="level2" element={<NewLevel2 />} />
               <Route path="learn" element={<Learn />} />
               <Route path="login" element={<Login />} />

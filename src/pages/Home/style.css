@@ -120,13 +120,13 @@ li{
   margin: 0 auto;
 
   /* Dimensions  */
-  width: 50%; /* Can be in percentage also. */
+  width: auto; /* Can be in percentage also. */
   height: auto;
   margin-top: 64px;
 
   /* Visual  */
   background-color: #111111dd;
-  padding: 16px;
+  padding: 20px;
   border-radius: 16px;
   color: white;
   letter-spacing: .2rem;
