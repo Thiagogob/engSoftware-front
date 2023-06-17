@@ -1,6 +1,7 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import StyledLink from '../../components/StyledLink'
 import { generateAnimalsOptions } from "../../utils/generateAnimalsOptions";
 import { drawAnimals } from "../../utils/drawAnimals";
 import { shuffleArray } from '../../utils/shuffleArray'
@@ -101,94 +102,99 @@ const NewLevel1 = () => {
   };
 
   return (
-    <div className="container">
-      <div className="jumbotron jumbotron-fluid animal-jumbotron">
-        {showHowToPlay ? (
-          <div className="d-flex align-items-center justify-content-center">
-            <div className="how-to-play">
-              <h1 className="d-flex justify-content-center">Como Jogar: </h1>
-              <ul className="justify-content-between">
-                <li>1. Perguntas sobre animais aparecerão na tela</li>
-                <li>2. Você deve clicar na opção que achar correta</li>
-                <li>3. Decida a opção correta de acordo com seus conhecimentos</li>
-                <li>4. Para aprender sobre animais, clique no botão amarelo</li>
-              </ul>
-              <div className="row d-flex justify-content-around">
-                <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 1</button>
-                <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
-                <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+    <>
+      <div className="container">
+        <div className="jumbotron jumbotron-fluid animal-jumbotron">
+          {showHowToPlay ? (
+            <div className="d-flex align-items-center justify-content-center">
+              <div className="how-to-play">
+                <h1 className="d-flex justify-content-center">Como Jogar: </h1>
+                <ul className="justify-content-between">
+                  <li>1. Perguntas sobre animais aparecerão na tela</li>
+                  <li>2. Você deve clicar na opção que achar correta</li>
+                  <li>3. Decida a opção correta de acordo com seus conhecimentos</li>
+                  <li>4. Para aprender sobre animais, clique no botão amarelo</li>
+                </ul>
+                <div className="row d-flex justify-content-around">
+                  <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 1</button>
+                  <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
+                  <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                </div>
               </div>
             </div>
-          </div>
-        )
-          :
-          (
-            <div>
-              {showFinalResults ? (
-                <div className="d-flex align-items-center justify-content-center">
-                  <div className="final-result">
-                    <h1 className="d-flex justify-content-center" style={{ marginBottom: '2rem', fontSize: '3.5rem' }}>Resultado Final</h1>
-                    {score.map((animal, index) =>
-                      <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
-                        <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
-                        <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
-                          {animal.animal} {index % 2 ? '(Nome)' : '(Áudio)'}:
-                        </h2>
-                        <h2 style={{ fontSize: '2.5rem', color: animal.isCorrect ? 'green' : 'red' }}>{animal.isCorrect ? 'Acertou' : 'Errou'}</h2>
+          )
+            :
+            (
+              <div>
+                {showFinalResults ? (
+                  <div className="d-flex align-items-center justify-content-center">
+                    <div className="final-result">
+                      <h1 className="d-flex justify-content-center" style={{ marginBottom: '2rem', fontSize: '3.5rem' }}>Resultado Final</h1>
+                      {score.map((animal, index) =>
+                        <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
+                          <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
+                          <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
+                            {animal.animal} {index % 2 ? '(Nome)' : '(Áudio)'}:
+                          </h2>
+                          <h2 style={{ fontSize: '2.5rem', color: animal.isCorrect ? 'green' : 'red' }}>{animal.isCorrect ? 'Acertou' : 'Errou'}</h2>
+                        </div>
+                      )}
+                      <div className="row d-flex justify-content-around">
+                        <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
+                        <Link to="/level2"><button type="button" className="btn btn-primary">Jogar Fase 2</button></Link>
+                        <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
                       </div>
-                    )}
-                    <div className="row d-flex justify-content-around">
-                      <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
-                      <Link to="/level2"><button type="button" className="btn btn-primary">Jogar Fase 2</button></Link>
-                      <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="question-card">
-                  <h2 className="score-text">Quantidade de Pontos: {score.filter(item => item.isCorrect).length}</h2>
-                  <div className="animal-img d-flex justify-content-center">
-                    <img src={`/static/images/${tasks[currentQuestion].image}Fix.png`} />
-                  </div>
-                  <p className="lead project-text d-flex justify-content-center question-text">
-                    {tasks[currentQuestion].text}
-                  </p>
-                  <ul className="d-flex justify-content-center list-style justify-content-around">
-                    {tasks[currentQuestion].options.map((option) => {
-                      if (currentQuestion % 2 === 0) {
-                        return (
-                          <li
-                            type="button"
-                            className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
-                            onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, 'Foto')}
-                            key={v4()}
-                          >
-                            {option.text}
-                          </li>
-                        );
-                      } else return (
-                        <div key={v4()}>
-                          <div className="row d-flex justify-content-center justify-content-around">
-                            <button type="button" className="btn btn-light" onClick={() => soundClicked(option.audio)}><img src="/static/images/playIcon.png" /></button>
+                ) : (
+                  <div className="question-card">
+                    <h2 className="score-text">Quantidade de Pontos: {score.filter(item => item.isCorrect).length}</h2>
+                    <div className="animal-img d-flex justify-content-center">
+                      <img src={`/static/images/${tasks[currentQuestion].image}Fix.png`} />
+                    </div>
+                    <p className="lead project-text d-flex justify-content-center question-text">
+                      {tasks[currentQuestion].text}
+                    </p>
+                    <ul className="d-flex justify-content-center list-style justify-content-around">
+                      {tasks[currentQuestion].options.map((option) => {
+                        if (currentQuestion % 2 === 0) {
+                          return (
+                            <li
+                              type="button"
+                              className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
+                              onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, 'Foto')}
+                              key={v4()}
+                            >
+                              {option.text}
+                            </li>
+                          );
+                        } else return (
+                          <div key={v4()}>
+                            <div className="row d-flex justify-content-center justify-content-around">
+                              <button type="button" className="btn btn-light" onClick={() => soundClicked(option.audio)}><img src="/static/images/playIcon.png" /></button>
+                            </div>
+                            <li
+                              type="button"
+                              className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
+                              onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, 'Áudio')}
+                              key={v4()}
+                            >
+                              {option.text}
+                            </li>
                           </div>
-                          <li
-                            type="button"
-                            className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
-                            onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, 'Áudio')}
-                            key={v4()}
-                          >
-                            {option.text}
-                          </li>
-                        </div>
-                      );
-                    })}
-                  </ul>
-                </div>
-              )}
-            </div>
-          )}
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+        </div>
       </div>
-    </div>
+      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
+      </div>
+    </>
   )
 }
 

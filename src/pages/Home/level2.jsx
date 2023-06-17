@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import StyledLink from '../../components/StyledLink'
 import { generateAnimalsOptions } from '../../utils/generateAnimalsOptions.js'
 import { drawAnimals } from '../../utils/drawAnimals.js'
 import { useAnimals } from '../../hooks/useAnimals'
@@ -66,8 +67,8 @@ const NewLevel2 = () => {
           id: index,
           img: correctAnimal?.img,
           correctAnimal: correctAnimal?.name,
-          image: <img src={`/static/images/${animal.img}Movimento.png`} />,
-          hover: <img src={`/static/images/${animal.img}Foto.png`} />,
+          image: <img style={{ height: '20rem' }} src={`/static/images/${animal.img}Movimento.png`} />,
+          hover: <img style={{ height: '20rem' }} src={`/static/images/${animal.img}Foto.png`} />,
           isCorrect: correctAnimal?.name === animal.name ? true : false,
         })),
       })));
@@ -90,11 +91,12 @@ const NewLevel2 = () => {
   };
 
   return (
-    <div className="container container-camera">
-      {showHowToPlay ? (
-        <div className="d-flex align-items-center justify-content-center">
-          <div className="how-to-play">
-            <h1 className="d-flex justify-content-center">Como Jogar: </h1>
+    <>
+      <div className="container container-camera">
+        {showHowToPlay ? (
+          <div className="d-flex align-items-center justify-content-center">
+            <div className="how-to-play">
+              <h1 className="d-flex justify-content-center">Como Jogar: </h1>
             <ul className="justify-content-between">
               <li>1. Qual animal fotografar aparecerá na tela</li>
               <li>2. Você deve passar o mouse por cima do animal em movimento</li>
@@ -150,25 +152,29 @@ const NewLevel2 = () => {
                   return (
                     <li
                       className="animal"
-                      onClick={() => { optionClicked(option.isCorrect, option.correctAnimal, option.img) }}
-                      key={option.id}
-                    >
-                      <div
-                        onMouseEnter={() => setHoveredOption(option.id)}
-                        onMouseLeave={() => setHoveredOption(null)}
+                        onClick={() => optionClicked(option.isCorrect, option.correctAnimal, option.img)}
+                        key={option.id}
                       >
-                        {hoveredOption === option.id ? option.hover : option.image}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          }
-        </div>
-      )
-      }
-    </div >
+                        <div
+                          onMouseEnter={() => setHoveredOption(option.id)}
+                          onMouseLeave={() => setHoveredOption(null)}
+                        >
+                          {hoveredOption === option.id ? option.hover : option.image}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            }
+          </div>
+        )
+        }
+      </div >
+      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
+      </div>
+    </>
   );
 };
 
