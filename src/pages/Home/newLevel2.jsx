@@ -22,7 +22,7 @@ const NewLevel2 = () => {
   const [tasksGenerated, setTasksGenerated] = useState(false);
   const [tasks, setTasks] = useState([])
 
-  const optionClicked = async (isCorrect, animal) => {
+  const optionClicked = (isCorrect, animal) => {
     setScore(currentScore => [...currentScore, { animal, isCorrect }]);
     if (isCorrect) {
       const sound = new Audio("/static/sounds/flashSoundEffect.mp3");
@@ -46,12 +46,13 @@ const NewLevel2 = () => {
   }
 
   useEffect(() => {
-    if (currentTask + 1 >= tasks.length && authUser)
+    if (authUser && score.length === 3) {
       (async function () {
         const cookie = await getCookie('user')
         const token = await getCookie('authstudent')
         await postAttempt('Dois', score, cookie.username, cookie.teacherUser, token)
       })()
+    }
   }, [score])
 
   useEffect(() => {
@@ -85,7 +86,6 @@ const NewLevel2 = () => {
     setTasksGenerated(false);
     setTasks([]);
   };
-
 
   return (
     <div className="container container-camera">
@@ -121,9 +121,9 @@ const NewLevel2 = () => {
                   )}
                 </div>
                 <div className="row d-flex justify-content-around">
-                  <button onClick={() => restartLevel()} type="button" class="btn btn-primary">Recomeçar</button>
-                  <Link to="/level1"><button type="button" class="btn btn-primary">Jogar Fase 1</button></Link>
-                  <Link to="/"><button type="button" class="btn btn-danger btn-exit">Sair</button></Link>
+                  <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
+                  <Link to="/level1"><button type="button" className="btn btn-primary">Jogar Fase 1</button></Link>
+                  <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
                 </div>
               </div>
             </div>
@@ -142,13 +142,17 @@ const NewLevel2 = () => {
               <ul className="d-flex justify-content-center">
                 {tasks[currentTask]?.options?.map((option) => {
                   return (
-                    <li className="animal" onClick={() => { optionClicked(option.isCorrect, option.correctAnimal) }}
+                    <li
+                      className="animal"
+                      onClick={() => { optionClicked(option.isCorrect, option.correctAnimal) }}
                       key={option.id}
                     >
                       <div
                         onMouseEnter={() => setHoveredOption(option.id)}
                         onMouseLeave={() => setHoveredOption(null)}
-                      >{hoveredOption === option.id ? option.hover : option.image}</div>
+                      >
+                        {hoveredOption === option.id ? option.hover : option.image}
+                      </div>
                     </li>
                   );
                 })}
@@ -158,7 +162,7 @@ const NewLevel2 = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default NewLevel2
+export default NewLevel2;

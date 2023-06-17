@@ -134,18 +134,12 @@ const DashBoard = () => {
                             {student.attempts.map((attempt, index) =>
                               <div key={v4()}>
                                 <h3 style={{ margin: '2rem 0 1rem 0', fontWeight: 'bold', letterSpacing: '.2rem' }}>Tentativa {index + 1}:</h3>
-                                <h4>Fase 1:</h4>
-                                {attempt?.phaseOne?.map(phase =>
+                                <h4>Fase {attempt.phase}:</h4>
+                                <h5>Data: {new Date(attempt.date).toLocaleString("pt-BR")}</h5>
+                                {attempt?.tries?.map(phase =>
                                   <div key={v4()} style={{ display: 'flex', alignItems: 'center' }}>
-                                    <h5>{"phase.animal"}: </h5>
-                                    <h6>{"phase.selected" ? "Acertou" : "Errou"}</h6>
-                                  </div>
-                                )}
-                                <h4 style={{ marginTop: '.5rem' }}>Fase 2:</h4>
-                                {attempt?.phaseTwo?.map(phase =>
-                                  <div key={v4()} style={{ display: 'flex', alignItems: 'center' }}>
-                                    <h5>{"phase.animal"}: </h5>
-                                    <h6>{"phase.selected" ? "Acertou" : "Errou"}</h6>
+                                    <h5 style={{ marginRight: '.2rem' }}>{phase.animal}:</h5>
+                                    <h6>{phase.isCorrect ? "Acertou" : "Errou"}</h6>
                                   </div>
                                 )}
                               </div>
