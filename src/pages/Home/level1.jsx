@@ -191,9 +191,10 @@ const NewLevel1 = () => {
             )}
         </div>
       </div>
-      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
-        <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
-      </div>
+      {(!showFinalResults && !showHowToPlay) &&
+        <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+          <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
+        </div>}
     </>
   )
 }

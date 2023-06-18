@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAuth } from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
@@ -9,7 +9,7 @@ import StyledLink from "../../components/StyledLink";
 const AdminRegister = () => {
   const [loginData, setLoginData] = useState({ username: '', name: '', password: '' })
   const [loading, setLoading] = useState(false);
-  const { registerTeacher } = useAuth()
+  const { registerTeacher, authAdmin } = useAuth()
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
@@ -27,6 +27,10 @@ const AdminRegister = () => {
 
     setLoginData({ username: '', password: '', name: '' })
   }
+
+  useEffect(() => {
+    if (authAdmin) navigate('dashboard')
+  }, [authAdmin])
 
   return (
     <>

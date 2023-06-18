@@ -97,61 +97,61 @@ const NewLevel2 = () => {
           <div className="d-flex align-items-center justify-content-center">
             <div className="how-to-play">
               <h1 className="d-flex justify-content-center">Como Jogar: </h1>
-            <ul className="justify-content-between">
-              <li>1. Qual animal fotografar aparecerá na tela</li>
-              <li>2. Você deve passar o mouse por cima do animal em movimento</li>
-              <li>3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
-              <li>4. Você deve clicar rápido para realizar a fotografia</li>
-              <li>5. Para aprender sobre animais, clique no botão amarelo</li>
-            </ul>
-            <div className="row d-flex justify-content-around">
-              <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 2</button>
-              <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
-              <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+              <ul className="justify-content-between">
+                <li>1. Qual animal fotografar aparecerá na tela</li>
+                <li>2. Você deve passar o mouse por cima do animal em movimento</li>
+                <li>3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
+                <li>4. Você deve clicar rápido para realizar a fotografia</li>
+                <li>5. Para aprender sobre animais, clique no botão amarelo</li>
+              </ul>
+              <div className="row d-flex justify-content-around">
+                <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 2</button>
+                <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
+                <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div>
-          {showFinalResults ?
-            <div className="d-flex align-items-center justify-content-center">
-              <div className="final-result">
-                <h1 className="d-flex justify-content-center" style={{ fontSize: '3.5rem' }}>Resultado Final</h1>
-                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '4rem', gap: '2rem' }}>
-                  {score.map((animal, index) =>
-                    <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
-                      <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
-                      <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
-                        {animal.animal}:
-                      </h2>
-                      <h2 style={{ fontSize: '2.5rem', color: score[index].isCorrect ? 'green' : 'red' }}>{score[index].isCorrect ? 'Acertou' : 'Errou'}</h2>
-                    </div>
-                  )}
-                </div>
-                <div className="row d-flex justify-content-around">
-                  <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
-                  <Link to="/level1"><button type="button" className="btn btn-primary">Jogar Fase 1</button></Link>
-                  <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
-                </div>
-              </div>
-            </div>
-            :
-            <div className="task-card">
-              <div className="row">
-                <div className="mx-auto">
-                  <h2 className="d-flex justify-content-center project-text">{tasks[currentTask]?.text}</h2>
+        ) : (
+          <div>
+            {showFinalResults ?
+              <div className="d-flex align-items-center justify-content-center">
+                <div className="final-result">
+                  <h1 className="d-flex justify-content-center" style={{ fontSize: '3.5rem' }}>Resultado Final</h1>
+                  <div style={{ display: 'flex', flexDirection: 'column', marginTop: '4rem', gap: '2rem' }}>
+                    {score.map((animal, index) =>
+                      <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
+                        <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
+                        <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
+                          {animal.animal}:
+                        </h2>
+                        <h2 style={{ fontSize: '2.5rem', color: score[index].isCorrect ? 'green' : 'red' }}>{score[index].isCorrect ? 'Acertou' : 'Errou'}</h2>
+                      </div>
+                    )}
+                  </div>
+                  <div className="row d-flex justify-content-around">
+                    <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
+                    <Link to="/level1"><button type="button" className="btn btn-primary">Jogar Fase 1</button></Link>
+                    <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                  </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="mx-auto">
-                  <h2 className="project-text">{photosLeft} fotos restantes</h2>
+              :
+              <div className="task-card">
+                <div className="row">
+                  <div className="mx-auto">
+                    <h2 className="d-flex justify-content-center project-text">{tasks[currentTask]?.text}</h2>
+                  </div>
                 </div>
-              </div>
-              <ul className="d-flex justify-content-center">
-                {tasks[currentTask]?.options?.map((option) => {
-                  return (
-                    <li
-                      className="animal"
+                <div className="row">
+                  <div className="mx-auto">
+                    <h2 className="project-text">{photosLeft} fotos restantes</h2>
+                  </div>
+                </div>
+                <ul className="d-flex justify-content-center">
+                  {tasks[currentTask]?.options?.map((option) => {
+                    return (
+                      <li
+                        className="animal"
                         onClick={() => optionClicked(option.isCorrect, option.correctAnimal, option.img)}
                         key={option.id}
                       >
@@ -171,9 +171,10 @@ const NewLevel2 = () => {
         )
         }
       </div >
-      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
-        <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
-      </div>
+      {(!showFinalResults && !showHowToPlay) &&
+        <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+          <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
+        </div>}
     </>
   );
 };
