@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import "./style.css";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import StyledLink from "../../components/StyledLink";
 
@@ -14,7 +14,6 @@ const Home = () => (
       <ul><StyledLink className="link" to='admin'>Professor</StyledLink></ul>
     </NavBar>
   </div>
-
 );
 
 const NavBar = styled.nav`
