@@ -15,7 +15,7 @@ const NewLevel2 = () => {
   const { getCookie } = useCookies()
 
   const [showFinalResults, setFinalResults] = useState(false);
-  const [photosLeft, setPhotosLeft] = useState(5);
+  const [photosLeft, setPhotosLeft] = useState(3);
   const [currentTask, setCurrentTask] = useState(0);
   const [score, setScore] = useState([]);
   const [showHowToPlay, setHowToPlay] = useState(true);
@@ -81,7 +81,7 @@ const NewLevel2 = () => {
 
   const restartLevel = () => {
     setFinalResults(false);
-    setPhotosLeft(5);
+    setPhotosLeft(3);
     setCurrentTask(0);
     setScore([]);
     setHowToPlay(true);
