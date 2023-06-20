@@ -1,13 +1,16 @@
+const api = 'https://apifaunasnapshot.vercel.app'
+// const api = 'http://localhost:8000'
+
 const useApi = () => {
   const getTeachers = async () => {
-    const response = await fetch('https://apifaunasnapshot.vercel.app/teacher')
+    const response = await fetch(`${api}/teacher`)
     const data = await response.json()
 
     return data
   }
 
   const getTeacherAnimals = async (username) => {
-    const response = await fetch(`https://apifaunasnapshot.vercel.app/animal/${username}`)
+    const response = await fetch(`${api}/animal/${username}`)
     const data = await response.json()
 
     return data
@@ -19,14 +22,14 @@ const useApi = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: animal, state }),
     }
-    const response = await fetch(`https://apifaunasnapshot.vercel.app/animal/${username}`, requestOptions)
+    const response = await fetch(`${api}/animal/${username}`, requestOptions)
     const data = await response.json()
 
     return data;
   }
 
   const getClassRoomAttempts = async (username) => {
-    const response = await fetch(`https://apifaunasnapshot.vercel.app/attempt/teacher/${username}`)
+    const response = await fetch(`${api}/attempt/teacher/${username}`)
     const data = await response.json()
     return data
   }
@@ -37,7 +40,7 @@ const useApi = () => {
       headers: { 'Content-Type': 'application/json', authstudent },
       body: JSON.stringify({ phase, tries }),
     }
-    const response = await fetch(`https://apifaunasnapshot.vercel.app/attempt/${teacherUser}/${username}`, requestOptions)
+    const response = await fetch(`${api}/attempt/${teacherUser}/${username}`, requestOptions)
     const data = await response.json()
 
     return data

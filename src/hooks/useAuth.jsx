@@ -2,6 +2,9 @@ import { useContext, useEffect } from 'react'
 import { useCookies } from './useCookies'
 import { AuthContext } from '../contexts/auth'
 
+const api = 'https://apifaunasnapshot.vercel.app'
+// const api = 'http://localhost:8000'
+
 export const useAuth = () => {
   const { auth, setAuth } = useContext(AuthContext)
   const { getCookie, removeCookie, setAuthCookie, setUserCookie } = useCookies()
@@ -35,7 +38,7 @@ export const useAuth = () => {
       body: JSON.stringify({ username, password }),
     }
 
-    const response = await fetch('https://apifaunasnapshot.vercel.app/auth/teacher', requestOptions)
+    const response = await fetch(`${api}/auth/teacher`, requestOptions)
     const data = await response.json()
 
     if (data?.token) {
@@ -57,7 +60,7 @@ export const useAuth = () => {
       body: JSON.stringify({ name, username, password }),
     }
 
-    const response = await fetch('https://apifaunasnapshot.vercel.app/teacher', requestOptions)
+    const response = await fetch(`${api}/teacher`, requestOptions)
     const data = await response.json()
 
     if (data?.token) {
@@ -79,9 +82,9 @@ export const useAuth = () => {
       body: JSON.stringify({ username, teacherUser }),
     }
 
-    await fetch('https://apifaunasnapshot.vercel.app/student', requestOptions)
+    await fetch(`${api}/student`, requestOptions)
 
-    const loginResponse = await fetch('https://apifaunasnapshot.vercel.app/auth/student', requestOptions)
+    const loginResponse = await fetch(`${api}/auth/student`, requestOptions)
     const loginData = await loginResponse.json()
 
     if (loginData?.token) {

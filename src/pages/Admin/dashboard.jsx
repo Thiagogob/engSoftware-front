@@ -34,7 +34,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     (async function () {
-      setUsername((await getCookie('user')).username)
+      setUsername((await getCookie('user'))?.username)
     })()
   }, [])
 
