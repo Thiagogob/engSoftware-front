@@ -56,11 +56,12 @@ const DashBoard = () => {
 
   const updateAnimalCheckBox = async (animalName, state) => {
     updateTeacherAnimal(username, animalName, state);
-    setAnimals(currentAnimals =>
-      currentAnimals.map(animal =>
-        animal.name === animalName ? { ...animal, selected: state } : animal
-      )
-    );
+    if (animals.filter(animal => animal.selected).length !== 3 || state)
+      setAnimals(currentAnimals =>
+        currentAnimals.map(animal =>
+          animal.name === animalName ? { ...animal, selected: state } : animal
+        )
+      );
   };
 
   const logout = () => {

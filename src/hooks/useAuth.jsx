@@ -42,7 +42,7 @@ export const useAuth = () => {
     const data = await response.json()
 
     if (data?.token) {
-      setAuthCookie(data.token, true, 'authteacher')
+      setAuthCookie(data.token, 'authteacher')
       setAuth({ admin: true, user: false })
       if (await getCookie('user')) removeCookie('user')
       setUserCookie({ username })
@@ -64,7 +64,7 @@ export const useAuth = () => {
     const data = await response.json()
 
     if (data?.token) {
-      setAuthCookie(data.token, true, 'authteacher')
+      setAuthCookie(data.token, 'authteacher')
       setAuth({ admin: true, user: false })
       if (await getCookie('user')) removeCookie('user')
       setUserCookie({ username })
@@ -88,8 +88,8 @@ export const useAuth = () => {
     const loginData = await loginResponse.json()
 
     if (loginData?.token) {
-      setAuthCookie(loginData.token, true, 'authstudent')
-      setUserCookie({ username, teacherUser }, true)
+      setAuthCookie(loginData.token, 'authstudent')
+      setUserCookie({ username, teacherUser })
 
       setAuth({ admin: false, user: true })
 

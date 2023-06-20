@@ -150,13 +150,13 @@ const NewLevel1 = () => {
                   <div className="question-card">
                     <h2 className="score-text">Quantidade de Pontos: {score.filter(item => item.isCorrect).length}</h2>
                     <div className="animal-img d-flex justify-content-center">
-                      <img src={`/static/images/${tasks[currentQuestion].image}Fix.png`} />
+                      <img src={`/static/images/${tasks[currentQuestion]?.image}Fix.png`} />
                     </div>
                     <p className="lead project-text d-flex justify-content-center question-text">
-                      {tasks[currentQuestion].text}
+                      {tasks[currentQuestion]?.text}
                     </p>
                     <ul className="d-flex justify-content-center list-style justify-content-around">
-                      {tasks[currentQuestion].options.map((option) => {
+                      {tasks[currentQuestion]?.options.map((option) => {
                         if (currentQuestion % 2 === 0) {
                           return (
                             <li
