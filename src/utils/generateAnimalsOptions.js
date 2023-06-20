@@ -1,7 +1,7 @@
 export function generateAnimalsOptions(name, array) {
   const animals = [];
 
-  while (animals.length < 3) {
+  while (animals.length < 2) {
     const randomIndex = Math.floor(Math.random() * array.length);
     const randomAnimal = array[randomIndex];
 
