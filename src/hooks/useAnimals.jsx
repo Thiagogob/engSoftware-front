@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react"
 import { AnimalsContext } from "../contexts/animals"
 import { useCookies } from "./useCookies"
 
-const api = 'https://apifaunasnapshot.vercel.app'
+const api = 'https://apifaunasnapshot.onrender.com'
 // const api = 'http://localhost:8000'
 
 export const useAnimals = () => {

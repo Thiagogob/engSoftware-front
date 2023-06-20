@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { useCookies } from './useCookies'
 import { AuthContext } from '../contexts/auth'
 
-const api = 'https://apifaunasnapshot.vercel.app'
+const api = 'https://apifaunasnapshot.onrender.com'
 // const api = 'http://localhost:8000'
 
 export const useAuth = () => {

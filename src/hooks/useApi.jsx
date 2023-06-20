@@ -1,4 +1,4 @@
-const api = 'https://apifaunasnapshot.vercel.app'
+const api = 'https://apifaunasnapshot.onrender.com'
 // const api = 'http://localhost:8000'
 
 const useApi = () => {
