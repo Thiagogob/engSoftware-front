@@ -1,39 +1,32 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-transform: uppercase;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: uppercase;
 }
 
-
-body{
-    background-image: url(/static/images/faunaSnapshotBackground.jpg);
-    background-size: cover;
-    cursor: pointer;
-    text-transform: uppercase;
+body {
+  background-image: url(/static/images/faunaSnapshotBackground.jpg);
+  background-size: cover;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
-
-
-.cursor{
-    position: relative;
-    cursor: pointer;
-    z-index: -1;
-    width: calc(5vw + 5vh); /* dynamic width */
+.cursor {
+  position: relative;
+  cursor: pointer;
+  z-index: -1;
+  width: calc(5vw + 5vh); /* dynamic width */
   height: calc(5vw + 5vh); /* dynamic height */
   transform-origin: center;
-    
-}
-  
-.camera-size{
-    position: absolute;
-    height: 128px;
-    width: 150px;
 }
 
-.animal{
-    cursor: pointer;
+.camera-size {
+  position: absolute;
+  height: 128px;
+  width: 150px;
 }
 
-
-
+.animal {
+  cursor: pointer;
+}

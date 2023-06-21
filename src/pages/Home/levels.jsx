@@ -1,16 +1,17 @@
 import "./style.css";
-import StyledLink from '../../components/StyledLink'
-import YouTube from 'react-youtube'
+import StyledLink from "../../components/StyledLink";
+import YouTube from "react-youtube";
 import { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const opts = {
-  height: '518',
-  width: '921',
+  height: "518",
+  width: "921",
 };
 
 const Levels = () => {
-  const [video, setVideo] = useState(false)
+  const [video, setVideo] = useState(false);
 
   return (
     <>
@@ -24,7 +25,9 @@ const Levels = () => {
             <div className="card-body card-bg">
               <h5 className="card-title d-flex justify-content-center">Fase 1</h5>
               <p className="card-text justify-card-text">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
-              <div className="d-flex justify-content-center"><a href="/level1"><button type="button" className="btn btn-primary btn-decoration">Jogar Fase 1</button></a></div>
+              <div className="d-flex justify-content-center">
+                <Link to="/level1" className="btn btn-primary btn-decoration">Jogar Fase 1</Link>
+              </div>
             </div>
           </div>
           <div className="col-1"></div>
@@ -33,12 +36,14 @@ const Levels = () => {
             <div className="card-body card-bg">
               <h5 className="card-title d-flex justify-content-center">Fase 2</h5>
               <p className="card-text justify-card-text">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
-              <div className="d-flex justify-content-center"><a href="/level2"><button type="button" className="btn btn-primary btn-decoration">Jogar Fase 2</button></a></div>
+              <div className="d-flex justify-content-center">
+                <Link href="/level2" className="btn btn-primary btn-decoration">Jogar Fase 2</Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
         <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
       <ButtonStyled onClick={() => setVideo(currentVideo => !currentVideo)}>Tutorial</ButtonStyled>
@@ -49,8 +54,8 @@ const Levels = () => {
         </div>
       </VideoContainer>}
     </>
-  )
-}
+  );
+};
 
 const ButtonStyled = styled.button`
  background-color: #111111;
@@ -72,7 +77,7 @@ const ButtonStyled = styled.button`
     background-color: #333;
     color: #FBFBFB;
   }
-`
+`;
 
 const VideoContainer = styled.div`
   position: fixed;
@@ -101,6 +106,6 @@ const VideoContainer = styled.div`
       }
     }
   }
-`
+`;
 
 export default Levels;

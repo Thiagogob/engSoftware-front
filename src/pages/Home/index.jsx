@@ -27,6 +27,6 @@ const NavBar = styled.nav`
     margin: 0;
     padding: 0;
   }
-`
+`;
 
 export default Home;

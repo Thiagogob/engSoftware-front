@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import StyledLink from '../../components/StyledLink'
-import { generateAnimalsOptions } from '../../utils/generateAnimalsOptions.js'
-import { drawAnimals } from '../../utils/drawAnimals.js'
-import { useAnimals } from '../../hooks/useAnimals'
-import { useAuth } from '../../hooks/useAuth'
-import useApi from '../../hooks/useApi';
-import { useCookies } from '../../hooks/useCookies';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import StyledLink from "../../components/StyledLink";
+import { generateAnimalsOptions } from "../../utils/generateAnimalsOptions.js";
+import { drawAnimals } from "../../utils/drawAnimals.js";
+import { useAnimals } from "../../hooks/useAnimals";
+import { useAuth } from "../../hooks/useAuth";
+import useApi from "../../hooks/useApi";
+import { useCookies } from "../../hooks/useCookies";
 
 const NewLevel2 = () => {
-  const { animals } = useAnimals()
-  const { authUser } = useAuth()
-  const { postAttempt } = useApi()
-  const { getCookie } = useCookies()
+  const { animals } = useAnimals();
+  const { authUser } = useAuth();
+  const { postAttempt } = useApi();
+  const { getCookie } = useCookies();
 
   const [showFinalResults, setFinalResults] = useState(false);
   const [photosLeft, setPhotosLeft] = useState(3);
@@ -21,7 +21,7 @@ const NewLevel2 = () => {
   const [showHowToPlay, setHowToPlay] = useState(true);
   const [hoveredOption, setHoveredOption] = useState(null);
   const [tasksGenerated, setTasksGenerated] = useState(false);
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
   const optionClicked = (isCorrect, animal, img) => {
     setScore(currentScore => [...currentScore, { animal, isCorrect, img }]);
@@ -45,30 +45,30 @@ const NewLevel2 = () => {
     else {
       setFinalResults(true);
     }
-  }
+  };
 
   useEffect(() => {
     if (authUser && score.length === 3) {
       (async function () {
-        const cookie = await getCookie('user')
-        const token = await getCookie('authstudent')
-        await postAttempt('Dois', score, cookie.username, cookie.teacherUser, token)
-      })()
+        const cookie = await getCookie("user");
+        const token = await getCookie("authstudent");
+        await postAttempt("Dois", score, cookie.username, cookie.teacherUser, token);
+      })();
     }
-  }, [score])
+  }, [score]);
 
   useEffect(() => {
     if (!tasksGenerated && animals.length) {
       const drawnAnimals = drawAnimals(animals, 3);
 
       setTasks(drawnAnimals.map(correctAnimal => ({
-        text: `Tire uma foto d${(correctAnimal.name.toLowerCase().endsWith('a') || correctAnimal.name.charAt(drawnAnimals[0].name.length - 2) === 'a') ? 'a' : 'o'} ${correctAnimal.name}:`,
+        text: `Tire uma foto d${(correctAnimal.name.toLowerCase().endsWith("a") || correctAnimal.name.charAt(drawnAnimals[0].name.length - 2) === "a") ? "a" : "o"} ${correctAnimal.name}:`,
         options: generateAnimalsOptions(correctAnimal, animals).map((animal, index) => ({
           id: index,
           img: correctAnimal?.img,
           correctAnimal: correctAnimal?.name,
-          image: <img style={{ height: '20rem' }} src={`/static/images/${animal.img}Movimento.png`} />,
-          hover: <img style={{ height: '20rem' }} src={`/static/images/${animal.img}Foto.png`} />,
+          image: <img style={{ height: "20rem" }} src={`/static/images/${animal.img}Movimento.png`} />,
+          hover: <img style={{ height: "20rem" }} src={`/static/images/${animal.img}Foto.png`} />,
           isCorrect: correctAnimal?.name === animal.name ? true : false,
         })),
       })));
@@ -116,15 +116,15 @@ const NewLevel2 = () => {
             {showFinalResults ?
               <div className="d-flex align-items-center justify-content-center">
                 <div className="final-result">
-                  <h1 className="d-flex justify-content-center" style={{ fontSize: '3.5rem' }}>Resultado Final</h1>
-                  <div style={{ display: 'flex', flexDirection: 'column', marginTop: '4rem', gap: '2rem' }}>
+                  <h1 className="d-flex justify-content-center" style={{ fontSize: "3.5rem" }}>Resultado Final</h1>
+                  <div style={{ display: "flex", flexDirection: "column", marginTop: "4rem", gap: "2rem" }}>
                     {score.map((animal, index) =>
-                      <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
-                        <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
-                        <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
+                      <div key={index} style={{ display: "flex", textAlign: "center" }}>
+                        <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: "5rem" }} />
+                        <h2 style={{ fontSize: "2.5rem", marginRight: ".5rem" }}>
                           {animal.animal}:
                         </h2>
-                        <h2 style={{ fontSize: '2.5rem', color: score[index].isCorrect ? 'green' : 'red' }}>{score[index].isCorrect ? 'Acertou' : 'Errou'}</h2>
+                        <h2 style={{ fontSize: "2.5rem", color: score[index].isCorrect ? "green" : "red" }}>{score[index].isCorrect ? "Acertou" : "Errou"}</h2>
                       </div>
                     )}
                   </div>
@@ -172,7 +172,7 @@ const NewLevel2 = () => {
         }
       </div >
       {(!showFinalResults && !showHowToPlay) &&
-        <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
           <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
         </div>}
     </>

@@ -16,6 +16,6 @@ const StyledLink = styled(Link)`
     background-color: #333;
     color: #FBFBFB;
   }
-`
+`;
 
-export default StyledLink
+export default StyledLink;

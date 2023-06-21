@@ -1,71 +1,71 @@
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material"
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-import useApi from "../../hooks/useApi"
-import { useAuth } from "../../hooks/useAuth"
-import { useNavigate } from "react-router"
-import StyledLink from "../../components/StyledLink"
+import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import useApi from "../../hooks/useApi";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
+import StyledLink from "../../components/StyledLink";
 
 const Login = () => {
-    const [loginDatas, setLoginDatas] = useState({ username: '', teacher: '' })
-    const [teachers, setTeachers] = useState([])
-    const { getTeachers } = useApi()
-    const { loginStudent, authUser } = useAuth()
-    const navigate = useNavigate()
+  const [loginDatas, setLoginDatas] = useState({ username: "", teacher: "" });
+  const [teachers, setTeachers] = useState([]);
+  const { getTeachers } = useApi();
+  const { loginStudent, authUser } = useAuth();
+  const navigate = useNavigate();
 
-    const fetchTeachers = async () => {
-        const teachers = await getTeachers()
-        const filteredTeachers = teachers.map(teacher => ({
-            name: teacher.name,
-            username: teacher.username
-        }))
+  const fetchTeachers = async () => {
+    const teachers = await getTeachers();
+    const filteredTeachers = teachers.map(teacher => ({
+      name: teacher.name,
+      username: teacher.username
+    }));
 
-        setTeachers(filteredTeachers)
-    }
+    setTeachers(filteredTeachers);
+  };
 
-    useEffect(() => {
-        setTimeout(() => fetchTeachers(), 300)
+  useEffect(() => {
+    setTimeout(() => fetchTeachers(), 300);
 
-    }, [])
+  }, []);
 
-    useEffect(() => {
-        if (authUser) navigate('/levels', { replace: true })
-    }, [authUser]);
+  useEffect(() => {
+    if (authUser) navigate("/levels", { replace: true });
+  }, [authUser]);
 
-    async function loginSubmit(event) {
-        event.preventDefault()
+  async function loginSubmit(event) {
+    event.preventDefault();
 
-        await loginStudent(loginDatas.username, loginDatas.teacher)
-        if (authUser) navigate('/levels', { replace: true })
+    await loginStudent(loginDatas.username, loginDatas.teacher);
+    if (authUser) navigate("/levels", { replace: true });
 
-        setLoginDatas({ username: '', teacher: '' })
-    }
+    setLoginDatas({ username: "", teacher: "" });
+  }
 
-    return (
-        <>
-            {!authUser && (
-                <LoginContainer>
-                    <div className="content">
-                        <h1>Login (Aluno)</h1>
-                        <TextField onChange={e => setLoginDatas(currentData => ({ ...currentData, username: e.target.value }))} value={loginDatas.username} color='primary' label="Digite o seu nome" variant="outlined" />
-                        <InputLabel id="123">Professor</InputLabel>
-                        <Select
-                            labelId="123"
-                            value={loginDatas.teacher}
-                            onChange={e => setLoginDatas(currentData => ({ ...currentData, teacher: e.target.value }))}
-                        >
-                            {teachers.map(teacher => <MenuItem key={teacher.username} value={teacher.username}>{`${teacher.name} (${teacher.username})`}</MenuItem>)}
-                        </Select>
-                        <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
-                    </div>
-                </LoginContainer>
-            )}
-            <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
-                <StyledLink to='/'>Voltar ao início</StyledLink>
-            </div>
-        </>
-    );
-}
+  return (
+    <>
+      {!authUser && (
+        <LoginContainer>
+          <div className="content">
+            <h1>Login (Aluno)</h1>
+            <TextField onChange={e => setLoginDatas(currentData => ({ ...currentData, username: e.target.value }))} value={loginDatas.username} color='primary' label="Digite o seu nome" variant="outlined" />
+            <InputLabel id="123">Professor</InputLabel>
+            <Select
+              labelId="123"
+              value={loginDatas.teacher}
+              onChange={e => setLoginDatas(currentData => ({ ...currentData, teacher: e.target.value }))}
+            >
+              {teachers.map(teacher => <MenuItem key={teacher.username} value={teacher.username}>{`${teacher.name} (${teacher.username})`}</MenuItem>)}
+            </Select>
+            <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
+          </div>
+        </LoginContainer>
+      )}
+      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
+        <StyledLink to='/'>Voltar ao início</StyledLink>
+      </div>
+    </>
+  );
+};
 
 const LoginContainer = styled.div`
   display: flex;
@@ -87,7 +87,7 @@ const LoginContainer = styled.div`
       text-transform: uppercase;
     }
   }
-`
+`;
 
 
-export default Login
+export default Login;

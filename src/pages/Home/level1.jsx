@@ -1,29 +1,29 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import StyledLink from '../../components/StyledLink'
+import StyledLink from "../../components/StyledLink";
 import { generateAnimalsOptions } from "../../utils/generateAnimalsOptions";
 import { drawAnimals } from "../../utils/drawAnimals";
-import { shuffleArray } from '../../utils/shuffleArray'
-import { soundClicked } from '../../utils/soundClicked'
-import { useAnimals } from '../../hooks/useAnimals'
-import { useAuth } from '../../hooks/useAuth'
-import useApi from '../../hooks/useApi';
-import { useCookies } from '../../hooks/useCookies';
-import { v4 } from 'uuid'
+import { shuffleArray } from "../../utils/shuffleArray";
+import { soundClicked } from "../../utils/soundClicked";
+import { useAnimals } from "../../hooks/useAnimals";
+import { useAuth } from "../../hooks/useAuth";
+import useApi from "../../hooks/useApi";
+import { useCookies } from "../../hooks/useCookies";
+import { v4 } from "uuid";
 
 const NewLevel1 = () => {
-  const { animals } = useAnimals()
-  const { authUser } = useAuth()
-  const { postAttempt } = useApi()
-  const { getCookie } = useCookies()
+  const { animals } = useAnimals();
+  const { authUser } = useAuth();
+  const { postAttempt } = useApi();
+  const { getCookie } = useCookies();
 
   const [showFinalResults, setFinalResults] = useState(false);
   const [showHowToPlay, setHowToPlay] = useState(true);
   const [score, setScore] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [tasksGenerated, setTasksGenerated] = useState(false);
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
   const correctAudio = new Audio("/static/sounds/correct.mp3");
   const wrongAudio = new Audio("/static/sounds/errado.mp3");
@@ -33,10 +33,10 @@ const NewLevel1 = () => {
       const drawnAnimals = drawAnimals(animals, 3);
 
       const questions = drawnAnimals.map(correctAnimal => {
-        const animalsOptions = generateAnimalsOptions(correctAnimal, animals)
+        const animalsOptions = generateAnimalsOptions(correctAnimal, animals);
 
         return [{
-          text: 'Qual o nome desse animal:',
+          text: "Qual o nome desse animal:",
           image: correctAnimal?.img,
           options: animalsOptions.map((animal, index) => ({
             text: animal.name,
@@ -55,10 +55,10 @@ const NewLevel1 = () => {
             colorClass: `option-color-${index}`,
             audio: new Audio(`/static/sounds/${animal.img}.mp3`)
           }))
-        }]
-      })
+        }];
+      });
 
-      setTasks(questions.flat())
+      setTasks(questions.flat());
 
       if (drawnAnimals.length === 3) {
         setTasksGenerated(true);
@@ -69,12 +69,12 @@ const NewLevel1 = () => {
   useEffect(() => {
     if (authUser && score.length === 6) {
       (async function () {
-        const cookie = await getCookie('user')
-        const token = await getCookie('authstudent')
-        await postAttempt('Um', score, cookie.username, cookie.teacherUser, token)
-      })()
+        const cookie = await getCookie("user");
+        const token = await getCookie("authstudent");
+        await postAttempt("Um", score, cookie.username, cookie.teacherUser, token);
+      })();
     }
-  }, [score])
+  }, [score]);
 
   const optionClicked = (isCorrect, animal, img, mode) => {
     setScore(currentScore => [...currentScore, { animal: `${animal} ${(mode)}`, isCorrect, img }]);
@@ -91,7 +91,7 @@ const NewLevel1 = () => {
     else {
       setFinalResults(true);
     }
-  }
+  };
 
   const restartLevel = () => {
     setFinalResults(false);
@@ -129,14 +129,14 @@ const NewLevel1 = () => {
                 {showFinalResults ? (
                   <div className="d-flex align-items-center justify-content-center">
                     <div className="final-result">
-                      <h1 className="d-flex justify-content-center" style={{ marginBottom: '2rem', fontSize: '3.5rem' }}>Resultado Final</h1>
+                      <h1 className="d-flex justify-content-center" style={{ marginBottom: "2rem", fontSize: "3.5rem" }}>Resultado Final</h1>
                       {score.map((animal, index) =>
-                        <div key={index} style={{ display: 'flex', textAlign: 'center' }}>
-                          <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: '5rem' }} />
-                          <h2 style={{ fontSize: '2.5rem', marginRight: '.5rem' }}>
-                            {animal.animal} {index % 2 ? '(Nome)' : '(Áudio)'}:
+                        <div key={index} style={{ display: "flex", textAlign: "center" }}>
+                          <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: "5rem" }} />
+                          <h2 style={{ fontSize: "2.5rem", marginRight: ".5rem" }}>
+                            {animal.animal} {index % 2 ? "(Nome)" : "(Áudio)"}:
                           </h2>
-                          <h2 style={{ fontSize: '2.5rem', color: animal.isCorrect ? 'green' : 'red' }}>{animal.isCorrect ? 'Acertou' : 'Errou'}</h2>
+                          <h2 style={{ fontSize: "2.5rem", color: animal.isCorrect ? "green" : "red" }}>{animal.isCorrect ? "Acertou" : "Errou"}</h2>
                         </div>
                       )}
                       <div className="row d-flex justify-content-around">
@@ -162,7 +162,7 @@ const NewLevel1 = () => {
                             <li
                               type="button"
                               className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
-                              onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, 'Foto')}
+                              onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Foto")}
                               key={v4()}
                             >
                               {option.text}
@@ -176,7 +176,7 @@ const NewLevel1 = () => {
                             <li
                               type="button"
                               className={`btn btn-primary btn-decoration mx-auto btn-animal btn-decoration ${option.colorClass}`}
-                              onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, 'Áudio')}
+                              onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Áudio")}
                               key={v4()}
                             >
                               {option.text}
@@ -192,11 +192,11 @@ const NewLevel1 = () => {
         </div>
       </div>
       {(!showFinalResults && !showHowToPlay) &&
-        <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+        <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
           <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
         </div>}
     </>
-  )
-}
+  );
+};
 
-export default NewLevel1
+export default NewLevel1;

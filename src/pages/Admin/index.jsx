@@ -1,57 +1,57 @@
-import { Button, TextField } from "@mui/material"
-import { useState } from "react"
-import styled from "styled-components"
-import { useAuth } from "../../hooks/useAuth"
-import Loading from "../../components/Loading"
-import { useNavigate } from "react-router"
-import { useEffect } from "react"
-import { Link } from "react-router-dom"
-import StyledLink from "../../components/StyledLink"
+import { Button, TextField } from "@mui/material";
+import { useState } from "react";
+import styled from "styled-components";
+import { useAuth } from "../../hooks/useAuth";
+import Loading from "../../components/Loading";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import StyledLink from "../../components/StyledLink";
 
 const Admin = () => {
-  const [loginData, setLoginData] = useState({ username: '', password: '' })
+  const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { loginTeacher, authAdmin } = useAuth()
-  const navigate = useNavigate()
+  const { loginTeacher, authAdmin } = useAuth();
+  const navigate = useNavigate();
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
       ...currentLogin,
       [key]: e.target.value,
-    }))
+    }));
   }
 
   async function loginSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     setLoading(true);
-    const data = await loginTeacher(loginData.username, loginData.password)
+    const data = await loginTeacher(loginData.username, loginData.password);
     setLoading(false);
-    setLoginData({ username: '', password: '' });
+    setLoginData({ username: "", password: "" });
   }
 
   useEffect(() => {
-    if (authAdmin) navigate('dashboard')
-  }, [authAdmin])
+    if (authAdmin) navigate("dashboard");
+  }, [authAdmin]);
 
   return (
     <>
       {!authAdmin && <AdminContainer>
         <div className="content">
           <h1>Login (Professor)</h1>
-          <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
-          <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
+          <TextField onChange={e => updateLogin("username", e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
+          <TextField onChange={e => updateLogin("password", e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
           <Link to='cadastro'>Não possui uma conta?</Link>
           <Button onClick={loginSubmit} variant="contained">Fazer login</Button>
         </div>
         {loading && <Loading />}
       </AdminContainer>}
-      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
         <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
     </>
-  )
-}
+  );
+};
 
 const AdminContainer = styled.div`
   display: flex;
@@ -73,6 +73,6 @@ const AdminContainer = styled.div`
       text-transform: uppercase;
     }
   }
-`
+`;
 
-export default Admin
+export default Admin;

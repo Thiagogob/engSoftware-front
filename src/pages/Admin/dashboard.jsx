@@ -1,11 +1,11 @@
-import styled from "styled-components"
-import { useAuth } from "../../hooks/useAuth"
+import styled from "styled-components";
+import { useAuth } from "../../hooks/useAuth";
 import useApi from "../../hooks/useApi";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useCookies } from "../../hooks/useCookies";
-import { v4 } from 'uuid'
-import Loading from "../../components/Loading"
+import { v4 } from "uuid";
+import Loading from "../../components/Loading";
 import {
   Paper,
   Switch,
@@ -19,40 +19,40 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-} from "@mui/material"
+} from "@mui/material";
 import { useNavigate } from "react-router";
 
 const DashBoard = () => {
   const [loading, setLoading] = useState(false);
-  const [animals, setAnimals] = useState([])
-  const [classRoom, setClassRoom] = useState([])
-  const [username, setUsername] = useState('')
-  const { authAdmin } = useAuth()
-  const { getTeacherAnimals, updateTeacherAnimal, getClassRoomAttempts } = useApi()
-  const { getCookie, removeCookie } = useCookies()
-  const navigate = useNavigate()
+  const [animals, setAnimals] = useState([]);
+  const [classRoom, setClassRoom] = useState([]);
+  const [username, setUsername] = useState("");
+  const { authAdmin } = useAuth();
+  const { getTeacherAnimals, updateTeacherAnimal, getClassRoomAttempts } = useApi();
+  const { getCookie, removeCookie } = useCookies();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async function () {
-      setUsername((await getCookie('user'))?.username)
-    })()
-  }, [])
+      setUsername((await getCookie("user"))?.username);
+    })();
+  }, []);
 
   useEffect(() => {
     (async function () {
       if (username) {
         setLoading(true);
 
-        const AnimalsData = await getTeacherAnimals(username)
-        const AttemptsData = await getClassRoomAttempts(username)
+        const AnimalsData = await getTeacherAnimals(username);
+        const AttemptsData = await getClassRoomAttempts(username);
 
-        setAnimals(AnimalsData)
-        setClassRoom(AttemptsData)
+        setAnimals(AnimalsData);
+        setClassRoom(AttemptsData);
 
         setLoading(false);
       }
-    })()
-  }, [username])
+    })();
+  }, [username]);
 
   const updateAnimalCheckBox = async (animalName, state) => {
     updateTeacherAnimal(username, animalName, state);
@@ -65,10 +65,10 @@ const DashBoard = () => {
   };
 
   const logout = () => {
-    removeCookie('authteacher')
-    removeCookie('user')
-    navigate('/', { replace: true })
-  }
+    removeCookie("authteacher");
+    removeCookie("user");
+    navigate("/", { replace: true });
+  };
 
 
   return (
@@ -78,7 +78,7 @@ const DashBoard = () => {
         <button onClick={logout}>Sair</button>
       </StyledHeader>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', margin: '4rem 0' }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "3rem", margin: "4rem 0" }}>
         <DashBoardContainer>
           <div className="content">
             <TableContainer component={Paper}>
@@ -134,12 +134,12 @@ const DashBoard = () => {
                           <AccordionDetails>
                             {student.attempts.map((attempt, index) =>
                               <div key={v4()}>
-                                <h3 style={{ margin: '2rem 0 1rem 0', fontWeight: 'bold', letterSpacing: '.2rem' }}>Tentativa {index + 1}:</h3>
+                                <h3 style={{ margin: "2rem 0 1rem 0", fontWeight: "bold", letterSpacing: ".2rem" }}>Tentativa {index + 1}:</h3>
                                 <h4>Fase {attempt.phase}:</h4>
                                 <h5>Data: {new Date(attempt.date).toLocaleString("pt-BR")}</h5>
                                 {attempt?.tries?.map(phase =>
-                                  <div key={v4()} style={{ display: 'flex', alignItems: 'center' }}>
-                                    <h5 style={{ marginRight: '.2rem' }}>{phase.animal}:</h5>
+                                  <div key={v4()} style={{ display: "flex", alignItems: "center" }}>
+                                    <h5 style={{ marginRight: ".2rem" }}>{phase.animal}:</h5>
                                     <h6>{phase.isCorrect ? "Acertou" : "Errou"}</h6>
                                   </div>
                                 )}
@@ -158,24 +158,24 @@ const DashBoard = () => {
       </div>
       {loading && <Loading />}
     </>
-  )
-}
+  );
+};
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#111',
-    color: '#eaeaea',
+    backgroundColor: "#111",
+    color: "#eaeaea",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: '1rem',
+    fontSize: "1rem",
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: '#999',
+const StyledTableRow = styled(TableRow)(() => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: "#999",
   },
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -199,7 +199,7 @@ const DashBoardContainer = styled.div`
     text-align: center;
     text-transform: uppercase;
   }
-`
+`;
 
 const StyledHeader = styled.div`
   display: flex;
@@ -221,6 +221,6 @@ const StyledHeader = styled.div`
     border-radius: 5px;
     padding: .2rem 1rem;
   }
-`
+`;
 
-export default DashBoard
+export default DashBoard;

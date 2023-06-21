@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from "styled-components";
 
 const Loading = () => (
   <LoadingContainer>
@@ -7,7 +7,7 @@ const Loading = () => (
       <span>carregando...</span>
     </div>
   </LoadingContainer>
-)
+);
 
 const ringAnimte = keyframes`
   0% {
@@ -22,7 +22,7 @@ const ringAnimte = keyframes`
     transform: rotate(360deg);
     box-shadow: 1px 5px 2px #0456c8;
   }
-`
+`;
 
 const LoadingContainer = styled.div`
   position: fixed;
@@ -70,6 +70,6 @@ const LoadingContainer = styled.div`
     text-transform: uppercase;
     letter-spacing: 0.15rem;
   }
-`
+`;
 
-export default Loading
+export default Loading;
