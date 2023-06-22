@@ -10,8 +10,4 @@ export default createGlobalStyle`
     font-weight: 700;
     text-transform: uppercase;
   }
-
-  a {
-    color: red;
-  }
 `;
