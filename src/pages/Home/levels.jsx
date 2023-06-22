@@ -3,7 +3,7 @@ import StyledLink from "../../components/StyledLink";
 import YouTube from "react-youtube";
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import StyledButtonLink from "../../components/StyledButtonLink";
 
 const opts = {
   height: "518",
@@ -15,35 +15,30 @@ const Levels = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="row d-flex justify-content-center">
-          <h1 className="my-3 project-text">Seleção de Fase: <span className="badge badge-secondary"></span></h1>
-        </div>
-        <div className="row d-flex justify-content-center">
-          <div className="col-4 card-border">
-            <img src={"/static/images/level1.png"} className="card-img-top img-level" alt="..."></img>
-            <div className="card-body card-bg">
-              <h5 className="card-title d-flex justify-content-center">Fase 1</h5>
-              <p className="card-text justify-card-text">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
-              <div className="d-flex justify-content-center">
-                <Link to="/level1" className="btn btn-primary btn-decoration">Jogar Fase 1</Link>
-              </div>
+      <h1 className="project-text text-5xl 2xl:text-7xl absolute left-1/2 -translate-x-1/2 top-6 2xl:top-16 text-center ">Seleção de Fase: </h1>
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] flex justify-between gap-8 w-3/5 2xl:w-1/2 mx-auto">
+        <div className="flex-1">
+          <img src={"/static/images/level1.png"} className="card-img-top img-level" alt="..."></img>
+          <div className="relative p-3 bg-white h-2/5">
+            <h5 className="mb-2 text-center font-black text-xl">Fase 1</h5>
+            <p className="text-justify">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
+            <div className="absolute bottom-4 left-0 flex justify-center w-full mt-4">
+              <StyledButtonLink to="/level1" className="bg-[#23a038]">Jogar Fase 1</StyledButtonLink>
             </div>
           </div>
-          <div className="col-1"></div>
-          <div className="col-4 card-border">
-            <img src={"/static/images/level2.png"} className="card-img-top img-level" alt="..."></img>
-            <div className="card-body card-bg">
-              <h5 className="card-title d-flex justify-content-center">Fase 2</h5>
-              <p className="card-text justify-card-text">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
-              <div className="d-flex justify-content-center">
-                <Link href="/level2" className="btn btn-primary btn-decoration">Jogar Fase 2</Link>
-              </div>
+        </div>
+        <div className="flex-1">
+          <img src={"/static/images/level2.png"} className="card-img-top img-level" alt="..."></img>
+          <div className="relative p-3 bg-white h-2/5">
+            <h5 className="mb-2 text-center font-black text-xl">Fase 2</h5>
+            <p className="text-justify">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
+            <div className="absolute bottom-4 left-0 flex justify-center w-full mt-4">
+              <StyledButtonLink to="/level2" className="bg-[#23a038]">Jogar Fase 2</StyledButtonLink>
             </div>
           </div>
         </div>
       </div>
-      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
+      <div className="absolute top-4 right-4">
         <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
       <ButtonStyled onClick={() => setVideo(currentVideo => !currentVideo)}>Tutorial</ButtonStyled>
