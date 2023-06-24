@@ -116,9 +116,9 @@ const NewLevel1 = () => {
                   <li>4. Para aprender sobre animais, clique no botão amarelo</li>
                 </ul>
                 <div className="row d-flex justify-content-around">
-                  <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 1</button>
-                  <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
-                  <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                  <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>JOGAR FASE 1</button>
+                  <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">ESTUDAR ANIMAIS</button></Link>
+                  <Link to="/"><button type="button" className="btn btn-danger btn-exit">SAIR</button></Link>
                 </div>
               </div>
             </div>
@@ -140,9 +140,9 @@ const NewLevel1 = () => {
                         </div>
                       )}
                       <div className="row d-flex justify-content-around">
-                        <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
-                        <Link to="/level2"><button type="button" className="btn btn-primary">Jogar Fase 2</button></Link>
-                        <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                        <button onClick={() => restartLevel()} type="button" className="btn btn-primary">RECOMEÇAR</button>
+                        <Link to="/level2"><button type="button" className="btn btn-primary">JOGAR FASE 2</button></Link>
+                        <Link to="/"><button type="button" className="btn btn-danger btn-exit">SAIR</button></Link>
                       </div>
                     </div>
                   </div>

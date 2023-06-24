@@ -98,16 +98,16 @@ const NewLevel2 = () => {
             <div className="how-to-play">
               <h1 className="d-flex justify-content-center">Como Jogar: </h1>
               <ul className="justify-content-between">
-                <li>1. Qual animal fotografar aparecerá na tela</li>
-                <li>2. Você deve passar o mouse por cima do animal em movimento</li>
-                <li>3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
-                <li>4. Você deve clicar rápido para realizar a fotografia</li>
+                <li>1. Você deve tirar foto de um animal especifico</li>
+                <li>2. Aparecerão três animais para fotografar</li>
+                <li>3. Leve o cursor do mouse até o animal que achar correto</li>
+                <li>4. Clique com o botão esquerdo para tirar a foto</li>
                 <li>5. Para aprender sobre animais, clique no botão amarelo</li>
               </ul>
               <div className="row d-flex justify-content-around">
-                <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 2</button>
-                <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
-                <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>JOGAR FASE 2</button>
+                <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">ESTUDAR ANIMAIS</button></Link>
+                <Link to="/"><button type="button" className="btn btn-danger btn-exit">SAIR</button></Link>
               </div>
             </div>
           </div>
@@ -129,9 +129,9 @@ const NewLevel2 = () => {
                     )}
                   </div>
                   <div className="row d-flex justify-content-around">
-                    <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
-                    <Link to="/level1"><button type="button" className="btn btn-primary">Jogar Fase 1</button></Link>
-                    <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                    <button onClick={() => restartLevel()} type="button" className="btn btn-primary">RECOMEÇAR</button>
+                    <Link to="/level1"><button type="button" className="btn btn-primary">JOGAR FASE 1</button></Link>
+                    <Link to="/"><button type="button" className="btn btn-danger btn-exit">SAIR</button></Link>
                   </div>
                 </div>
               </div>

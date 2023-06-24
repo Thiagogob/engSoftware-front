@@ -41,7 +41,7 @@ function Learn() {
               </div>
               <h2>{animals[currentAnimal]?.text}</h2>
               <h2>Escute o som desse animal: <button type="button" class="btn btn-warning" onClick={() => soundClicked(animals[currentAnimal].audio)}><img src="/static/images/playIcon.png" /></button></h2>
-              <button class="btn btn-primary btn-lg" onClick={() => nextClicked()}>Próximo</button>
+              <button class="btn btn-primary btn-lg" onClick={() => nextClicked()}>PRÓXIMO</button>
             </div>
           </div>
         ) :
