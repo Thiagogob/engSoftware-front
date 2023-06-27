@@ -20,20 +20,20 @@ const Levels = () => {
         <div className="flex-1">
           <img src={"/static/images/level1.png"} className="card-img-top img-level" alt="..."></img>
           <div className="relative p-3 bg-white h-2/5">
-            <h5 className="mb-2 text-center font-black text-xl">Fase 1</h5>
-            <p className="text-justify">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
+            <h5 className="mb-2 text-center font-black text-2xl">Fase 1</h5>
+            <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
             <div className="absolute bottom-4 left-0 flex justify-center w-full mt-4">
-              <StyledButtonLink to="/level1" className="bg-[#23a038]">Jogar Fase 1</StyledButtonLink>
+              <StyledButtonLink to="/level1" className="bg-[#28a745] hover:bg-[#0a4914]">Jogar Fase 1</StyledButtonLink>
             </div>
           </div>
         </div>
         <div className="flex-1">
           <img src={"/static/images/level2.png"} className="card-img-top img-level" alt="..."></img>
           <div className="relative p-3 bg-white h-2/5">
-            <h5 className="mb-2 text-center font-black text-xl">Fase 2</h5>
-            <p className="text-justify">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
+            <h5 className="mb-2 text-center font-black text-2xl">Fase 2</h5>
+            <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
             <div className="absolute bottom-4 left-0 flex justify-center w-full mt-4">
-              <StyledButtonLink to="/level2" className="bg-[#23a038]">Jogar Fase 2</StyledButtonLink>
+              <StyledButtonLink to="/level2" className="bg-[#28a745] hover:bg-[#0a4914]">Jogar Fase 2</StyledButtonLink>
             </div>
           </div>
         </div>

@@ -1,1 +1,1 @@
-export const apiLink = "https://apifaunasnapshot.onrender.com";
+export const apiLink = "https://apifaunasnapshot.vercel.app";
