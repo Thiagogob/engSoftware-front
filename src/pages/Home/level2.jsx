@@ -100,10 +100,10 @@ const NewLevel2 = () => {
             <div className="bg-[#5500dd9f] shadow-lg rounded-2xl p-4 text-white ">
               <h1 className="text-center text-5xl mb-4">Como Jogar: </h1>
               <ul className="flex flex-col gap-3 mb-4">
-                <li className="text-2xl">1. Qual animal fotografar aparecerá na tela</li>
-                <li className="text-2xl">2. Você deve passar o mouse por cima do animal em movimento</li>
-                <li className="text-2xl">3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
-                <li className="text-2xl">4. Você deve clicar rápido para realizar a fotografia</li>
+                <li className="text-2xl">1. Você deve tirar foto de um animal especifico</li>
+                <li className="text-2xl">2. Aparecerão três animais para fotografar</li>
+                <li className="text-2xl">3. Leve o cursor do mouse até o animal que achar correto</li>
+                <li className="text-2xl">4. Clique com o botão esquerdo para tirar a foto</li>
                 <li className="text-2xl">5. Para aprender sobre animais, clique no botão amarelo</li>
               </ul>
               <div className="flex justify-around">
