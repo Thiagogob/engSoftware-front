@@ -1,4 +1,3 @@
-import "./style.css";
 import StyledLink from "../../components/StyledLink";
 import YouTube from "react-youtube";
 import { useState } from "react";
@@ -15,10 +14,10 @@ const Levels = () => {
 
   return (
     <>
-      <h1 className="project-text text-5xl 2xl:text-7xl absolute left-1/2 -translate-x-1/2 top-6 2xl:top-16 text-center ">Seleção de Fase: </h1>
+      <h1 className="font-bold font-margarine text-white drop-shadow-letter text-5xl 2xl:text-7xl absolute left-1/2 -translate-x-1/2 top-6 2xl:top-16 text-center ">Seleção de Fase: </h1>
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[40%] flex justify-between gap-8 w-3/5 2xl:w-1/2 mx-auto">
         <div className="flex-1">
-          <img src={"/static/images/level1.png"} className="card-img-top img-level" alt="..."></img>
+          <img src={"/static/images/level1.png"} className="object-cover w-full h-1/2" alt="Foto de Animais" />
           <div className="relative p-3 bg-white h-2/5">
             <h5 className="mb-2 text-center font-black text-2xl">Fase 1</h5>
             <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
@@ -28,7 +27,7 @@ const Levels = () => {
           </div>
         </div>
         <div className="flex-1">
-          <img src={"/static/images/level2.png"} className="card-img-top img-level" alt="..."></img>
+          <img src={"/static/images/level2.png"} className="object-cover w-full h-1/2" alt="Foto de Animais" />
           <div className="relative p-3 bg-white h-2/5">
             <h5 className="mb-2 text-center font-black text-2xl">Fase 2</h5>
             <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
@@ -90,6 +89,7 @@ const VideoContainer = styled.div`
       position: absolute;
       right: 2rem;
       top: .75rem;
+      padding: .25rem .5rem;
       background-color: #FBFBFB;
       border-radius: 5px;
       font-size: 1.6rem;

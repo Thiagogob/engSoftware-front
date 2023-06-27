@@ -1,4 +1,3 @@
-import "./style.css";
 import { useEffect, useState } from "react";
 import StyledLink from "../../components/StyledLink";
 import StyledButton from "../../components/StyledButton";
@@ -29,6 +28,12 @@ const NewLevel1 = () => {
   const correctAudio = new Audio("/static/sounds/correct.mp3");
   const wrongAudio = new Audio("/static/sounds/errado.mp3");
 
+  const optionButtonColor = (index) => {
+    if (index == 0) return "bg-blue-500 hover:bg-blue-700";
+    if (index == 1) return "bg-orange-500 hover:bg-orange-700";
+    if (index == 2) return "bg-green-500 hover:bg-green-700";
+  };
+
   useEffect(() => {
     if (!tasksGenerated && animals.length) {
       const drawnAnimals = drawAnimals(animals, 3);
@@ -43,7 +48,7 @@ const NewLevel1 = () => {
             text: animal.name,
             correctAnimal: correctAnimal?.name,
             isCorrect: correctAnimal?.name === animal.name ? true : false,
-            colorClass: `option-color-${index}`
+            colorOption: optionButtonColor(index),
           })),
         },
         {
@@ -53,7 +58,7 @@ const NewLevel1 = () => {
             text: <img src='/static/images/checkFinal.png' />,
             isCorrect: correctAnimal?.name === animal.name ? true : false,
             correctAnimal: correctAnimal?.name,
-            colorClass: `option-color-${index}`,
+            colorOption: optionButtonColor(index),
             audio: new Audio(`/static/sounds/${animal.img}.mp3`)
           }))
         }];
@@ -156,18 +161,18 @@ const NewLevel1 = () => {
                       Tentativas restantes: {tasks.length - currentQuestion}
                     </h2>
                   </div>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center mt-6">
                     <img src={`/static/images/${tasks[currentQuestion]?.image}Fix.png`} />
                   </div>
-                  <p className="mb-4 font-margarine justify-center text-white text-center text-4xl font-bold tracking-widest">
+                  <h1 className="drop-shadow-letter mb-4 font-margarine justify-center text-white text-center text-4xl font-bold tracking-widest shadow-black ">
                     {tasks[currentQuestion]?.text}
-                  </p>
+                  </h1>
                   <div className="flex justify-around w-[70%] absolute left-1/2 -translate-x-1/2">
                     {tasks[currentQuestion]?.options.map((option) => {
                       if (currentQuestion % 2 === 0) {
                         return (
                           <button
-                            className={`${option.colorClass} text-3xl text-white py-3 mx-4 w-full rounded`}
+                            className={`${option.colorOption} text-3xl text-white py-3 mx-4 w-full rounded`}
                             onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Foto")}
                             key={v4()}
                           >
@@ -182,7 +187,7 @@ const NewLevel1 = () => {
                             </button>
                           </div>
                           <StyledButton
-                            className={`w-full flex justify-center items-center mt-2 ${option.colorClass}`}
+                            className={`${option.colorOption.color} w-full flex justify-center items-center mt-2`}
                             onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Áudio")}
                             key={v4()}
                           >
@@ -198,7 +203,7 @@ const NewLevel1 = () => {
           )}
       </div >
       {(!showFinalResults && !showHowToPlay) &&
-        <div className="absolute top-1 right-1">
+        <div className="absolute top-4 right-4">
           <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
         </div>
       }

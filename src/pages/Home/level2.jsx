@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import StyledLink from "../../components/StyledLink";
+import StyledButton from "../../components/StyledButton";
+import StyledButtonLink from "../../components/StyledButtonLink";
 import { generateAnimalsOptions } from "../../utils/generateAnimalsOptions.js";
 import { drawAnimals } from "../../utils/drawAnimals.js";
 import { useAnimals } from "../../hooks/useAnimals";
@@ -90,91 +91,98 @@ const NewLevel2 = () => {
     setTasks([]);
   };
 
+
   return (
     <>
-      <div className="container container-camera">
+      <div className="w-4/5 absolute left-1/2 -translate-x-1/2">
         {showHowToPlay ? (
-          <div className="d-flex align-items-center justify-content-center">
-            <div className="how-to-play">
-              <h1 className="d-flex justify-content-center">Como Jogar: </h1>
-              <ul className="justify-content-between">
-                <li>1. Qual animal fotografar aparecerá na tela</li>
-                <li>2. Você deve passar o mouse por cima do animal em movimento</li>
-                <li>3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
-                <li>4. Você deve clicar rápido para realizar a fotografia</li>
-                <li>5. Para aprender sobre animais, clique no botão amarelo</li>
+          <div className="flex justify-center items-center mt-8">
+            <div className="bg-[#5500dd9f] shadow-lg rounded-2xl p-4 text-white ">
+              <h1 className="text-center text-5xl mb-4">Como Jogar: </h1>
+              <ul className="flex flex-col gap-3 mb-4">
+                <li className="text-2xl">1. Qual animal fotografar aparecerá na tela</li>
+                <li className="text-2xl">2. Você deve passar o mouse por cima do animal em movimento</li>
+                <li className="text-2xl">3. Caso o mouse estiver na posição correta, uma camerá aparecerá</li>
+                <li className="text-2xl">4. Você deve clicar rápido para realizar a fotografia</li>
+                <li className="text-2xl">5. Para aprender sobre animais, clique no botão amarelo</li>
               </ul>
               <div className="row d-flex justify-content-around">
-                <button type="button" className="btn btn-success" onClick={() => setHowToPlay(false)}>Jogar Fase 2</button>
-                <Link to="/learn"><button type="button" className="btn btn-warning font-weight-bold">Estudar animais</button></Link>
-                <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                <StyledButton className="bg-[#28a745] hover:bg-[#0a4914]" onClick={() => setHowToPlay(false)}>Jogar Fase 2</StyledButton>
+                <StyledButtonLink to="/learn" className="bg-[#cd9a02] hover:bg-[#9c7502]">Estudar animais</StyledButtonLink>
+                <StyledButtonLink to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
               </div>
             </div>
           </div>
         ) : (
           <div>
             {showFinalResults ?
-              <div className="d-flex align-items-center justify-content-center">
-                <div className="final-result">
-                  <h1 className="d-flex justify-content-center" style={{ fontSize: "3.5rem" }}>Resultado Final</h1>
+              <div className="flex items-center justify-center h-screen">
+                <div className="my-0 mx-auto w-auto h-auto mt-16 bg-zinc-950 bg-opacity-80 p-4 rounded-2xl text-white tracking-wider font-semibold">
+                  <h1 className="text-center text-6xl">Resultado Final</h1>
                   <div style={{ display: "flex", flexDirection: "column", marginTop: "4rem", gap: "2rem" }}>
                     {score.map((animal, index) =>
-                      <div key={index} style={{ display: "flex", textAlign: "center" }}>
-                        <img src={`/static/images/${animal.img}Movimento.png`} style={{ height: "5rem" }} />
-                        <h2 style={{ fontSize: "2.5rem", marginRight: ".5rem" }}>
+                      <div key={index} className="flex text-center">
+                        <img src={`/static/images/${animal.img}Movimento.png`} className="h-20" />
+                        <h2 className="text-4xl mr-2">
                           {animal.animal}:
                         </h2>
-                        <h2 style={{ fontSize: "2.5rem", color: score[index].isCorrect ? "green" : "red" }}>{score[index].isCorrect ? "Acertou" : "Errou"}</h2>
+                        <h2 className={`text-4xl ${score[index].isCorrect ? "text-green-600" : "text-red-600"}`}>
+                          {score[index].isCorrect ? "Acertou" : "Errou"}
+                        </h2>
                       </div>
                     )}
                   </div>
-                  <div className="row d-flex justify-content-around">
-                    <button onClick={() => restartLevel()} type="button" className="btn btn-primary">Recomeçar</button>
-                    <Link to="/level1"><button type="button" className="btn btn-primary">Jogar Fase 1</button></Link>
-                    <Link to="/"><button type="button" className="btn btn-danger btn-exit">Sair</button></Link>
+                  <div className="flex justify-around mt-4">
+                    <StyledButtonLink onClick={() => restartLevel()} type="button" className="bg-[#007bfe] hover:bg-[#0354ab]">Recomeçar</StyledButtonLink>
+                    <StyledButtonLink to="/level1" className="bg-[#007bfe] hover:bg-[#0354ab]">Jogar Fase 1</StyledButtonLink>
+                    <StyledButtonLink to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
                   </div>
                 </div>
               </div>
               :
-              <div className="task-card">
-                <div className="row">
-                  <div className="mx-auto">
-                    <h2 className="d-flex justify-content-center project-text">{tasks[currentTask]?.text}</h2>
-                  </div>
+              <>
+                <div className="absolute top-4 -left-16 bg-zinc-900 bg-opacity-80 p-2 rounded">
+                  <h2 className="text-white tracking-wider text-2xl">
+                    Quantidade de Pontos: {score.filter(item => item.isCorrect).length}
+                  </h2>
+                  <h2 className="text-white tracking-wider text-2xl">
+                    Fotos restantes: {tasks.length - currentTask}
+                  </h2>
                 </div>
-                <div className="row">
-                  <div className="mx-auto">
-                    <h2 className="project-text">{photosLeft} fotos restantes</h2>
-                  </div>
-                </div>
-                <ul className="d-flex justify-content-center">
-                  {tasks[currentTask]?.options?.map((option) => {
-                    return (
-                      <li
-                        className="animal"
-                        onClick={() => optionClicked(option.isCorrect, option.correctAnimal, option.img)}
-                        key={option.id}
-                      >
-                        <div
-                          onMouseEnter={() => setHoveredOption(option.id)}
-                          onMouseLeave={() => setHoveredOption(null)}
+                <div className="absolute left-1/2 -translate-x-1/2 w-4/5 top-32">
+                  <h2 className="drop-shadow-letter text-white text-center font-margarine font-bold text-5xl 2xl:text-7xl shadow-black tracking-wider ">
+                    {tasks[currentTask]?.text}
+                  </h2>
+                  <ul className="flex justify-center mt-16">
+                    {tasks[currentTask]?.options?.map((option) => {
+                      return (
+                        <li
+                          className="cursor-pointer"
+                          onClick={() => optionClicked(option.isCorrect, option.correctAnimal, option.img)}
+                          key={option.id}
                         >
-                          {hoveredOption === option.id ? option.hover : option.image}
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+                          <div
+                            onMouseEnter={() => setHoveredOption(option.id)}
+                            onMouseLeave={() => setHoveredOption(null)}
+                          >
+                            {hoveredOption === option.id ? option.hover : option.image}
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </>
             }
           </div>
         )
         }
       </div >
       {(!showFinalResults && !showHowToPlay) &&
-        <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
+        <div className="absolute top-4 right-4">
           <StyledLink onClick={() => restartLevel()} to='/'>Voltar ao início</StyledLink>
-        </div>}
+        </div>
+      }
     </>
   );
 };

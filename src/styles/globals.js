@@ -4,6 +4,9 @@ export default createGlobalStyle`
   body {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+    background-image: url(/static/images/faunaSnapshotBackground.jpg);
+    background-size: cover;
+    text-transform: uppercase;
   }
 
   button, a {
