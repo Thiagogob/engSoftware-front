@@ -1,32 +1,21 @@
-import "./style.css";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import StyledLink from "../../components/StyledLink";
 
 const Home = () => (
-  <div className="container">
-    <div className="menu-box jumbotron">
-      <h1 className="display-4 project-text my-4">Fauna Snapshot</h1>
-      <Link to="/levels"><button type="button" className="btn btn-outline-secondary btn-play my-2">JOGAR</button></Link>
+  <div className="container w-full">
+    <div className="bg-transparent absolute top-1/4 left-40 2xl:left-1/4">
+      <h1 className="text-7xl mb-6 font-margarine font-bold text-white drop-shadow-letter">
+        Fauna Snapshot
+      </h1>
+      <Link to="/levels" className="text-white font-margarine bg-zinc-200 border-solid border-2 border-zinc-300 border-opacity-40 text-4xl tracking-widest bg-opacity-20 px-52 py-2 rounded-2xl duration-300 hover:no-underline hover:bg-opacity-40">
+        Jogar
+      </Link>
     </div>
-    <NavBar>
+    <nav className="absolute right-4 top-4 flex gap-8">
       <ul><StyledLink className="link" to='login'>Aluno</StyledLink></ul>
       <ul><StyledLink className="link" to='admin'>Professor</StyledLink></ul>
-    </NavBar>
+    </nav>
   </div>
 );
-
-const NavBar = styled.nav`
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  display: flex;
-  gap: 2rem;
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-`
 
 export default Home;

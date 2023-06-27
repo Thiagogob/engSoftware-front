@@ -1,6 +1,6 @@
 export function drawAnimals(animals, quantity) {
   if (quantity > animals.length) {
-    return []
+    return [];
   }
 
   const drawnAnimals = [];

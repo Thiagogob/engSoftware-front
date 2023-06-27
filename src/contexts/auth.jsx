@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react'
+import { createContext, useState } from "react";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ admin: false, user: false })
+  const [auth, setAuth] = useState({ admin: false, user: false });
 
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
-}
+  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+};

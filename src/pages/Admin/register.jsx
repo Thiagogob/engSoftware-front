@@ -3,54 +3,55 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAuth } from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StyledLink from "../../components/StyledLink";
 
 const AdminRegister = () => {
-  const [loginData, setLoginData] = useState({ username: '', name: '', password: '' })
+  const [loginData, setLoginData] = useState({ username: "", name: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { registerTeacher, authAdmin } = useAuth()
+  const { registerTeacher, authAdmin } = useAuth();
+  const navigate = useNavigate();
 
   function updateLogin(key, e) {
     setLoginData((currentLogin) => ({
       ...currentLogin,
       [key]: e.target.value,
-    }))
+    }));
   }
 
   async function loginSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    setLoading(true)
-    const data = await registerTeacher(loginData.name, loginData.username, loginData.password)
-    setLoading(false)
+    setLoading(true);
+    await registerTeacher(loginData.name, loginData.username, loginData.password);
+    setLoading(false);
 
-    setLoginData({ username: '', password: '', name: '' })
+    setLoginData({ username: "", password: "", name: "" });
   }
 
   useEffect(() => {
-    if (authAdmin) navigate('dashboard')
-  }, [authAdmin])
+    if (authAdmin) navigate("dashboard");
+  }, [authAdmin]);
 
   return (
     <>
       <AdminContainer>
         <div className="content">
-          <h1>Cadastro</h1>
-          <TextField onChange={e => updateLogin('name', e)} value={loginData.name} color='primary' label="Nome" variant="outlined" />
-          <TextField onChange={e => updateLogin('username', e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
-          <TextField onChange={e => updateLogin('password', e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
+          <h1 className="text-4xl">Cadastro (Professor)</h1>
+          <TextField onChange={e => updateLogin("name", e)} value={loginData.name} color='primary' label="Nome" variant="outlined" />
+          <TextField onChange={e => updateLogin("username", e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
+          <TextField onChange={e => updateLogin("password", e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
           <Link to='/admin'>Já possui uma conta?</Link>
           <Button onClick={loginSubmit} variant="contained">Fazer cadastro</Button>
         </div>
         {loading && <Loading />}
       </AdminContainer>
-      <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
         <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
     </>
-  )
-}
+  );
+};
 
 const AdminContainer = styled.div`
   display: flex;
@@ -72,6 +73,6 @@ const AdminContainer = styled.div`
       text-transform: uppercase;
     }
   }
-`
+`;
 
-export default AdminRegister
+export default AdminRegister;
