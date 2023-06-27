@@ -46,7 +46,7 @@ const Login = () => {
       {!authUser && (
         <LoginContainer>
           <div className="content">
-            <h1>Login (Aluno)</h1>
+            <h1 className="text-5xl">Login (Aluno)</h1>
             <TextField onChange={e => setLoginDatas(currentData => ({ ...currentData, username: e.target.value }))} value={loginDatas.username} color='primary' label="Digite o seu nome" variant="outlined" />
             <InputLabel id="123">Professor</InputLabel>
             <Select
@@ -60,7 +60,7 @@ const Login = () => {
           </div>
         </LoginContainer>
       )}
-      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
+      <div className="absolute top-4 right-4">
         <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
     </>

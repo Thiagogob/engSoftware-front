@@ -25,7 +25,7 @@ const Admin = () => {
     event.preventDefault();
 
     setLoading(true);
-    const data = await loginTeacher(loginData.username, loginData.password);
+    await loginTeacher(loginData.username, loginData.password);
     setLoading(false);
     setLoginData({ username: "", password: "" });
   }
@@ -38,7 +38,7 @@ const Admin = () => {
     <>
       {!authAdmin && <AdminContainer>
         <div className="content">
-          <h1>Login (Professor)</h1>
+          <h1 className="text-4xl">Login (Professor)</h1>
           <TextField onChange={e => updateLogin("username", e)} value={loginData.username} color='primary' label="Usuário" variant="outlined" />
           <TextField onChange={e => updateLogin("password", e)} value={loginData.password} color='primary' label="Senha" variant="outlined" />
           <Link to='cadastro'>Não possui uma conta?</Link>
@@ -46,7 +46,7 @@ const Admin = () => {
         </div>
         {loading && <Loading />}
       </AdminContainer>}
-      <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
+      <div className="absolute top-4 right-4">
         <StyledLink to='/'>Voltar ao início</StyledLink>
       </div>
     </>

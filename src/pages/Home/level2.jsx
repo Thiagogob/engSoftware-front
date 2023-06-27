@@ -68,8 +68,8 @@ const NewLevel2 = () => {
           id: index,
           img: correctAnimal?.img,
           correctAnimal: correctAnimal?.name,
-          image: <img style={{ height: "20rem" }} src={`/static/images/${animal.img}Movimento.png`} />,
-          hover: <img style={{ height: "20rem" }} src={`/static/images/${animal.img}Foto.png`} />,
+          image: <img className="h-80" src={`/static/images/${animal.img}Movimento.png`} />,
+          hover: <img className="h-80" src={`/static/images/${animal.img}Foto.png`} />,
           isCorrect: correctAnimal?.name === animal.name ? true : false,
         })),
       })));
@@ -106,7 +106,7 @@ const NewLevel2 = () => {
                 <li className="text-2xl">4. Você deve clicar rápido para realizar a fotografia</li>
                 <li className="text-2xl">5. Para aprender sobre animais, clique no botão amarelo</li>
               </ul>
-              <div className="row d-flex justify-content-around">
+              <div className="flex justify-around">
                 <StyledButton className="bg-[#28a745] hover:bg-[#0a4914]" onClick={() => setHowToPlay(false)}>Jogar Fase 2</StyledButton>
                 <StyledButtonLink to="/learn" className="bg-[#cd9a02] hover:bg-[#9c7502]">Estudar animais</StyledButtonLink>
                 <StyledButtonLink to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
@@ -117,9 +117,9 @@ const NewLevel2 = () => {
           <div>
             {showFinalResults ?
               <div className="flex items-center justify-center h-screen">
-                <div className="my-0 mx-auto w-auto h-auto mt-16 bg-zinc-950 bg-opacity-80 p-4 rounded-2xl text-white tracking-wider font-semibold">
+                <div className="my-0 mx-auto w-auto h-auto mt-16 bg-zinc-950 bg-opacity-80 p-8 rounded-2xl text-white tracking-wider font-semibold">
                   <h1 className="text-center text-6xl">Resultado Final</h1>
-                  <div style={{ display: "flex", flexDirection: "column", marginTop: "4rem", gap: "2rem" }}>
+                  <div className="flex flex-col gap-6 mt-8">
                     {score.map((animal, index) =>
                       <div key={index} className="flex text-center">
                         <img src={`/static/images/${animal.img}Movimento.png`} className="h-20" />

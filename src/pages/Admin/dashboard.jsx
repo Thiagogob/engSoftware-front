@@ -134,13 +134,13 @@ const DashBoard = () => {
                           <AccordionDetails>
                             {student.attempts.map((attempt, index) =>
                               <div key={v4()}>
-                                <h3 style={{ margin: "2rem 0 1rem 0", fontWeight: "bold", letterSpacing: ".2rem" }}>Tentativa {index + 1}:</h3>
-                                <h4>Fase {attempt.phase}:</h4>
-                                <h5>Data: {new Date(attempt.date).toLocaleString("pt-BR")}</h5>
+                                <h3 className="font-extrabold mx-0 mt-6 mb-2 tracking-wider text-3xl">Tentativa {index + 1}:</h3>
+                                <h4 className="text-2xl font-bold">Fase {attempt.phase}:</h4>
+                                <h5 className="text-xl">Data: {new Date(attempt.date).toLocaleString("pt-BR")}</h5>
                                 {attempt?.tries?.map(phase =>
                                   <div key={v4()} style={{ display: "flex", alignItems: "center" }}>
-                                    <h5 style={{ marginRight: ".2rem" }}>{phase.animal}:</h5>
-                                    <h6>{phase.isCorrect ? "Acertou" : "Errou"}</h6>
+                                    <h5 className="mr-1 text-xl">{phase.animal}:</h5>
+                                    <h6 className="text-lg">{phase.isCorrect ? "Acertou" : "Errou"}</h6>
                                   </div>
                                 )}
                               </div>

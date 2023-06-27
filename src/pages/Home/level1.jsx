@@ -120,7 +120,7 @@ const NewLevel1 = () => {
                 <li className="text-2xl">3. Decida a opção correta de acordo com seus conhecimentos</li>
                 <li className="text-2xl">4. Para aprender sobre animais, clique no botão amarelo</li>
               </ul>
-              <div className="row d-flex justify-content-around">
+              <div className="flex justify-around">
                 <StyledButton className="bg-[#28a745] hover:bg-[#0a4914]" onClick={() => setHowToPlay(false)}>Jogar Fase 1</StyledButton>
                 <StyledButtonLink to="/learn" className="bg-[#cd9a02] hover:bg-[#9c7502]">Estudar animais</StyledButtonLink>
                 <StyledButtonLink to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
@@ -133,7 +133,7 @@ const NewLevel1 = () => {
             <div>
               {showFinalResults ? (
                 <div className="flex items-center justify-center h-screen">
-                  <div className="my-0 mx-auto w-auto h-auto mt-16 bg-zinc-950 bg-opacity-80 p-4 rounded-2xl text-white tracking-wider font-semibold">
+                  <div className="my-0 mx-auto w-auto h-auto bg-zinc-950 bg-opacity-80 p-4 rounded-2xl text-white tracking-wider font-semibold">
                     <h1 className="text-center mb-3 text-6xl">Resultado Final</h1>
                     {score.map((animal, index) =>
                       <div key={index} className="flex text-center items-center">
@@ -144,7 +144,7 @@ const NewLevel1 = () => {
                         <h2 className={`text-4xl ${animal.isCorrect ? "text-green-600" : "text-red-600"}`}>{animal.isCorrect ? "Acertou" : "Errou"}</h2>
                       </div>
                     )}
-                    <div className="flex justify-around">
+                    <div className="flex justify-around mt-4">
                       <StyledButtonLink onClick={() => restartLevel()} type="button" className="bg-[#007bfe] hover:bg-[#0354ab]">Recomeçar</StyledButtonLink>
                       <StyledButtonLink to="/level2" className="bg-[#007bfe] hover:bg-[#0354ab]">Jogar Fase 2</StyledButtonLink>
                       <StyledButtonLink to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
@@ -187,7 +187,7 @@ const NewLevel1 = () => {
                             </button>
                           </div>
                           <StyledButton
-                            className={`${option.colorOption.color} w-full flex justify-center items-center mt-2`}
+                            className={`${option.colorOption} w-full flex justify-center items-center mt-2`}
                             onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Áudio")}
                             key={v4()}
                           >
