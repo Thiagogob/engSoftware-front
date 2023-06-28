@@ -53,10 +53,8 @@ const NewLevel2 = () => {
     const animal = tasks[hoveredOption?.currentTask]?.options[hoveredOption?.id]?.audio;
     if (animal) {
       const audio = new Audio(`/static/sounds/foto_${animal}.mp3`);
-      if (hoveredOption !== null) {
-        console.log();
+      if (hoveredOption !== null)
         soundClicked(audio, 4000);
-      }
       return () => {
         audio.pause();
       };

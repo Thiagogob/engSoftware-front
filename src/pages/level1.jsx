@@ -24,6 +24,8 @@ const NewLevel1 = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [tasksGenerated, setTasksGenerated] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [hoveredOption, setHoveredOption] = useState(null);
+  const [audio, setAudio] = useState(null);
 
   const correctAudio = new Audio("/static/sounds/correct.mp3");
   const wrongAudio = new Audio("/static/sounds/errado.mp3");
@@ -33,6 +35,23 @@ const NewLevel1 = () => {
     if (index == 1) return "bg-orange-500 hover:bg-orange-700";
     if (index == 2) return "bg-green-500 hover:bg-green-700";
   };
+
+  useEffect(() => {
+    setAudio(new Audio("/static/sounds/como_jogar_1.mp3"));
+
+    return () => {
+      audio?.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (audio) {
+      soundClicked(audio, 15500);
+    }
+    if (!showHowToPlay) {
+      audio?.pause();
+    }
+  }, [audio, showHowToPlay]);
 
   useEffect(() => {
     if (!tasksGenerated && animals.length) {
@@ -46,6 +65,7 @@ const NewLevel1 = () => {
           image: correctAnimal?.img,
           options: animalsOptions.map((animal, index) => ({
             text: animal.name,
+            audio: animal.img,
             correctAnimal: correctAnimal?.name,
             isCorrect: correctAnimal?.name === animal.name ? true : false,
             colorOption: optionButtonColor(index),
@@ -81,6 +101,19 @@ const NewLevel1 = () => {
       })();
     }
   }, [score]);
+
+  useEffect(() => {
+    if (hoveredOption?.audio) {
+      const audio = new Audio(`/static/sounds/clique_se_${hoveredOption.audio}.mp3`);
+      if (hoveredOption !== null) {
+        console.log();
+        soundClicked(audio, 4500);
+      }
+      return () => {
+        audio.pause();
+      };
+    }
+  }, [hoveredOption]);
 
   const optionClicked = (isCorrect, animal, img, mode) => {
     setScore(currentScore => [...currentScore, { animal: `${animal} ${(mode)}`, isCorrect, img }]);
@@ -175,6 +208,8 @@ const NewLevel1 = () => {
                             className={`${option.colorOption} text-3xl text-white py-3 mx-4 w-full rounded`}
                             onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Foto")}
                             key={v4()}
+                            onMouseEnter={hoveredOption === null ? () => setHoveredOption({ currentQuestion, audio: option.audio }) : () => { }}
+                            onMouseLeave={() => setHoveredOption(null)}
                           >
                             {option.text}
                           </button>
