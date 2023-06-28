@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import StyledLink from "../../components/StyledLink";
-import StyledButton from "../../components/StyledButton";
-import { generateAnimalsOptions } from "../../utils/generateAnimalsOptions";
-import { drawAnimals } from "../../utils/drawAnimals";
-import { shuffleArray } from "../../utils/shuffleArray";
-import { soundClicked } from "../../utils/soundClicked";
-import { useAnimals } from "../../hooks/useAnimals";
-import { useAuth } from "../../hooks/useAuth";
-import useApi from "../../hooks/useApi";
-import { useCookies } from "../../hooks/useCookies";
+import StyledLink from "../components/StyledLink";
+import StyledButton from "../components/StyledButton";
+import { generateAnimalsOptions } from "../utils/generateAnimalsOptions";
+import { drawAnimals } from "../utils/drawAnimals";
+import { shuffleArray } from "../utils/shuffleArray";
+import { soundClicked } from "../utils/soundClicked";
+import { useAnimals } from "../hooks/useAnimals";
+import { useAuth } from "../hooks/useAuth";
+import useApi from "../hooks/useApi";
+import { useCookies } from "../hooks/useCookies";
 import { v4 } from "uuid";
-import StyledButtonLink from "../../components/StyledButtonLink";
+import StyledButtonLink from "../components/StyledButtonLink";
 
 const NewLevel1 = () => {
   const { animals } = useAnimals();
@@ -182,7 +182,7 @@ const NewLevel1 = () => {
                       } else return (
                         <div key={v4()} className="mx-6 w-3/4">
                           <div className="flex justify-center">
-                            <button className="bg-zinc-200 hover:bg-zinc-400 rounded w-full flex justify-center items-center h-16" onClick={() => soundClicked(option.audio)}>
+                            <button className="bg-zinc-200 hover:bg-zinc-400 rounded w-full flex justify-center items-center h-16" onClick={() => soundClicked(option.audio, 2000)}>
                               <img src="/static/images/playIcon.png" className="scale-125" />
                             </button>
                           </div>

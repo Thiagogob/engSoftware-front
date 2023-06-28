@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import StyledLink from "../../components/StyledLink";
+import StyledLink from "../components/StyledLink";
 
 const Home = () => (
   <div className="container w-full">
@@ -11,10 +11,13 @@ const Home = () => (
         Jogar
       </Link>
     </div>
-    <nav className="absolute right-4 top-4 flex gap-8">
-      <ul><StyledLink className="link" to='login'>Aluno</StyledLink></ul>
-      <ul><StyledLink className="link" to='admin'>Professor</StyledLink></ul>
+    <nav className="absolute right-4 top-4">
+      <ul className="flex gap-8">
+        <li><StyledLink to='login'>Aluno</StyledLink></li>
+        <li><StyledLink to='admin'>Professor</StyledLink></li>
+      </ul>
     </nav>
+    <StyledLink to='creditos' className="absolute bottom-4 right-4">Creditos</StyledLink>
   </div>
 );
 

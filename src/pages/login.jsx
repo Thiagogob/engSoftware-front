@@ -1,10 +1,10 @@
 import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import useApi from "../../hooks/useApi";
-import { useAuth } from "../../hooks/useAuth";
+import useApi from "../hooks/useApi";
+import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router";
-import StyledLink from "../../components/StyledLink";
+import StyledLink from "../components/StyledLink";
 
 const Login = () => {
   const [loginDatas, setLoginDatas] = useState({ username: "", teacher: "" });

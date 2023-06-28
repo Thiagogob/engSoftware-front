@@ -1,7 +1,7 @@
-export function soundClicked(audio) {
+export function soundClicked(audio, time) {
   audio.play();
   setTimeout(() => {
     audio.pause();
-  }, 2000);
+  }, time);
   audio.currentTime = 0;
 }

@@ -1,9 +1,9 @@
-import { useAnimals } from "../../hooks/useAnimals";
+import { useAnimals } from "../hooks/useAnimals";
 import { useEffect, useState } from "react";
-import { soundClicked } from "../../utils/soundClicked";
-import StyledLink from "../../components/StyledLink";
-import StyledButtonLink from "../../components/StyledButtonLink";
-import StyledButton from "../../components/StyledButton";
+import { soundClicked } from "../utils/soundClicked";
+import StyledLink from "../components/StyledLink";
+import StyledButtonLink from "../components/StyledButtonLink";
+import StyledButton from "../components/StyledButton";
 
 function Learn() {
   const { animals: animalsAPI } = useAnimals();
@@ -46,7 +46,7 @@ function Learn() {
             </div>
             <StyledButton
               className="bg-[#cd9a02] hover:bg-[#9c7502]"
-              onClick={() => soundClicked(animals[currentAnimal].audio)}
+              onClick={() => soundClicked(animals[currentAnimal].audio, 2000)}
             >
               <img className="scale-125" src="/static/images/playIcon.png" />
             </StyledButton>

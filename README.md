@@ -9,13 +9,14 @@ This project consists of a game aimed at children who suffer from mental illness
 # :busts_in_silhouette: Owners
 
 - [Gabriel Stawny](https://github.com/gastawny)
-- [João Francisco Mayer Agottani](https://github.com)
+- [João Francisco Mayer Agottani](https://github.com/joaoFrAgo)
 - [Pablo Renan Santos Costa](https://github.com/PabloRenan157)
 - [Thiago Guimarães Belém](https://github.com/Thiagogob)
 
 # :computer: Technologies
 
 - [React](https://react.dev)
-- [Bootstrap](https://getbootstrap.com)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Styled-components](https://styled-components.com)
 - [React Router](https://reactrouter.com/en/main)
+- [MUI](https://mui.com/)

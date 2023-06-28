@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import StyledLink from "../../components/StyledLink";
-import StyledButton from "../../components/StyledButton";
-import StyledButtonLink from "../../components/StyledButtonLink";
-import { generateAnimalsOptions } from "../../utils/generateAnimalsOptions.js";
-import { drawAnimals } from "../../utils/drawAnimals.js";
-import { useAnimals } from "../../hooks/useAnimals";
-import { useAuth } from "../../hooks/useAuth";
-import useApi from "../../hooks/useApi";
-import { useCookies } from "../../hooks/useCookies";
+import StyledLink from "../components/StyledLink";
+import StyledButton from "../components/StyledButton";
+import StyledButtonLink from "../components/StyledButtonLink";
+import { generateAnimalsOptions } from "../utils/generateAnimalsOptions.js";
+import { drawAnimals } from "../utils/drawAnimals.js";
+import { useAnimals } from "../hooks/useAnimals";
+import { useAuth } from "../hooks/useAuth";
+import useApi from "../hooks/useApi";
+import { useCookies } from "../hooks/useCookies";
 
 const NewLevel2 = () => {
   const { animals } = useAnimals();

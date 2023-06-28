@@ -5,15 +5,12 @@ export const useCookies = () => {
   const getCookie = async (cookie) => await cookies.get(cookie);
 
   const setAuthCookie = (token, cookieName) => {
-    const expirationDate = new Date();
-    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
-    cookies.set(cookieName, `${token}`, { expires: expirationDate });
+    // Criar um cookie com duracao de uma sessao
+    cookies.set(cookieName, token);
   };
 
   const setUserCookie = (user) => {
-    const expirationDate = new Date();
-    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
-    cookies.set("user", user, { expires: expirationDate });
+    cookies.set("user", user);
   };
 
   const removeCookie = (cookie) => {

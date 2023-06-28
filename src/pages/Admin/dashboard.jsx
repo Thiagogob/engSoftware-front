@@ -55,13 +55,14 @@ const DashBoard = () => {
   }, [username]);
 
   const updateAnimalCheckBox = async (animalName, state) => {
-    updateTeacherAnimal(username, animalName, state);
-    if (animals.filter(animal => animal.selected).length !== 3 || state)
+    if (animals.filter(animal => animal.selected).length !== 4 || state) {
+      updateTeacherAnimal(username, animalName, state);
       setAnimals(currentAnimals =>
         currentAnimals.map(animal =>
           animal.name === animalName ? { ...animal, selected: state } : animal
         )
       );
+    }
   };
 
   const logout = () => {
@@ -69,7 +70,6 @@ const DashBoard = () => {
     removeCookie("user");
     navigate("/", { replace: true });
   };
-
 
   return (
     authAdmin && <>
@@ -86,7 +86,7 @@ const DashBoard = () => {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>Animais</StyledTableCell>
-                    <StyledTableCell align="right">Selecionado</StyledTableCell>
+                    <StyledTableCell align="right">Selecionado (mínimo 4)</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

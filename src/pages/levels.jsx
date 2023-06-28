@@ -1,8 +1,10 @@
-import StyledLink from "../../components/StyledLink";
+import StyledLink from "../components/StyledLink";
 import YouTube from "react-youtube";
 import { useState } from "react";
 import styled from "styled-components";
-import StyledButtonLink from "../../components/StyledButtonLink";
+import StyledButtonLink from "../components/StyledButtonLink";
+import { useEffect } from "react";
+import { soundClicked } from "../utils/soundClicked";
 
 const opts = {
   height: "518",
@@ -12,6 +14,15 @@ const opts = {
 const Levels = () => {
   const [video, setVideo] = useState(false);
 
+  useEffect(() => {
+    const audio = new Audio("/static/sounds/tutorial_selecao_fases.mp3");
+    soundClicked(audio, 10000);
+
+    return () => {
+      audio.pause();
+    };
+  }, []);
+
   return (
     <>
       <h1 className="font-bold font-margarine text-white drop-shadow-letter text-5xl 2xl:text-7xl absolute left-1/2 -translate-x-1/2 top-6 2xl:top-16 text-center ">Seleção de Fase: </h1>
@@ -20,7 +31,7 @@ const Levels = () => {
           <img src={"/static/images/level1.png"} className="object-cover w-full h-1/2" alt="Foto de Animais" />
           <div className="relative p-3 bg-white h-2/5">
             <h5 className="mb-2 text-center font-black text-2xl">Fase 1</h5>
-            <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo nome e pelo som que eles emitem.</p>
+            <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é apresentado a diferentes espécies de animais da fauna brasileira e é desafiado a identificá-los pelo <span className="text-emerald-700 font-semibold">nome</span> e pelo <span className="text-emerald-700 font-semibold">som</span> que eles emitem.</p>
             <div className="absolute bottom-4 left-0 flex justify-center w-full mt-4">
               <StyledButtonLink to="/level1" className="bg-[#28a745] hover:bg-[#0a4914]">Jogar Fase 1</StyledButtonLink>
             </div>
@@ -30,7 +41,7 @@ const Levels = () => {
           <img src={"/static/images/level2.png"} className="object-cover w-full h-1/2" alt="Foto de Animais" />
           <div className="relative p-3 bg-white h-2/5">
             <h5 className="mb-2 text-center font-black text-2xl">Fase 2</h5>
-            <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é desafiado a encontrar e fotografar diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
+            <p className="text-justify text-base 2xl:text-lg">Nessa fase, o jogador é desafiado a encontrar e <span className="text-emerald-700 font-semibold">fotografar</span> diferentes espécies de animais que habitam as florestas, pantanais, e outros ecossistemas do Brasil.</p>
             <div className="absolute bottom-4 left-0 flex justify-center w-full mt-4">
               <StyledButtonLink to="/level2" className="bg-[#28a745] hover:bg-[#0a4914]">Jogar Fase 2</StyledButtonLink>
             </div>
