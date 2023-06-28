@@ -17,7 +17,7 @@ const Home = () => (
         <li><StyledLink to='admin'>Professor</StyledLink></li>
       </ul>
     </nav>
-    <StyledLink to='creditos' className="absolute bottom-4 right-4">Creditos</StyledLink>
+    <StyledLink to='creditos' className="absolute bottom-4 right-4">Créditos</StyledLink>
   </div>
 );
 

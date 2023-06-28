@@ -8,6 +8,7 @@ import { useAnimals } from "../hooks/useAnimals";
 import { useAuth } from "../hooks/useAuth";
 import useApi from "../hooks/useApi";
 import { useCookies } from "../hooks/useCookies";
+import { soundClicked } from "../utils/soundClicked";
 
 const NewLevel2 = () => {
   const { animals } = useAnimals();
@@ -49,6 +50,20 @@ const NewLevel2 = () => {
   };
 
   useEffect(() => {
+    const animal = tasks[hoveredOption?.currentTask]?.options[hoveredOption?.id]?.audio;
+    if (animal) {
+      const audio = new Audio(`/static/sounds/foto_${animal}.mp3`);
+      if (hoveredOption !== null) {
+        console.log();
+        soundClicked(audio, 4000);
+      }
+      return () => {
+        audio.pause();
+      };
+    }
+  }, [hoveredOption]);
+
+  useEffect(() => {
     if (authUser && score.length === 3) {
       (async function () {
         const cookie = await getCookie("user");
@@ -67,6 +82,7 @@ const NewLevel2 = () => {
         options: generateAnimalsOptions(correctAnimal, animals).map((animal, index) => ({
           id: index,
           img: correctAnimal?.img,
+          audio: `${animal?.img}`,
           correctAnimal: correctAnimal?.name,
           image: <img className="h-80" src={`/static/images/${animal.img}Movimento.png`} />,
           hover: <img className="h-80" src={`/static/images/${animal.img}Foto.png`} />,
@@ -90,7 +106,6 @@ const NewLevel2 = () => {
     setTasksGenerated(false);
     setTasks([]);
   };
-
 
   return (
     <>
@@ -162,10 +177,10 @@ const NewLevel2 = () => {
                           key={option.id}
                         >
                           <div
-                            onMouseEnter={() => setHoveredOption(option.id)}
+                            onMouseEnter={() => setHoveredOption({ currentTask, id: option.id })}
                             onMouseLeave={() => setHoveredOption(null)}
                           >
-                            {hoveredOption === option.id ? option.hover : option.image}
+                            {hoveredOption?.id === option.id ? option.hover : option.image}
                           </div>
                         </li>
                       );
