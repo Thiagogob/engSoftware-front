@@ -26,6 +26,7 @@ const NewLevel1 = () => {
   const [tasks, setTasks] = useState([]);
   const [hoveredOption, setHoveredOption] = useState(null);
   const [audio, setAudio] = useState(null);
+  const [audioAnimals, setAudioAnimals] = useState(null);
 
   const correctAudio = new Audio("/static/sounds/correct.mp3");
   const wrongAudio = new Audio("/static/sounds/errado.mp3");
@@ -103,21 +104,28 @@ const NewLevel1 = () => {
   }, [score]);
 
   useEffect(() => {
-    if (hoveredOption?.audio) {
-      const audio = new Audio(`/static/sounds/clique_se_${hoveredOption.audio}.mp3`);
-      if (hoveredOption !== null) {
-        console.log();
-        soundClicked(audio, 4500);
-      }
-      return () => {
-        audio.pause();
-      };
-    }
+    if (hoveredOption?.audio)
+      setAudioAnimals(new Audio(`/static/sounds/clique_se_${hoveredOption.audio}.mp3`));
+
+    return () => {
+      audioAnimals?.pause();
+    };
   }, [hoveredOption]);
+
+  useEffect(() => {
+    if (hoveredOption !== null && audioAnimals !== null) {
+      soundClicked(audioAnimals, 4500);
+    }
+  }, [audioAnimals]);
+
+  useEffect(() => {
+    if (audioAnimals)
+      audioAnimals.pause();
+  }, [currentQuestion]);
 
   const optionClicked = (isCorrect, animal, img, mode) => {
     setScore(currentScore => [...currentScore, { animal: `${animal} ${(mode)}`, isCorrect, img }]);
-
+    audio.pause();
     if (isCorrect) {
       correctAudio.play();
     }
