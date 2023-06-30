@@ -55,6 +55,12 @@ const NewLevel1 = () => {
   }, [audio, showHowToPlay]);
 
   useEffect(() => {
+    return () => {
+      audio?.pause();
+    };
+  }, [audio]);
+
+  useEffect(() => {
     if (!tasksGenerated && animals.length) {
       const drawnAnimals = drawAnimals(animals, 3);
 
@@ -148,6 +154,14 @@ const NewLevel1 = () => {
     setTasksGenerated(false);
   };
 
+  const handleStopAudio = () => {
+    console.log(audio);
+    if (audio) {
+      audioAnimals.pause();
+      setHoveredOption(null);
+    }
+  };
+
   return (
     <>
       <div className="w-4/5 absolute left-1/2 -translate-x-1/2">
@@ -163,8 +177,8 @@ const NewLevel1 = () => {
               </ul>
               <div className="flex justify-around">
                 <StyledButton className="bg-[#28a745] hover:bg-[#0a4914]" onClick={() => setHowToPlay(false)}>Jogar Fase 1</StyledButton>
-                <StyledButtonLink to="/learn" className="bg-[#cd9a02] hover:bg-[#9c7502]">Estudar animais</StyledButtonLink>
-                <StyledButtonLink to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
+                <StyledButtonLink onClick={() => setHowToPlay(false)} to="/learn" className="bg-[#cd9a02] hover:bg-[#9c7502]">Estudar animais</StyledButtonLink>
+                <StyledButtonLink onClick={() => setHowToPlay(false)} to="/" className="bg-[#dc3545] hover:bg-[#9e222f]">Sair</StyledButtonLink>
               </div>
             </div>
           </div>
@@ -180,7 +194,7 @@ const NewLevel1 = () => {
                       <div key={index} className="flex text-center items-center">
                         <img src={`/static/images/${animal.img}Movimento.png`} className="h-20" />
                         <h2 className="text-4xl mr-2">
-                          {animal.animal} {index % 2 ? "(Áudio)" : "(Nome)"}:
+                          {animal.animal} {":"}
                         </h2>
                         <h2 className={`text-4xl ${animal.isCorrect ? "text-green-600" : "text-red-600"}`}>{animal.isCorrect ? "Acertou" : "Errou"}</h2>
                       </div>
@@ -217,7 +231,7 @@ const NewLevel1 = () => {
                             onClick={() => optionClicked(option.isCorrect, option.correctAnimal, tasks[currentQuestion].image, "Foto")}
                             key={v4()}
                             onMouseEnter={hoveredOption === null ? () => setHoveredOption({ currentQuestion, audio: option.audio }) : () => { }}
-                            onMouseLeave={() => setHoveredOption(null)}
+                            onMouseLeave={() => handleStopAudio()}
                           >
                             {option.text}
                           </button>

@@ -33,8 +33,8 @@ const Owners = () => {
           <div className="flex flex-col justify-center items-center gap-4">
             <h1 className="text-white text-4xl tracking-widest font-bold">Sobre este jogo</h1>
             <p className="text-white text-base 2xl:text-lg text-justify">
-              Este projeto consiste em um jogo voltado para crianças que sofrem de
-              doenças mentais. Esse jogo faz parte de um projeto na Universidade
+              Este projeto consiste em um jogo voltado para pessoas com deficiência
+              intelectual. Esse jogo faz parte de um projeto na Universidade
               Tecnológica Federal do Paraná
               <Link
                 to="http://www.utfpr.edu.br/"

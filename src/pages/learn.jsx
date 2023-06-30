@@ -10,6 +10,7 @@ function Learn() {
   const [currentAnimal, setCurrentAnimals] = useState(0);
   const [showAnimals, setShowAnimals] = useState(true);
   const [animals, setAnimals] = useState([]);
+  const [audio, setAudio] = useState(null);
 
   const nextClicked = () => {
     if (currentAnimal < animals.length - 1) {
@@ -17,8 +18,17 @@ function Learn() {
     }
     else {
       setShowAnimals(false);
+      if (audio) {
+        audio.pause();
+      }
     }
   };
+
+  useEffect(() => {
+    if (audio)
+      audio.pause();
+    setAudio(new Audio(`/static/sounds/tutorial_${animals[currentAnimal]?.image}.mp3`));
+  }, [currentAnimal]);
 
   useEffect(() => {
     if (animalsAPI.length > 0 && animals.length !== animalsAPI.length)
@@ -28,6 +38,32 @@ function Learn() {
         audio: new Audio(`/static/sounds/${animal?.img}.mp3`)
       })));
   }, [animalsAPI]);
+
+  useEffect(() => {
+    if (animals[0]?.image) {
+      setAudio(new Audio(`/static/sounds/tutorial_${animals[0]?.image}.mp3`));
+
+      return () => {
+        audio?.pause();
+      };
+    }
+  }, [animals]);
+
+  useEffect(() => {
+    if (audio) {
+      soundClicked(audio, 15500);
+    }
+  }, [audio]);
+
+  const playAudio = (animalAudio) => {
+    if (audio)
+      audio.pause();
+    soundClicked(animalAudio, 2000);
+  };
+
+  const handleStopAudio = () => {
+    audio.pause();
+  };
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -46,7 +82,7 @@ function Learn() {
             </div>
             <StyledButton
               className="bg-[#cd9a02] hover:bg-[#9c7502]"
-              onClick={() => soundClicked(animals[currentAnimal].audio, 2000)}
+              onClick={() => playAudio(animals[currentAnimal].audio)}
             >
               <img className="scale-125" src="/static/images/playIcon.png" />
             </StyledButton>
@@ -57,8 +93,8 @@ function Learn() {
           >
             Próximo
           </button>
-          <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
-            <StyledLink to='/'>Voltar ao início</StyledLink>
+          <div className="absolute top-4 right-4">
+            <StyledLink onClick={() => handleStopAudio()} to='/'>Voltar ao início</StyledLink>
           </div>
         </div>
       ) :
@@ -73,18 +109,21 @@ function Learn() {
               <div className="flex gap-6 justify-center">
                 <StyledButtonLink
                   to="/level1"
+                  onClick={() => handleStopAudio()}
                   className="bg-[#007bfe] hover:bg-[#0354ab]"
                 >
                   Jogar Fase 1
                 </StyledButtonLink>
                 <StyledButtonLink
                   to="/level2"
+                  onClick={() => handleStopAudio()}
                   className="bg-[#007bfe] hover:bg-[#0354ab]"
                 >
                   Jogar Fase 2
                 </StyledButtonLink>
                 <StyledButtonLink
                   to="/"
+                  onClick={() => handleStopAudio()}
                   className="bg-[#dc3545] hover:bg-[#9e222f]"
                 >
                   Sair

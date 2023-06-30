@@ -24,6 +24,7 @@ const NewLevel2 = () => {
   const [hoveredOption, setHoveredOption] = useState(null);
   const [tasksGenerated, setTasksGenerated] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [audio, setAudio] = useState(null);
 
   const optionClicked = (isCorrect, animal, img) => {
     setScore(currentScore => [...currentScore, { animal, isCorrect, img }]);
@@ -93,6 +94,29 @@ const NewLevel2 = () => {
       }
     }
   }, [animals]);
+
+  useEffect(() => {
+    setAudio(new Audio("/static/sounds/como_jogar_2.mp3"));
+
+    return () => {
+      audio?.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (audio) {
+      soundClicked(audio, 16500);
+    }
+    if (!showHowToPlay) {
+      audio?.pause();
+    }
+  }, [audio, showHowToPlay]);
+
+  useEffect(() => {
+    return () => {
+      audio?.pause();
+    };
+  }, [audio]);
 
   const restartLevel = () => {
     setFinalResults(false);

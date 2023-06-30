@@ -16,7 +16,7 @@ const Levels = () => {
 
   useEffect(() => {
     const audio = new Audio("/static/sounds/tutorial_selecao_fases.mp3");
-    soundClicked(audio, 10000);
+    soundClicked(audio, 10500);
 
     return () => {
       audio.pause();
